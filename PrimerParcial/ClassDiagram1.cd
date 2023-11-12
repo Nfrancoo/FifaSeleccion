@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PrimerParcial.PersonalEquipoSeleccion">
+    <Position X="10.25" Y="0.75" Width="1.75" />
+    <Members>
+      <Method Name="Method" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAQAAACEgAAgAAAAAAAAAAAQAAIAAAAAIAQ=</HashCode>
+      <FileName>PersonalEquipoSeleccion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrimerParcial.Masajista">
+    <Position X="10.5" Y="4.75" Width="1.5" />
+    <Members>
+      <Method Name="Method" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="PrimerParcial.PersonalEquipoSeleccion" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="11.125" Y="3.844" />
+        <Point X="11.125" Y="4.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AACAAIAAAAQAAAAEAAAggAAAAAAAAgAQACAAAAAAAAA=</HashCode>
+      <FileName>Masajista.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrimerParcial.Entrenador">
+    <Position X="12.75" Y="4.75" Width="1.5" />
+    <Members>
+      <Method Name="Method" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAQAAAAEAAAggAAAAAAAAgAQAAAACAAAAAg=</HashCode>
+      <FileName>Entrenador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrimerParcial.Jugador">
+    <Position X="8.25" Y="4.75" Width="1.5" />
+    <Members>
+      <Method Name="Method" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AACAAAAAgAQAAIAEAAAggAAAAAAAAgAQAAQAAAAEAAA=</HashCode>
+      <FileName>Jugador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
