@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using System.ComponentModel.Design;
 using System.Data.SqlClient;
-using PrimerParcial;
+using SegundoParcial;
 
 namespace SegundoParcial
 {

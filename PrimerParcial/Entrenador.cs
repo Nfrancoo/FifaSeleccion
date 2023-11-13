@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace PrimerParcial
+namespace SegundoParcial
 {
     /// <summary>
     /// Clase que representa a un entrenador en un equipo de selección.

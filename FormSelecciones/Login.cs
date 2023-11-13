@@ -1,5 +1,5 @@
 using System.Text.Json;
-using PrimerParcial;
+using SegundoParcial;
 
 namespace FormSelecciones
 {

@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace PrimerParcial
+namespace SegundoParcial
 {
     /// <summary>
     /// Clase que representa a un masajista en un equipo de selección.

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrimerParcial
+namespace SegundoParcial
 {
     /// <summary>
     /// Clase que representa un equipo y contiene una lista de miembros del equipo.

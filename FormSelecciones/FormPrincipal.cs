@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PrimerParcial;
+using SegundoParcial;
 using System.IO;
 using System.Text.Json;
 using Newtonsoft.Json;
@@ -253,27 +253,105 @@ namespace FormSelecciones
         /// </summary>
         private void FormPrincipal_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //JUGADORES
-            Serializar("JugadorArgentina.json", jugadoresArgentina);
-            Serializar("JugadorBrasil.json", jugadoresBrasil);
-            Serializar("JugadorItalia.json", jugadoresItalia);
-            Serializar("JugadorFrancia.json", jugadoresFrancia);
-            Serializar("JugadorAlemania.json", jugadoresAlemania);
+            ////JUGADORES
+            //Serializar("JugadorArgentina.json", jugadoresArgentina);
+            //Serializar("JugadorBrasil.json", jugadoresBrasil);
+            //Serializar("JugadorItalia.json", jugadoresItalia);
+            //Serializar("JugadorFrancia.json", jugadoresFrancia);
+            //Serializar("JugadorAlemania.json", jugadoresAlemania);
 
-            //ENTRENADORES
-            Serializar("EntrenadorArgentina.json", entrenadorArgentina);
-            Serializar("EntrenadorBrasil.json", entrenadorBrasil);
-            Serializar("EntrenadorItalia.json", entrenadorItalia);
-            Serializar("EntrenadorFrancia.json", entrenadorFrancia);
-            Serializar("EntrenadorAlemania.json", entrenadorAlemania);
+            ////ENTRENADORES
+            //Serializar("EntrenadorArgentina.json", entrenadorArgentina);
+            //Serializar("EntrenadorBrasil.json", entrenadorBrasil);
+            //Serializar("EntrenadorItalia.json", entrenadorItalia);
+            //Serializar("EntrenadorFrancia.json", entrenadorFrancia);
+            //Serializar("EntrenadorAlemania.json", entrenadorAlemania);
 
-            //MASAJISTAS
-            Serializar("MasajistaArgentina.json", masajeadoresArgentina);
-            Serializar("MasajistaBrasil.json", masajeadoresBrasil);
-            Serializar("MasajistaItalia.json", masajeadoresItalia);
-            Serializar("MasajistaFrancia.json", masajeadoresFrancia);
-            Serializar("MasajistaAlemania.json", masajeadoresAlemania);
+            ////MASAJISTAS
+            //Serializar("MasajistaArgentina.json", masajeadoresArgentina);
+            //Serializar("MasajistaBrasil.json", masajeadoresBrasil);
+            //Serializar("MasajistaItalia.json", masajeadoresItalia);
+            //Serializar("MasajistaFrancia.json", masajeadoresFrancia);
+            //Serializar("MasajistaAlemania.json", masajeadoresAlemania);
+            try
+{
+                SQL sql = new SQL();
+                // Recorrer las listas y agregar los elementos a la base de datos
+                foreach (Jugador jugador in jugadoresArgentina)
+                {
+                    sql.AgregarJugador(jugador);
+                }
 
+                foreach (Jugador jugador in jugadoresBrasil)
+                {
+                    sql.AgregarJugador(jugador);
+                }
+
+                foreach (Jugador jugador in jugadoresAlemania)
+                {
+                    sql.AgregarJugador(jugador);
+                }
+
+                foreach (Jugador jugador in jugadoresItalia)
+                {
+                    sql.AgregarJugador(jugador);
+                }
+                foreach (Jugador jugador in jugadoresFrancia)
+                {
+                    sql.AgregarJugador(jugador);
+                }
+
+                // Hacer lo mismo para entrenadores y masajistas
+                foreach (Entrenador entrenador in entrenadorArgentina)
+                {
+                    sql.AgregarEntrenador(entrenador);
+                }
+                foreach (Entrenador entrenador in entrenadorBrasil)
+                {
+                    sql.AgregarEntrenador(entrenador);
+                }
+                foreach (Entrenador entrenador in entrenadorAlemania)
+                {
+                    sql.AgregarEntrenador(entrenador);
+                }
+                foreach (Entrenador entrenador in entrenadorItalia)
+                {
+                    sql.AgregarEntrenador(entrenador);
+                }
+                foreach (Entrenador entrenador in entrenadorFrancia)
+                {
+                    sql.AgregarEntrenador(entrenador);
+                }
+                foreach (Masajista masajista in masajeadoresArgentina)
+                {
+                    sql.AgregarMasajista(masajista);
+                }
+                foreach (Masajista masajista in masajeadoresBrasil)
+                {
+                    sql.AgregarMasajista(masajista);
+                }
+                foreach (Masajista masajista in masajeadoresAlemania)
+                {
+                    sql.AgregarMasajista(masajista);
+                }
+                foreach (Masajista masajista in masajeadoresItalia)
+                {
+                    sql.AgregarMasajista(masajista);
+                }
+                foreach (Masajista masajista in masajeadoresFrancia)
+                {
+                    sql.AgregarMasajista(masajista);
+                }
+
+                // Repite el proceso para las otras listas y tipos de personal
+
+                // Cierra la conexión después de agregar todos los elementos
+                sql.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al guardar datos en la base de datos: " + ex.Message);
+            }
             DialogResult result = MessageBox.Show("¿Estás seguro que quieras salir de la aplicación?", "Confirmar cierre", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
@@ -615,6 +693,7 @@ namespace FormSelecciones
             }
         }
 
+        #region Serializacion Manual
         /// <summary>
         /// metodo en el que el usuario puede guardar manualmente los archivos json, lo que si cuando se cierra el program
         /// de igual manera se va a guardar manualmente
@@ -622,7 +701,6 @@ namespace FormSelecciones
         /// <typeparam name="T"></typeparam>
         /// <param name="path"></param>
         /// <param name="lista"></param>
-        #region Serializacion Manual
         public void SerializarManual<T>(string path, List<T> lista)
         {
             try
