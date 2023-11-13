@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PrimerParcial\PrimerParcial.csproj" />
+    <ProjectReference Include="..\PrimerParcial\SegundoParcial.csproj" />
   </ItemGroup>
 
 </Project>
