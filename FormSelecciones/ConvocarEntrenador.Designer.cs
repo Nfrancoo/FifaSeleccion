@@ -31,7 +31,6 @@
             btnCancelar = new Button();
             btnAceptar = new Button();
             txtTactica = new TextBox();
-            txtPais = new TextBox();
             txtEdad = new TextBox();
             txtApellido = new TextBox();
             txtNombre = new TextBox();
@@ -43,6 +42,7 @@
             label3 = new Label();
             label2 = new Label();
             lblNombre = new Label();
+            cmbPaises = new ComboBox();
             SuspendLayout();
             // 
             // btnCancelar
@@ -73,13 +73,6 @@
             txtTactica.Name = "txtTactica";
             txtTactica.Size = new Size(240, 23);
             txtTactica.TabIndex = 31;
-            // 
-            // txtPais
-            // 
-            txtPais.Location = new Point(33, 203);
-            txtPais.Name = "txtPais";
-            txtPais.Size = new Size(240, 23);
-            txtPais.TabIndex = 30;
             // 
             // txtEdad
             // 
@@ -176,15 +169,23 @@
             lblNombre.TabIndex = 18;
             lblNombre.Text = "Nombre";
             // 
+            // cmbPaises
+            // 
+            cmbPaises.Items.AddRange(new object[] { "Italia", "Francia", "Brasil", "Argentina", "Alemania" });
+            cmbPaises.Location = new Point(33, 203);
+            cmbPaises.Name = "cmbPaises";
+            cmbPaises.Size = new Size(240, 23);
+            cmbPaises.TabIndex = 36;
+            // 
             // ConvocarEntrenador
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(319, 422);
+            Controls.Add(cmbPaises);
             Controls.Add(btnCancelar);
             Controls.Add(btnAceptar);
             Controls.Add(txtTactica);
-            Controls.Add(txtPais);
             Controls.Add(txtEdad);
             Controls.Add(txtApellido);
             Controls.Add(txtNombre);
@@ -207,7 +208,6 @@
         private Button btnCancelar;
         private Button btnAceptar;
         private TextBox txtTactica;
-        private TextBox txtPais;
         private TextBox txtEdad;
         private TextBox txtApellido;
         private TextBox txtNombre;
@@ -219,5 +219,6 @@
         private Label label3;
         private Label label2;
         private Label lblNombre;
+        private ComboBox cmbPaises;
     }
 }

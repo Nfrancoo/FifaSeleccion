@@ -14,7 +14,7 @@ namespace FormSelecciones
     public partial class ConvocarEntrenador : Form
     {
         public Entrenador NuevoEntrenador;
-        public Entrenador EntrendorParaEditar {  get; set; }
+        public Entrenador EntrendorParaEditar { get; set; }
 
         public ConvocarEntrenador(Entrenador jug)
         {
@@ -28,6 +28,8 @@ namespace FormSelecciones
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.BackColor = Color.LightCyan;
+            cmbPaises.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPaises.DataSource = Enum.GetValues(typeof(EPaises));
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -66,9 +68,8 @@ namespace FormSelecciones
                 MessageBox.Show("Por favor, ingrese un valor en el campo de tactica.");
                 return;
             }
-            
-            string paisInput = this.txtPais.Text;
-            paisInput = Capitalize(paisInput);
+
+            string paisInput = this.cmbPaises.SelectedItem.ToString();
 
             // Verificar si el país ingresado es válido
             if (!Enum.TryParse(paisInput, out EPaises pais))
@@ -112,11 +113,13 @@ namespace FormSelecciones
             this.txtApellido.Text = jug.Apellido;
             this.txtNombre.Text = jug.Nombre;
             this.txtEdad.Text = jug.Edad.ToString();
-            this.txtPais.Text = jug.Pais.ToString();
+            this.cmbPaises.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cmbPaises.DataSource = Enum.GetValues(typeof(EPaises));
+            this.cmbPaises.SelectedItem = jug.Pais;
             this.txtTactica.Text = jug.Tactica;
             this.txtApellido.Enabled = false;
             this.txtNombre.Enabled = false;
-            this.txtPais.Enabled = false;
+            this.cmbPaises.Enabled = false;
         }
         private string Capitalize(string input)
         {

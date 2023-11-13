@@ -40,14 +40,15 @@ namespace FormSelecciones
             Modificador(jug);
         }
 
-        /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="ConvocarJugador"/>.
-        /// </summary>
         public ConvocarJugador()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.BackColor = Color.LightCyan;
+            cmbPaises.DropDownStyle = ComboBoxStyle.DropDownList; // Deja el ComboBox de países en modo de edición al crear un nuevo jugador
+            cmbPaises.DataSource = Enum.GetValues(typeof(EPaises));
+            cmbPosiciones.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPosiciones.DataSource = Enum.GetValues(typeof(EPosicion));
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -101,13 +102,10 @@ namespace FormSelecciones
                 return;
             }
 
-            string paisInput = this.txtPais.Text;
-            string posicionInput = this.txtPosicion.Text;
+            string paisInput = this.cmbPaises.SelectedItem.ToString();
+            string posicionInput = this.cmbPosiciones.SelectedItem.ToString();
 
-            paisInput = Capitalize(paisInput);
-            posicionInput = Capitalize(posicionInput);
-
-            if(!Enum.TryParse(paisInput, out EPaises pais))
+            if (!Enum.TryParse(paisInput, out EPaises pais))
             {
                 MessageBox.Show("Por favor, ingrese un país válido.");
                 return;
@@ -157,12 +155,18 @@ namespace FormSelecciones
             this.txtNombre.Text = jug.nombre;
             this.txtEdad.Text = jug.edad.ToString();
             this.txtDorsal.Text = jug.Dorsal.ToString();
-            this.txtPais.Text = jug.paises.ToString();
-            this.txtPosicion.Text = jug.Posicion.ToString();
+            this.cmbPaises.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cmbPaises.DataSource = Enum.GetValues(typeof(EPaises));
+            this.cmbPaises.SelectedItem = jug.Pais;
+            this.cmbPosiciones.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cmbPosiciones.DataSource = Enum.GetValues(typeof(EPosicion));
+            this.cmbPosiciones.SelectedItem = jug.Posicion;
             this.txtApellido.Enabled = false;
             this.txtNombre.Enabled = false;
-            this.txtPais.Enabled = false;
+            this.cmbPaises.Enabled = false;
+            // No necesitas hacer nada más para el ComboBox de Países, ya que ya configuraste su estilo aquí.
         }
+
 
         /// <summary>
         /// Verifica si el texto contiene solo caracteres alfabéticos.

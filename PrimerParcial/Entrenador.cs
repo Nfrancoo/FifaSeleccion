@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,34 +18,9 @@ namespace PrimerParcial
         /// <summary>
         /// Constructor que inicializa un entrenador con su información básica y la táctica a utilizar.
         /// </summary>
-        public Entrenador(int edad, string nombre,string apellido,EPaises pais ,string tactica):base(edad, nombre, apellido, pais)
+        public Entrenador(int edad, string nombre, string apellido, EPaises pais, string tactica) : base(edad, nombre, apellido, pais)
         {
             this.tactica = tactica;
-        }
-
-        
-        //public PersonalEquipoSeleccion Equipo { get; set; }
-
-        
-        public string Nombre
-        {
-            get { return this.nombre; }
-            set { this.nombre = value; }
-        }
-
-
-        
-        public string Apellido
-        {
-            get { return this.apellido; }
-            set { this.apellido = value; }
-        }
-
-        
-        public int Edad
-        {
-            get { return this.edad; }
-            set { this.edad = value; }
         }
 
         /// <summary>
@@ -56,13 +32,6 @@ namespace PrimerParcial
             set { this.tactica = value; }
         }
 
-        [JsonConverter(typeof(JsonStringEnumConverter))]
-        public EPaises Pais
-        {
-            get { return this.paises; }
-            set { this.paises = value; }
-        }
-
         /// <summary>
         /// Método que describe la acción de concentración del entrenador con el equipo.
         /// </summary>
@@ -70,15 +39,6 @@ namespace PrimerParcial
         {
             return $"{base.nombre} {base.apellido} se está concentrando con el equipo.";
         }
-
-        ///// <summary>
-        ///// Método que describe la acción de viajar del entrenador con el equipo.
-        ///// </summary>
-        //public override string Viajar()
-        //{
-        //    return $"{base.nombre} {base.apellido} está viajando con el equipo.";
-        //}
-
 
         /// <summary>
         /// Método que describe la acción que realiza el entrenador.
@@ -93,24 +53,44 @@ namespace PrimerParcial
         /// </summary>
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append($"Nombre: {this.nombre}, Apellido: {this.apellido}, Edad: {this.edad}, País: {this.paises}, Tactica a usar: {this.tactica}");
-            return sb.ToString();
-        }
+            string baseInfo = base.ToString(); // Obtén la representación en cadena de la clase base
+            StringBuilder sb = new StringBuilder(baseInfo);
 
-        public void Method()
-        {
-            throw new System.NotImplementedException();
+            // Agrega la información específica del Entrenador
+            sb.Append($", Tactica a usar: {this.tactica}");
+
+            return sb.ToString();
         }
 
         public override bool Equals(object? obj)
         {
-            if (obj is Entrenador entre)
+            bool retorno = false;
+            if (obj is Entrenador)
             {
-                // Compara los nombres y apellidos de los jugadores.
-                return this.Nombre == entre.Nombre && this.Apellido == entre.Apellido;
+                retorno = this == (Entrenador)obj;
             }
-            return false;
+            return retorno;
         }
+
+
+        public static List<Entrenador> operator +(List<Entrenador> lista, Entrenador entrenador)
+        {
+            if (!lista.Contains(entrenador))
+            {
+                lista.Add(entrenador);
+            }
+            return lista;
+        }
+
+        public static bool operator ==(Entrenador uno, Entrenador dos)
+        {
+            return uno.Nombre == dos.Nombre && uno.Apellido == dos.Apellido;
+        }
+
+        public static bool operator !=(Entrenador uno, Entrenador dos)
+        {
+            return !(uno == dos);
+        }
+
     }
 }

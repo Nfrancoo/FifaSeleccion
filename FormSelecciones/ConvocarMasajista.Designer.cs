@@ -34,12 +34,12 @@
             label2 = new Label();
             label3 = new Label();
             txtEdad = new TextBox();
-            txtPais = new TextBox();
             label4 = new Label();
             txtTitulo = new TextBox();
             label5 = new Label();
             btnAceptar = new Button();
             btnCancelar = new Button();
+            cmbPaises = new ComboBox();
             SuspendLayout();
             // 
             // txtNombre
@@ -93,13 +93,6 @@
             txtEdad.Size = new Size(255, 23);
             txtEdad.TabIndex = 22;
             // 
-            // txtPais
-            // 
-            txtPais.Location = new Point(32, 246);
-            txtPais.Name = "txtPais";
-            txtPais.Size = new Size(255, 23);
-            txtPais.TabIndex = 23;
-            // 
             // label4
             // 
             label4.AutoSize = true;
@@ -149,17 +142,25 @@
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
             // 
+            // cmbPaises
+            // 
+            cmbPaises.Items.AddRange(new object[] { "Italia", "Francia", "Brasil", "Argentina", "Alemania" });
+            cmbPaises.Location = new Point(32, 246);
+            cmbPaises.Name = "cmbPaises";
+            cmbPaises.Size = new Size(255, 23);
+            cmbPaises.TabIndex = 36;
+            // 
             // ConvocarMasajista
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(318, 468);
+            Controls.Add(cmbPaises);
             Controls.Add(btnCancelar);
             Controls.Add(btnAceptar);
             Controls.Add(label5);
             Controls.Add(txtTitulo);
             Controls.Add(label4);
-            Controls.Add(txtPais);
             Controls.Add(txtEdad);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -180,11 +181,11 @@
         private Label label2;
         private Label label3;
         private TextBox txtEdad;
-        private TextBox txtPais;
         private Label label4;
         private TextBox txtTitulo;
         private Label label5;
         private Button btnAceptar;
         private Button btnCancelar;
+        private ComboBox cmbPaises;
     }
 }

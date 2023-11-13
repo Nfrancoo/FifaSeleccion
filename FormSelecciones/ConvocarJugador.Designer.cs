@@ -40,11 +40,11 @@
             txtNombre = new TextBox();
             txtApellido = new TextBox();
             txtEdad = new TextBox();
-            txtPais = new TextBox();
             txtDorsal = new TextBox();
-            txtPosicion = new TextBox();
             btnAceptar = new Button();
             btnCancelar = new Button();
+            cmbPaises = new ComboBox();
+            cmbPosiciones = new ComboBox();
             SuspendLayout();
             // 
             // lblNombre
@@ -153,26 +153,12 @@
             txtEdad.Size = new Size(240, 23);
             txtEdad.TabIndex = 11;
             // 
-            // txtPais
-            // 
-            txtPais.Location = new Point(39, 228);
-            txtPais.Name = "txtPais";
-            txtPais.Size = new Size(240, 23);
-            txtPais.TabIndex = 12;
-            // 
             // txtDorsal
             // 
             txtDorsal.Location = new Point(39, 289);
             txtDorsal.Name = "txtDorsal";
             txtDorsal.Size = new Size(240, 23);
             txtDorsal.TabIndex = 13;
-            // 
-            // txtPosicion
-            // 
-            txtPosicion.Location = new Point(39, 347);
-            txtPosicion.Name = "txtPosicion";
-            txtPosicion.Size = new Size(240, 23);
-            txtPosicion.TabIndex = 14;
             // 
             // btnAceptar
             // 
@@ -196,16 +182,33 @@
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
             // 
+            // cmbPaises
+            // 
+            cmbPaises.Items.AddRange(new object[] { "Italia", "Francia", "Brasil", "Argentina", "Alemania" });
+            cmbPaises.Location = new Point(39, 233);
+            cmbPaises.Name = "cmbPaises";
+            cmbPaises.Size = new Size(240, 23);
+            cmbPaises.TabIndex = 19;
+            // 
+            // cmbPosiciones
+            // 
+            cmbPosiciones.FormattingEnabled = true;
+            cmbPosiciones.Items.AddRange(new object[] { "Arquero", "Defensa", "Mediocentro", "Delantero" });
+            cmbPosiciones.Location = new Point(39, 347);
+            cmbPosiciones.Name = "cmbPosiciones";
+            cmbPosiciones.Size = new Size(240, 23);
+            cmbPosiciones.TabIndex = 20;
+            // 
             // ConvocarJugador
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(331, 493);
+            Controls.Add(cmbPosiciones);
+            Controls.Add(cmbPaises);
             Controls.Add(btnCancelar);
             Controls.Add(btnAceptar);
-            Controls.Add(txtPosicion);
             Controls.Add(txtDorsal);
-            Controls.Add(txtPais);
             Controls.Add(txtEdad);
             Controls.Add(txtApellido);
             Controls.Add(txtNombre);
@@ -238,10 +241,10 @@
         private TextBox txtNombre;
         private TextBox txtApellido;
         private TextBox txtEdad;
-        private TextBox txtPais;
         private TextBox txtDorsal;
-        private TextBox txtPosicion;
         private Button btnAceptar;
         private Button btnCancelar;
+        private ComboBox cmbPaises;
+        private ComboBox cmbPosiciones;
     }
 }

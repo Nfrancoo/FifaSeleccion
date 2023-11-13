@@ -11,7 +11,6 @@ namespace PrimerParcial
     {
         private int dorsal;
         private EPosicion posicion;
-        public Equipo jugador;
 
         /// <summary>
         /// Constructor que inicializa un jugador con su información básica.
@@ -21,45 +20,6 @@ namespace PrimerParcial
         {
             this.dorsal = dorsal;
             this.posicion = posicion;
-            this.jugador = new Equipo();
-        }
-
-        /// <summary>
-        /// Propiedad para obtener o establecer el nombre del jugador.
-        /// </summary>
-        public string Nombre
-        {
-            get { return this.nombre; }
-            set { this.nombre = value; }
-        }
-
-        /// <summary>
-        /// Propiedad para obtener o establecer el apellido del jugador.
-        /// </summary>
-        public string Apellido
-        {
-            get { return this.apellido; }
-            set { this.apellido = value; }
-
-        }
-
-        /// <summary>
-        /// Propiedad para obtener o establecer la edad del jugador.
-        /// </summary>
-        public int Edad
-        {
-            get { return this.edad; }
-            set { this.edad = value; }
-        }
-
-        /// <summary>
-        /// Propiedad para obtener o establecer el país del jugador con conversión JSON.
-        /// </summary>
-        [JsonConverter(typeof(JsonStringEnumConverter))]
-        public EPaises Pais 
-        {
-            get {return this.paises; }
-            set {this.paises = value; } 
         }
 
         /// <summary>
@@ -86,8 +46,12 @@ namespace PrimerParcial
         /// </summary>
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append($"Nombre: {this.nombre}, Apellido: {this.apellido}, Edad: {this.edad}, País: {this.paises}, Posicion: {this.posicion}, Dorsal: {this.dorsal}");
+            string baseInfo = base.ToString(); // Obtén la representación en cadena de la clase base
+            StringBuilder sb = new StringBuilder(baseInfo);
+
+            // Agrega la información específica del Jugador
+            sb.Append($", Posicion: {this.posicion}, Dorsal: {this.dorsal}");
+
             return sb.ToString();
         }
 
@@ -112,18 +76,31 @@ namespace PrimerParcial
 
         public override bool Equals(object? obj)
         {
-            if (obj is Jugador jugador)
+            bool retorno = false;
+            if (obj is Jugador)
             {
-                // Compara los nombres y apellidos de los jugadores.
-                return this.Nombre == jugador.Nombre && this.Apellido == jugador.Apellido;
+                retorno = this == (Jugador)obj;
             }
-            return false;
+            return retorno;
         }
 
-
-        public void Method()
+        public static List<Jugador> operator +(List<Jugador> lista, Jugador entrenador)
         {
-            throw new System.NotImplementedException();
+            if (!lista.Contains(entrenador))
+            {
+                lista.Add(entrenador);
+            }
+            return lista;
+        }
+
+        public static bool operator ==(Jugador uno, Jugador dos)
+        {
+            return uno.Nombre == dos.Nombre && uno.Apellido == dos.Apellido;
+        }
+
+        public static bool operator !=(Jugador uno, Jugador dos)
+        {
+            return !(uno == dos);
         }
     }
 }

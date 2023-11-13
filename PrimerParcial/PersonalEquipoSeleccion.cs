@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.Json.Serialization;
 
 namespace PrimerParcial
 {
@@ -12,7 +13,7 @@ namespace PrimerParcial
         public string apellido;
         public EPaises paises;
 
-        
+
         public PersonalEquipoSeleccion()
         {
             this.edad = 0;
@@ -26,7 +27,7 @@ namespace PrimerParcial
         /// </summary>
         public PersonalEquipoSeleccion(int edad) : this()
         {
-            this.edad= edad;
+            this.edad = edad;
         }
 
         /// <summary>
@@ -89,20 +90,50 @@ namespace PrimerParcial
         /// </summary>
         public override bool Equals(object? obj)
         {
-            bool retorno = false;
-            if (obj is PersonalEquipoSeleccion)
+            if (obj is PersonalEquipoSeleccion otro)
             {
-                retorno = this == (PersonalEquipoSeleccion)obj;
+                return this.Nombre == otro.Nombre && this.Apellido == otro.Apellido;
             }
-            return retorno;
+            return false;
         }
 
-        public void Method()
+        /// <summary>
+        /// Propiedad para obtener o establecer el nombre del personal.
+        /// </summary>
+        public string Nombre
         {
-            throw new System.NotImplementedException();
+            get { return this.nombre; }
+            set { this.nombre = value; }
         }
 
+        /// <summary>
+        /// Propiedad para obtener o establecer el apellido del personal.
+        /// </summary>
+        public string Apellido
+        {
+            get { return this.apellido; }
+            set { this.apellido = value; }
 
+        }
+
+        /// <summary>
+        /// Propiedad para obtener o establecer la edad del personal.
+        /// </summary>
+        public int Edad
+        {
+            get { return this.edad; }
+            set { this.edad = value; }
+        }
+
+        /// <summary>
+        /// Propiedad para obtener o establecer el país del personal con conversión JSON.
+        /// </summary>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public EPaises Pais
+        {
+            get { return this.paises; }
+            set { this.paises = value; }
+        }
 
         //public static bool operator ==(GenteEquipoSeleccion a, GenteEquipoSeleccion b)
         //{

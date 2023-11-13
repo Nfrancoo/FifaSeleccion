@@ -29,6 +29,8 @@ namespace FormSelecciones
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.BackColor = Color.LightCyan;
+            cmbPaises.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPaises.DataSource = Enum.GetValues(typeof(EPaises));
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -69,8 +71,7 @@ namespace FormSelecciones
                 return;
             }
 
-            string paisInput = this.txtPais.Text;
-            paisInput = Capitalize(paisInput);
+            string paisInput = this.cmbPaises.SelectedItem.ToString();
 
             if (!Enum.TryParse(paisInput, out EPaises pais))
             {
@@ -108,14 +109,16 @@ namespace FormSelecciones
             this.txtApellido.Text = masaj.Apellido;
             this.txtNombre.Text = masaj.Nombre;
             this.txtEdad.Text = masaj.Edad.ToString();
-            this.txtPais.Text = masaj.Pais.ToString();
+            this.cmbPaises.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.cmbPaises.DataSource = Enum.GetValues(typeof(EPaises));
+            this.cmbPaises.SelectedItem = masaj.Pais;
             this.txtTitulo.Text = masaj.CertificadoMasaje;
             this.txtApellido.Enabled = false;
             this.txtNombre.Enabled = false;
-            this.txtPais.Enabled = false;
+            this.cmbPaises.Enabled = false;
         }
 
-        
+
         private string Capitalize(string input)
         {
             if (string.IsNullOrEmpty(input))
