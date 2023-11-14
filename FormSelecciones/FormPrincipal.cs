@@ -378,7 +378,9 @@ namespace FormSelecciones
                 if (usuarioLog.perfil == "vendedor" || usuarioLog.perfil == "supervisor")
                 {
 
-                    MessageBox.Show("No tienes permitido usar esta opción.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    usuarioLog.NotificarAccesoNoPermitido += MostrarMensaje;
+                    usuarioLog.NotificarAcceso("No tienes permitido utilizar esta opción.");
+                    usuarioLog.NotificarAccesoNoPermitido -= MostrarMensaje;
                     return;
                 }
 
@@ -464,8 +466,9 @@ namespace FormSelecciones
             {
                 if (usuarioLog.perfil == "vendedor")
                 {
-                    //MessageBox.Show("No tienes permitido utilizar esta opción.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    //Notificar("No tienes permitido utilizar esta opción.");
+                    usuarioLog.NotificarAccesoNoPermitido += MostrarMensaje;
+                    usuarioLog.NotificarAcceso("No tienes permitido utilizar esta opción.");
+                    usuarioLog.NotificarAccesoNoPermitido -= MostrarMensaje;
                     return;
                 }
 
