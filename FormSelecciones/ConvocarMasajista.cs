@@ -11,9 +11,11 @@ using System.Windows.Forms;
 
 namespace FormSelecciones
 {
-    public partial class ConvocarMasajista : Form
+    public partial class ConvocarMasajista : Form, IConvocar
     {
         public Masajista MasajeadorParaEditar { get; set; }
+        public Masajista MasajistaParaEditar { get; internal set; }
+
         public Masajista NuevoMasajista;
 
         public ConvocarMasajista(Masajista masaj)
@@ -52,7 +54,7 @@ namespace FormSelecciones
             nombre = Capitalize(nombre);
             apellido = Capitalize(apellido);
 
-            if (!EsTextoValido(nombre) || !EsTextoValido(apellido))
+            if (!((IConvocar)this).EsTextoValido(nombre) || !((IConvocar)this).EsTextoValido(apellido))
             {
                 MessageBox.Show("El nombre y el apellido no deben contener números ni caracteres especiales.");
                 return;
@@ -90,7 +92,7 @@ namespace FormSelecciones
 
             if (this.DialogResult == DialogResult.OK)
             {
-                MessageBox.Show(NuevoMasajista.Concentrarse());
+                MessageBox.Show(NuevoMasajista.RealizarConcentracion());
             }
         }
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -99,27 +101,30 @@ namespace FormSelecciones
         }
         #region Metodos
 
-        private bool EsTextoValido(string texto)
+        bool IConvocar.EsTextoValido(string texto)
         {
             return System.Text.RegularExpressions.Regex.IsMatch(texto, @"^[a-zA-Z]+$");
         }
 
-        public void Modificador(Masajista masaj)
+        public void Modificador<T>(T personal) where T : PersonalEquipoSeleccion
         {
-            this.txtApellido.Text = masaj.Apellido;
-            this.txtNombre.Text = masaj.Nombre;
-            this.txtEdad.Text = masaj.Edad.ToString();
-            this.cmbPaises.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cmbPaises.DataSource = Enum.GetValues(typeof(EPaises));
-            this.cmbPaises.SelectedItem = masaj.Pais;
-            this.txtTitulo.Text = masaj.CertificadoMasaje;
-            this.txtApellido.Enabled = false;
-            this.txtNombre.Enabled = false;
-            this.cmbPaises.Enabled = false;
+            if (personal is Masajista masaj)
+            {
+                // Realizar las operaciones específicas para Masajista
+                this.txtApellido.Text = masaj.Apellido;
+                this.txtNombre.Text = masaj.Nombre;
+                this.txtEdad.Text = masaj.Edad.ToString();
+                this.cmbPaises.DropDownStyle = ComboBoxStyle.DropDownList;
+                this.cmbPaises.DataSource = Enum.GetValues(typeof(EPaises));
+                this.cmbPaises.SelectedItem = masaj.Pais;
+                this.txtTitulo.Text = masaj.CertificadoMasaje;
+                this.txtApellido.Enabled = false;
+                this.txtNombre.Enabled = false;
+                this.cmbPaises.Enabled = false;
+            }
         }
-
-
-        private string Capitalize(string input)
+    
+        public string Capitalize(string input)
         {
             if (string.IsNullOrEmpty(input))
             {

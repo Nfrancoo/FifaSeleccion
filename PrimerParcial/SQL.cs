@@ -280,7 +280,7 @@ namespace SegundoParcial
                     masajistas.Nombre = this.lector["nombre"].ToString();
                     masajistas.Apellido = this.lector["apellido"].ToString();
                     masajistas.Pais = (EPaises)pais;
-                    masajistas.CertificadoMasaje = this.lector["[lugar de estudio]"].ToString();
+                    masajistas.CertificadoMasaje = this.lector["lugarDeEstudio"].ToString();
 
                     lista.Add(masajistas);
                 }

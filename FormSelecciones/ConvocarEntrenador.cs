@@ -11,10 +11,11 @@ using System.Windows.Forms;
 
 namespace FormSelecciones
 {
-    public partial class ConvocarEntrenador : Form
+    public partial class ConvocarEntrenador : Form, IConvocar
     {
         public Entrenador NuevoEntrenador;
         public Entrenador EntrendorParaEditar { get; set; }
+        public Entrenador EntrenadorParaEditar { get; internal set; }
 
         public ConvocarEntrenador(Entrenador jug)
         {
@@ -50,7 +51,7 @@ namespace FormSelecciones
             nombre = Capitalize(nombre);
             apellido = Capitalize(apellido);
 
-            if (!EsTextoValido(nombre) || !EsTextoValido(apellido))
+            if (!((IConvocar)this).EsTextoValido(nombre) || !((IConvocar)this).EsTextoValido(apellido))
             {
                 MessageBox.Show("El nombre y el apellido no deben contener números ni caracteres especiales.");
                 return;
@@ -93,7 +94,7 @@ namespace FormSelecciones
 
             if (this.DialogResult == DialogResult.OK)
             {
-                MessageBox.Show(NuevoEntrenador.Concentrarse());
+                MessageBox.Show(NuevoEntrenador.RealizarConcentracion());
             }
         }
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -103,25 +104,30 @@ namespace FormSelecciones
 
 
         #region Metodos
-        private bool EsTextoValido(string texto)
+        bool IConvocar.EsTextoValido(string texto)
         {
             return System.Text.RegularExpressions.Regex.IsMatch(texto, @"^[a-zA-Z]+$");
         }
 
-        public void Modificador(Entrenador jug)
+        public void Modificador<T>(T personal) where T : PersonalEquipoSeleccion
         {
-            this.txtApellido.Text = jug.Apellido;
-            this.txtNombre.Text = jug.Nombre;
-            this.txtEdad.Text = jug.Edad.ToString();
-            this.cmbPaises.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cmbPaises.DataSource = Enum.GetValues(typeof(EPaises));
-            this.cmbPaises.SelectedItem = jug.Pais;
-            this.txtTactica.Text = jug.Tactica;
-            this.txtApellido.Enabled = false;
-            this.txtNombre.Enabled = false;
-            this.cmbPaises.Enabled = false;
+            if (personal is Entrenador entre)
+            {
+                // Realizar las operaciones específicas para entreista
+                this.txtApellido.Text = entre.Apellido;
+                this.txtNombre.Text = entre.Nombre;
+                this.txtEdad.Text = entre.Edad.ToString();
+                this.cmbPaises.DropDownStyle = ComboBoxStyle.DropDownList;
+                this.cmbPaises.DataSource = Enum.GetValues(typeof(EPaises));
+                this.cmbPaises.SelectedItem = entre.Pais;
+                this.txtTactica.Text = entre.Tactica;
+                this.txtApellido.Enabled = false;
+                this.txtNombre.Enabled = false;
+                this.cmbPaises.Enabled = false;
+            }
         }
-        private string Capitalize(string input)
+
+        public string Capitalize(string input)
         {
             if (string.IsNullOrEmpty(input))
             {

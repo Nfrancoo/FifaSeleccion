@@ -71,12 +71,11 @@ namespace SegundoParcial
         /// <summary>
         /// Método que describe la acción de concentración del jugador.
         /// </summary>
-        public override string Concentrarse()
+        public override string RealizarConcentracion()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append($"{this.nombre} {this.apellido} se está concentrando.");
             return sb.ToString().Trim();
-            //Console.WriteLine($"{this.nombre} {this.apellido} se está concentrando.");
         }
 
         public override bool Equals(object? obj)

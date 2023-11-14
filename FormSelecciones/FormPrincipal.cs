@@ -11,7 +11,7 @@ using SegundoParcial;
 using System.IO;
 using System.Text.Json;
 using Newtonsoft.Json;
-
+using System.Security.Principal;
 
 namespace FormSelecciones
 {
@@ -95,43 +95,6 @@ namespace FormSelecciones
         /// </summary>
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
-            ////JUGADORES
-            //Deserializar("JugadorArgentina.json", ref jugadoresArgentina);
-            //ActualizarVisor(jugadoresArgentina, lstArgentina);
-            //Deserializar("JugadorBrasil.json", ref jugadoresBrasil);
-            //ActualizarVisor(jugadoresBrasil, lstBrasil);
-            //Deserializar("JugadorItalia.json", ref jugadoresItalia);
-            //ActualizarVisor(jugadoresItalia, lstItalia);
-            //Deserializar("JugadorFrancia.json", ref jugadoresFrancia);
-            //ActualizarVisor(jugadoresFrancia, lstFrancia);
-            //Deserializar("JugadorAlemania.json", ref jugadoresAlemania);
-            //ActualizarVisor(jugadoresAlemania, lstAlemania);
-
-            ////ENTRENADORES
-            //Deserializar("EntrenadorArgentina.json", ref entrenadorArgentina);
-            //ActualizarVisor(entrenadorArgentina, lstArgentinaEntrenador);
-            //Deserializar("EntrenadorBrasil.json", ref entrenadorBrasil);
-            //ActualizarVisor(entrenadorBrasil, lstBrasilEntrenador);
-            //Deserializar("EntrenadorItalia.json", ref entrenadorItalia);
-            //ActualizarVisor(entrenadorItalia, lstItaliaEntrenador);
-            //Deserializar("EntrenadorFrancia.json", ref entrenadorFrancia);
-            //ActualizarVisor(entrenadorFrancia, lstFranciaEntrenador);
-            //Deserializar("EntrenadorAlemania.json", ref entrenadorAlemania);
-            //ActualizarVisor(entrenadorAlemania, lstAlemaniaEntrenador);
-
-            ////MASAJISTAS
-            //Deserializar("MasajistaArgentina.json", ref masajeadoresArgentina);
-            //ActualizarVisor(masajeadoresArgentina, lstArgentinaMasajeador);
-            //Deserializar("MasajistaBrasil.json", ref masajeadoresBrasil);
-            //ActualizarVisor(masajeadoresBrasil, lstBrasilMasajeador);
-            //Deserializar("MasajistaItalia.json", ref masajeadoresItalia);
-            //ActualizarVisor(masajeadoresItalia, lstItaliaMasajeador);
-            //Deserializar("MasajistaFrancia.json", ref masajeadoresFrancia);
-            //ActualizarVisor(masajeadoresFrancia, lstFranciaMasajeador);
-            //Deserializar("MasajistaFrancia.json", ref masajeadoresFrancia);
-            //ActualizarVisor(masajeadoresAlemania, lstAlemaniaMasajeador);
-
-
             try
             {
 
@@ -583,29 +546,29 @@ namespace FormSelecciones
                 switch (paisSeleccionado)
                 {
                     case EPaises.Argentina:
-                        OrdenarEdadAs(lstArgentina, jugadoresArgentina);
-                        OrdenarEdadAs(lstArgentinaEntrenador, entrenadorArgentina);
-                        OrdenarEdadAs(lstArgentinaMasajeador, masajeadoresArgentina);
+                        OrdenarEdad(lstArgentina, jugadoresArgentina);
+                        OrdenarEdad(lstArgentinaEntrenador, entrenadorArgentina);
+                        OrdenarEdad(lstArgentinaMasajeador, masajeadoresArgentina);
                         break;
                     case EPaises.Brasil:
-                        OrdenarEdadAs(lstBrasil, jugadoresBrasil);
-                        OrdenarEdadAs(lstBrasilEntrenador, entrenadorBrasil);
-                        OrdenarEdadAs(lstBrasilMasajeador, masajeadoresBrasil);
+                        OrdenarEdad(lstBrasil, jugadoresBrasil);
+                        OrdenarEdad(lstBrasilEntrenador, entrenadorBrasil);
+                        OrdenarEdad(lstBrasilMasajeador, masajeadoresBrasil);
                         break;
                     case EPaises.Italia:
-                        OrdenarEdadAs(lstItalia, jugadoresItalia);
-                        OrdenarEdadAs(lstItaliaEntrenador, entrenadorItalia);
-                        OrdenarEdadAs(lstItaliaMasajeador, masajeadoresItalia);
+                        OrdenarEdad(lstItalia, jugadoresItalia);
+                        OrdenarEdad(lstItaliaEntrenador, entrenadorItalia);
+                        OrdenarEdad(lstItaliaMasajeador, masajeadoresItalia);
                         break;
                     case EPaises.Francia:
-                        OrdenarEdadAs(lstFrancia, jugadoresFrancia);
-                        OrdenarEdadAs(lstFranciaEntrenador, entrenadorFrancia);
-                        OrdenarEdadAs(lstFranciaMasajeador, masajeadoresFrancia);
+                        OrdenarEdad(lstFrancia, jugadoresFrancia);
+                        OrdenarEdad(lstFranciaEntrenador, entrenadorFrancia);
+                        OrdenarEdad(lstFranciaMasajeador, masajeadoresFrancia);
                         break;
                     case EPaises.Alemania:
-                        OrdenarEdadAs(lstAlemania, jugadoresAlemania);
-                        OrdenarEdadAs(lstAlemaniaEntrenador, entrenadorAlemania);
-                        OrdenarEdadAs(lstAlemaniaMasajeador, masajeadoresAlemania);
+                        OrdenarEdad(lstAlemania, jugadoresAlemania);
+                        OrdenarEdad(lstAlemaniaEntrenador, entrenadorAlemania);
+                        OrdenarEdad(lstAlemaniaMasajeador, masajeadoresAlemania);
                         break;
                 }
             }
@@ -616,29 +579,29 @@ namespace FormSelecciones
                 switch (paisSeleccionado)
                 {
                     case EPaises.Argentina:
-                        OrdenarEdadDes(lstArgentina, jugadoresArgentina);
-                        OrdenarEdadDes(lstArgentinaEntrenador, entrenadorArgentina);
-                        OrdenarEdadDes(lstArgentinaMasajeador, masajeadoresArgentina);
+                        OrdenarEdad(lstArgentina, jugadoresArgentina);
+                        OrdenarEdad(lstArgentinaEntrenador, entrenadorArgentina);
+                        OrdenarEdad(lstArgentinaMasajeador, masajeadoresArgentina);
                         break;
                     case EPaises.Brasil:
-                        OrdenarEdadDes(lstBrasil, jugadoresBrasil);
-                        OrdenarEdadDes(lstBrasilEntrenador, entrenadorBrasil);
-                        OrdenarEdadDes(lstBrasilMasajeador, masajeadoresBrasil);
+                        OrdenarEdad(lstBrasil, jugadoresBrasil);
+                        OrdenarEdad(lstBrasilEntrenador, entrenadorBrasil);
+                        OrdenarEdad(lstBrasilMasajeador, masajeadoresBrasil);
                         break;
                     case EPaises.Italia:
-                        OrdenarEdadDes(lstItalia, jugadoresItalia);
-                        OrdenarEdadDes(lstItaliaEntrenador, entrenadorItalia);
-                        OrdenarEdadDes(lstItaliaMasajeador, masajeadoresItalia);
+                        OrdenarEdad(lstItalia, jugadoresItalia);
+                        OrdenarEdad(lstItaliaEntrenador, entrenadorItalia);
+                        OrdenarEdad(lstItaliaMasajeador, masajeadoresItalia);
                         break;
                     case EPaises.Francia:
-                        OrdenarEdadDes(lstFrancia, jugadoresFrancia);
-                        OrdenarEdadDes(lstFranciaEntrenador, entrenadorFrancia);
-                        OrdenarEdadDes(lstFranciaMasajeador, masajeadoresFrancia);
+                        OrdenarEdad(lstFrancia, jugadoresFrancia);
+                        OrdenarEdad(lstFranciaEntrenador, entrenadorFrancia);
+                        OrdenarEdad(lstFranciaMasajeador, masajeadoresFrancia);
                         break;
                     case EPaises.Alemania:
-                        OrdenarEdadDes(lstAlemania, jugadoresAlemania);
-                        OrdenarEdadDes(lstAlemaniaEntrenador, entrenadorAlemania);
-                        OrdenarEdadDes(lstAlemaniaMasajeador, masajeadoresAlemania);
+                        OrdenarEdad(lstAlemania, jugadoresAlemania);
+                        OrdenarEdad(lstAlemaniaEntrenador, entrenadorAlemania);
+                        OrdenarEdad(lstAlemaniaMasajeador, masajeadoresAlemania);
                         break;
                 }
             }
@@ -649,19 +612,19 @@ namespace FormSelecciones
                 switch (paisSeleccionado)
                 {
                     case EPaises.Argentina:
-                        OrdenarPosicionAs(lstArgentina, jugadoresArgentina);
+                        OrdenarPosicion(lstArgentina, jugadoresArgentina);
                         break;
                     case EPaises.Brasil:
-                        OrdenarPosicionAs(lstBrasil, jugadoresBrasil);
+                        OrdenarPosicion(lstBrasil, jugadoresBrasil);
                         break;
                     case EPaises.Italia:
-                        OrdenarPosicionAs(lstItalia, jugadoresItalia);
+                        OrdenarPosicion(lstItalia, jugadoresItalia);
                         break;
                     case EPaises.Francia:
-                        OrdenarPosicionAs(lstFrancia, jugadoresFrancia);
+                        OrdenarPosicion(lstFrancia, jugadoresFrancia);
                         break;
                     case EPaises.Alemania:
-                        OrdenarPosicionAs(lstAlemania, jugadoresAlemania);
+                        OrdenarPosicion(lstAlemania, jugadoresAlemania);
                         break;
                 }
             }
@@ -672,19 +635,19 @@ namespace FormSelecciones
                 switch (paisSeleccionado)
                 {
                     case EPaises.Argentina:
-                        OrdenarPosicionDes(lstArgentina, jugadoresArgentina);
+                        OrdenarPosicion(lstArgentina, jugadoresArgentina);
                         break;
                     case EPaises.Brasil:
-                        OrdenarPosicionDes(lstBrasil, jugadoresBrasil);
+                        OrdenarPosicion(lstBrasil, jugadoresBrasil);
                         break;
                     case EPaises.Italia:
-                        OrdenarPosicionDes(lstItalia, jugadoresItalia);
+                        OrdenarPosicion(lstItalia, jugadoresItalia);
                         break;
                     case EPaises.Francia:
-                        OrdenarPosicionDes(lstFrancia, jugadoresFrancia);
+                        OrdenarPosicion(lstFrancia, jugadoresFrancia);
                         break;
                     case EPaises.Alemania:
-                        OrdenarPosicionDes(lstAlemania, jugadoresAlemania);
+                        OrdenarPosicion(lstAlemania, jugadoresAlemania);
                         break;
                 }
             }
@@ -902,73 +865,73 @@ namespace FormSelecciones
         /// </summary>
         /// <param name="lst">ListBox que contiene la lista de jugadores</param>
         /// <param name="personal">Lista de jugadores</param>
-        private void ModificarList(ListBox lst, List<Jugador> personal)
+        private void ModificarList<T>(ListBox lst, List<T> personal) where T : PersonalEquipoSeleccion
         {
+            int selectedIndex = lst.SelectedIndex;
 
-            Jugador jugadorSeleccionado = (Jugador)lst.SelectedItem;
-            ConvocarJugador editarJugadorForm = new ConvocarJugador(jugadorSeleccionado);
-
-
-            editarJugadorForm.JugadorParaEditar = jugadorSeleccionado;
-
-            editarJugadorForm.ShowDialog();
-
-            if (editarJugadorForm.DialogResult == DialogResult.OK)
+            // Verifica si el índice es válido
+            if (selectedIndex >= 0 && selectedIndex < personal.Count)
             {
+                T personalSeleccionado = personal[selectedIndex];
 
-                Jugador jugadorModificado = editarJugadorForm.NuevoJugador;
+                if (personalSeleccionado is Jugador)
+                {
+                    // Utiliza directamente T en lugar de Jugador
+                    ConvocarJugador editarJugadorForm = new ConvocarJugador((Jugador)(object)personalSeleccionado);
 
-                int selectedIndex = lst.SelectedIndex;
+                    editarJugadorForm.JugadorParaEditar = (Jugador)(object)personalSeleccionado;
 
-                personal[selectedIndex] = jugadorModificado;
-                lst.Items[selectedIndex] = jugadorModificado;
+                    editarJugadorForm.ShowDialog();
 
-                sql.ModificarDato(jugadorModificado);
-            }
-        }
+                    if (editarJugadorForm.DialogResult == DialogResult.OK)
+                    {
+                        // Utiliza directamente T en lugar de Jugador
+                        T jugadorModificado = (T)(object)editarJugadorForm.NuevoJugador;
 
-        private void ModificarList(ListBox lst, List<Entrenador> personal)
-        {
-            Entrenador entrenadorSeleccionado = (Entrenador)lst.SelectedItem;
-            ConvocarEntrenador editarEntrenadorForm = new ConvocarEntrenador(entrenadorSeleccionado);
+                        // Realiza la asignación y modificación de la lista
+                        personal[selectedIndex] = jugadorModificado;
+                        lst.Items[selectedIndex] = jugadorModificado;
+                        sql.ModificarDato((Jugador)(object)jugadorModificado);
+                    }
+                }
+                else if (personalSeleccionado is Entrenador)
+                {
+                    ConvocarEntrenador editarEntrenadorForm = new ConvocarEntrenador((Entrenador)(object)personalSeleccionado);
 
-            editarEntrenadorForm.EntrendorParaEditar = entrenadorSeleccionado;
+                    editarEntrenadorForm.EntrenadorParaEditar = (Entrenador)(object)personalSeleccionado;
 
-            editarEntrenadorForm.ShowDialog();
+                    editarEntrenadorForm.ShowDialog();
 
-            if (editarEntrenadorForm.DialogResult == DialogResult.OK)
-            {
-                Entrenador entrenadorModificado = editarEntrenadorForm.NuevoEntrenador;
+                    if (editarEntrenadorForm.DialogResult == DialogResult.OK)
+                    {
+                        // Utiliza directamente T en lugar de Jugador
+                        T entrenadorModificado = (T)(object)editarEntrenadorForm.NuevoEntrenador;
 
-                int selectedIndex = lst.SelectedIndex;
+                        // Realiza la asignación y modificación de la lista
+                        personal[selectedIndex] = entrenadorModificado;
+                        lst.Items[selectedIndex] = entrenadorModificado;
+                        sql.ModificarDato((Entrenador)(object)entrenadorModificado);
+                    }
+                }
+                else if (personalSeleccionado is Masajista)
+                {
+                    ConvocarMasajista editarEntrenadorForm = new ConvocarMasajista((Masajista)(object)personalSeleccionado);
 
-                personal[selectedIndex] = entrenadorModificado;
-                lst.Items[selectedIndex] = entrenadorModificado;
+                    editarEntrenadorForm.MasajistaParaEditar = (Masajista)(object)personalSeleccionado;
 
-                sql.ModificarDato(entrenadorModificado);
-            }
-        }
+                    editarEntrenadorForm.ShowDialog();
 
-        private void ModificarList(ListBox lst, List<Masajista> personal)
-        {
+                    if (editarEntrenadorForm.DialogResult == DialogResult.OK)
+                    {
+                        // Utiliza directamente T en lugar de Jugador
+                        T entrenadorModificado = (T)(object)editarEntrenadorForm.NuevoMasajista;
 
-            Masajista masajistaSeleccionado = (Masajista)lst.SelectedItem;
-            ConvocarMasajista editarEntrenadorForm = new ConvocarMasajista(masajistaSeleccionado);
-
-            editarEntrenadorForm.MasajeadorParaEditar = masajistaSeleccionado;
-
-            editarEntrenadorForm.ShowDialog();
-
-            if (editarEntrenadorForm.DialogResult == DialogResult.OK)
-            {
-                Masajista entrenadorModificado = editarEntrenadorForm.NuevoMasajista;
-
-                int selectedIndex = lst.SelectedIndex;
-
-                personal[selectedIndex] = entrenadorModificado;
-                lst.Items[selectedIndex] = entrenadorModificado;
-
-                sql.ModificarDato(entrenadorModificado);
+                        // Realiza la asignación y modificación de la lista
+                        personal[selectedIndex] = entrenadorModificado;
+                        lst.Items[selectedIndex] = entrenadorModificado;
+                        sql.ModificarDato((Masajista)(object)entrenadorModificado);
+                    }
+                }
             }
         }
 
@@ -978,69 +941,16 @@ namespace FormSelecciones
         /// </summary>
         /// <param name="listBox">ListBox que contiene el elemento a modificar</param>
         /// <param name="lista">Lista de elementos del mismo tipo</param
-        public void ModificarElemento(ListBox listBox, List<Jugador> lista)
+        public void ModificarElemento<T>(ListBox listBox, List<T> lista) where T : PersonalEquipoSeleccion
         {
             if (listBox.SelectedIndex != -1)
             {
                 ModificarList(listBox, lista);
             }
         }
-        public void ModificarElemento(ListBox listBox, List<Masajista> lista)
-        {
-            if (listBox.SelectedIndex != -1)
-            {
-                ModificarList(listBox, lista);
-            }
-        }
-        public void ModificarElemento(ListBox listBox, List<Entrenador> lista)
-        {
-            if (listBox.SelectedIndex != -1)
-            {
-                ModificarList(listBox, lista);
-            }
-        }
-
-
         #endregion
 
-        #region Metodos para Serializar y Deserializar
-        /// <summary>
-        /// los tres metodos Serializan una lista (Jugadores, Entrenador, Masajista)
-        /// y la guarda en un archivo JSON.
-        /// </summary>
-        /// <param name="path">Ruta del archivo JSON</param>
-        /// <param name="listJugador">Lista de jugadores a serializar</param>
-        public void Serializar<T>(string path, List<T> lista)
-        {
-            JsonSerializerOptions serializador = new JsonSerializerOptions();
-            serializador.WriteIndented = true;
-
-            string objJson = System.Text.Json.JsonSerializer.Serialize(lista, serializador);
-
-            using (StreamWriter sw = new StreamWriter(path))
-            {
-                sw.WriteLine(objJson);
-            }
-        }
-
-        /// <summary>
-        /// estos tres metodos Deserializa un archivo JSON en una lista dependiendo
-        /// que typo de lista le pases por parametro(Jugador, Entrenador, Masajista).
-        /// </summary>
-        /// <param name="path">Ruta del archivo JSON</param>
-        /// <param name="listJugadores">Referencia a la lista de jugadores donde se almacenarán los datos deserializados</param>
-        public void Deserializar<T>(string path, ref List<T> lista)
-        {
-            if (File.Exists(path))
-            {
-                using (StreamReader sr = new StreamReader(path))
-                {
-                    string jsonString = sr.ReadToEnd();
-
-                    lista = System.Text.Json.JsonSerializer.Deserialize<List<T>>(jsonString);
-                }
-            }
-        }
+        #region Metodo para Actualizar Visor
 
         /// <summary>
         /// Actualiza la ListBox con una lista que le pase por parametro(Jugador,Masajista,Entrenador).
@@ -1058,242 +968,90 @@ namespace FormSelecciones
         #endregion
 
         #region Metodos para Ordenar
-
-
-
-        /// <summary>
-        /// los 3 metodos ordenan una lista (puede ser Juagador, Masajista o Entrenador)
-        /// por edad en orden ascendente y actualiza una ListBox.
-        /// </summary>
-        /// <param name="lst">ListBox que se actualizará con la lista ordenada</param>
-        /// <param name="lista">Lista de jugadores que se ordenará</param>
-        public void OrdenarEdadAs(ListBox lst, List<Jugador> lista)
+        public void OrdenarEdad<T>(ListBox lst, List<T> lista) where T : PersonalEquipoSeleccion
         {
-
             if (rdoAscendenteEdad.Checked)
             {
                 lista.Sort((j1, j2) => j1.Edad.CompareTo(j2.Edad));
             }
-            lst.Items.Clear();
-
-            foreach (var jugador in lista)
-            {
-                lst.Items.Add(jugador);
-            }
-        }
-        public void OrdenarEdadAs(ListBox lst, List<Entrenador> lista)
-        {
-
-            if (rdoAscendenteEdad.Checked)
-            {
-                lista.Sort((j1, j2) => j1.Edad.CompareTo(j2.Edad));
-            }
-
-            lst.Items.Clear();
-
-            foreach (var jugador in lista)
-            {
-                lst.Items.Add(jugador);
-            }
-        }
-        public void OrdenarEdadAs(ListBox lst, List<Masajista> lista)
-        {
-
-            if (rdoAscendenteEdad.Checked)
-            {
-                lista.Sort((j1, j2) => j1.Edad.CompareTo(j2.Edad));
-            }
-
-            lst.Items.Clear();
-
-            foreach (var jugador in lista)
-            {
-                lst.Items.Add(jugador);
-            }
-        }
-
-        /// <summary>
-        /// los 3 metodos ordenan una lista (puede ser Juagador, Masajista o Entrenador)
-        /// por edad en orden descendente y actualiza una ListBox.
-        /// </summary>
-        /// <param name="lst">ListBox que se actualizará con la lista ordenada</param>
-        /// <param name="lista">Lista de jugadores que se ordenará</param>
-        public void OrdenarEdadDes(ListBox lst, List<Jugador> lista)
-        {
-            if (rdoDescendenteEdad.Checked)
+            else if (rdoDescendenteEdad.Checked)
             {
                 lista.Sort((j1, j2) => j2.Edad.CompareTo(j1.Edad));
             }
-            lst.Items.Clear();
 
-            foreach (var jugador in lista)
-            {
-                lst.Items.Add(jugador);
-            }
-        }
-        public void OrdenarEdadDes(ListBox lst, List<Entrenador> lista)
-        {
-            if (rdoDescendenteEdad.Checked)
-            {
-                lista.Sort((j1, j2) => j2.Edad.CompareTo(j1.Edad));
-            }
-            lst.Items.Clear();
-
-            foreach (var jugador in lista)
-            {
-                lst.Items.Add(jugador);
-            }
-        }
-        public void OrdenarEdadDes(ListBox lst, List<Masajista> lista)
-        {
-            if (rdoDescendenteEdad.Checked)
-            {
-                lista.Sort((j1, j2) => j2.Edad.CompareTo(j1.Edad));
-            }
-            lst.Items.Clear();
-
-            foreach (var jugador in lista)
-            {
-                lst.Items.Add(jugador);
-            }
+            ActualizarListBox(lst, lista);
         }
 
-        /// <summary>
-        /// Ordena solamente una lista de jugadores por posición en orden ascendente y actualiza una ListBox.
-        /// </summary>
-        /// <param name="lst">ListBox que se actualizará con la lista ordenada</param>
-        /// <param name="lista">Lista de jugadores que se ordenará</param>
-        public void OrdenarPosicionAs(ListBox lst, List<Jugador> lista)
+        public void OrdenarPosicion<T>(ListBox lst, List<T> lista) where T : Jugador
         {
             if (rdoAscendentePosicion.Checked)
             {
-                lista.Sort((j1, j2) => j1.Posicion.CompareTo(j2.Posicion));
+                lista.Sort((j1, j2) => ((Jugador)j1).Posicion.CompareTo(((Jugador)j2).Posicion));
             }
-            lst.Items.Clear();
-
-            foreach (var jugador in lista)
+            else if (rdoDescendentePosicion.Checked)
             {
-                lst.Items.Add(jugador);
+                lista.Sort((j1, j2) => ((Jugador)j2).Posicion.CompareTo(((Jugador)j1).Posicion));
             }
+
+            ActualizarListBox(lst, lista);
         }
 
-        /// <summary>
-        /// Ordena solamente una lista de jugadores por posición en orden descendente y actualiza una ListBox.
-        /// </summary>
-        /// <param name="lst">ListBox que se actualizará con la lista ordenada</param>
-        /// <param name="lista">Lista de jugadores que se ordenará</param>
-
-        public void OrdenarPosicionDes(ListBox lst, List<Jugador> lista)
+        private void ActualizarListBox<T>(ListBox lst, List<T> lista)
         {
-            if (rdoDescendentePosicion.Checked)
-            {
-                lista.Sort((j1, j2) => j2.Posicion.CompareTo(j1.Posicion));
-            }
             lst.Items.Clear();
 
-            foreach (var jugador in lista)
+            foreach (var elemento in lista)
             {
-                lst.Items.Add(jugador);
+                lst.Items.Add(elemento);
             }
         }
+
         #endregion
 
         #region Añadir
-        public void Añadir(List<Jugador> lista, Jugador personal, ListBox lst)
+        public void Añadir<T>(List<T> lista, T personal, ListBox lst) where T : PersonalEquipoSeleccion
         {
-            bool jugadorRepetido = lista.Any(j => j.Equals(personal));
-            if (jugadorRepetido)
-            {
-                // Aquí puedes mostrar un mensaje de error o tomar alguna otra acción.
-                MessageBox.Show("El jugador ya existe en la lista.");
-            }
-            else
-            {
-                // Si el jugador no existe en la lista, agrégalo.
-                lista = lista + personal;
-                lst.Items.Add(personal);
-            }
-        }
+            bool elementoRepetido = lista.Any(item => item.Equals(personal));
 
-        public void Añadir(List<Entrenador> lista, Entrenador personal, ListBox lst)
-        {
-            //metodo para añadir jugador a la lista y a la listaBox
-            bool jugadorRepetido = lista.Any(j => j.Equals(personal));
-            if (jugadorRepetido)
+            if (elementoRepetido)
             {
-                // Aquí puedes mostrar un mensaje de error o tomar alguna otra acción.
-                MessageBox.Show("El jugador ya existe en la lista.");
+                MessageBox.Show("El elemento ya existe en la lista.");
             }
             else
             {
-                // Si el jugador no existe en la lista, agrégalo.
-                lista = lista + personal;
-                lst.Items.Add(personal);
-            }
-        }
-
-        public void Añadir(List<Masajista> lista, Masajista personal, ListBox lst)
-        {
-            bool jugadorRepetido = lista.Any(j => j.Equals(personal));
-            if (jugadorRepetido)
-            {
-                // Aquí puedes mostrar un mensaje de error o tomar alguna otra acción.
-                MessageBox.Show("El jugador ya existe en la lista.");
-            }
-            else
-            {
-                // Si el jugador no existe en la lista, agrégalo.
-                lista = lista + personal;
+                lista.Add(personal);
                 lst.Items.Add(personal);
             }
         }
         #endregion
 
         #region
+        private void RealizarAccion<T>(ListBox listBox, string tituloAccion) where T : PersonalEquipoSeleccion
+        {
+            if (listBox.SelectedIndex != -1)
+            {
+                if (listBox.SelectedItem is T seleccionado)
+                {
+                    string accion = seleccionado.RealizarAccion();
+
+                    MessageBox.Show(accion, $"Acción de {tituloAccion}", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
         private void AccionJugador(ListBox listBox)
         {
-            if (listBox.SelectedIndex != -1)
-            {
-                // Verifica si el objeto seleccionado es de tipo Jugador.
-                if (listBox.SelectedItem is Jugador jugador)
-                {
-                    // Llama al método RealizarAccion del jugador seleccionado.
-                    string accion = jugador.RealizarAccion();
-
-                    // Puedes mostrar la acción en un MessageBox o en otro lugar según tus necesidades.
-                    MessageBox.Show(accion, "Acción del Jugador", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
+            RealizarAccion<Jugador>(listBox, "Jugador");
         }
+
         private void AccionEntrenador(ListBox listBox)
         {
-            if (listBox.SelectedIndex != -1)
-            {
-                // Verifica si el objeto seleccionado es de tipo Jugador.
-                if (listBox.SelectedItem is Entrenador entrenador)
-                {
-                    // Llama al método RealizarAccion del jugador seleccionado.
-                    string accion = entrenador.RealizarAccion();
-
-                    // Puedes mostrar la acción en un MessageBox o en otro lugar según tus necesidades.
-                    MessageBox.Show(accion, "Acción del Entrenador", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
+            RealizarAccion<Entrenador>(listBox, "Entrenador");
         }
+
         private void AccionMasajista(ListBox listBox)
         {
-            if (listBox.SelectedIndex != -1)
-            {
-                // Verifica si el objeto seleccionado es de tipo Jugador.
-                if (listBox.SelectedItem is Masajista masajista)
-                {
-                    // Llama al método RealizarAccion del jugador seleccionado.
-                    string accion = masajista.RealizarAccion();
-
-                    // Puedes mostrar la acción en un MessageBox o en otro lugar según tus necesidades.
-                    MessageBox.Show(accion, "Acción del Masajeador", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
+            RealizarAccion<Masajista>(listBox, "Masajeador");
         }
 
         #endregion

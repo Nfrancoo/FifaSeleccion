@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace SegundoParcial
 {
-    public abstract class PersonalEquipoSeleccion
+    public abstract class PersonalEquipoSeleccion : IPersonal
     {
         /// <summary>
         /// Constructor predeterminado que inicializa valores por defecto.
@@ -63,7 +63,7 @@ namespace SegundoParcial
         /// <summary>
         /// Método virtual que puede ser sobrescrito por las clases derivadas para representar la acción de concentración.
         /// </summary>
-        public virtual string Concentrarse()
+        public virtual string RealizarConcentracion()
         {
             return $"{this.nombre} {this.apellido}";
         }

@@ -16,7 +16,7 @@ namespace FormSelecciones
     /// <summary>
     /// Formulario para la convocatoria de un jugador.
     /// </summary>
-    public partial class ConvocarJugador : Form
+    public partial class ConvocarJugador : Form, IConvocar
     {
         /// <summary>
         /// Obtiene o establece el jugador para editar.
@@ -84,7 +84,7 @@ namespace FormSelecciones
             nombre = Capitalize(nombre);
             apellido = Capitalize(apellido);
 
-            if (!EsTextoValido(nombre) || !EsTextoValido(apellido))
+            if (!((IConvocar)this).EsTextoValido(nombre) || !((IConvocar)this).EsTextoValido(apellido))
             {
                 MessageBox.Show("El nombre y el apellido no deben contener números ni caracteres especiales.");
                 return;
@@ -129,7 +129,7 @@ namespace FormSelecciones
 
             if (this.DialogResult == DialogResult.OK)
             {
-                MessageBox.Show(NuevoJugador.Concentrarse());
+                MessageBox.Show(NuevoJugador.RealizarConcentracion());
             }
 
 
@@ -149,22 +149,24 @@ namespace FormSelecciones
         /// la edicion de algunos TextBox
         /// </summary>
         /// <param name="jug">El jugador a editar.</param>
-        public void Modificador(Jugador jug)
+        public void Modificador<T>(T personal) where T : PersonalEquipoSeleccion
         {
-            this.txtApellido.Text = jug.apellido;
-            this.txtNombre.Text = jug.nombre;
-            this.txtEdad.Text = jug.edad.ToString();
-            this.txtDorsal.Text = jug.Dorsal.ToString();
-            this.cmbPaises.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cmbPaises.DataSource = Enum.GetValues(typeof(EPaises));
-            this.cmbPaises.SelectedItem = jug.Pais;
-            this.cmbPosiciones.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cmbPosiciones.DataSource = Enum.GetValues(typeof(EPosicion));
-            this.cmbPosiciones.SelectedItem = jug.Posicion;
-            this.txtApellido.Enabled = false;
-            this.txtNombre.Enabled = false;
-            this.cmbPaises.Enabled = false;
-            // No necesitas hacer nada más para el ComboBox de Países, ya que ya configuraste su estilo aquí.
+            if (personal is Jugador jug)
+            {
+                // Realizar las operaciones específicas para jugista
+                this.txtApellido.Text = jug.Apellido;
+                this.txtNombre.Text = jug.Nombre;
+                this.txtEdad.Text = jug.Edad.ToString();
+                this.cmbPaises.DropDownStyle = ComboBoxStyle.DropDownList;
+                this.cmbPaises.DataSource = Enum.GetValues(typeof(EPaises));
+                this.cmbPaises.SelectedItem = jug.Pais;
+                this.cmbPosiciones.DropDownStyle = ComboBoxStyle.DropDownList;
+                this.cmbPosiciones.DataSource = Enum.GetValues(typeof(EPosicion));
+                this.cmbPosiciones.SelectedItem = jug.Posicion;
+                this.txtApellido.Enabled = false;
+                this.txtNombre.Enabled = false;
+                this.cmbPaises.Enabled = false;
+            }
         }
 
 
@@ -173,7 +175,7 @@ namespace FormSelecciones
         /// </summary>
         /// <param name="texto">El texto a verificar.</param>
         /// <returns><c>true</c> si el texto contiene solo caracteres alfabéticos; de lo contrario, <c>false</c>.</returns>
-        private bool EsTextoValido(string texto)
+        bool IConvocar.EsTextoValido(string texto)
         {
             return System.Text.RegularExpressions.Regex.IsMatch(texto, @"^[a-zA-Z]+$");
         }
@@ -183,7 +185,7 @@ namespace FormSelecciones
         /// </summary>
         /// <param name="input">El texto de entrada.</param>
         /// <returns>El texto con la primera letra en mayúscula y el resto en minúscula.</returns>
-        private string Capitalize(string input)
+        public string Capitalize(string input)
         {
             if (string.IsNullOrEmpty(input))
             {

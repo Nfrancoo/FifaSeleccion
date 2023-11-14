@@ -41,7 +41,7 @@ namespace SegundoParcial
         /// <summary>
         /// Método que describe la acción de concentración del entrenador con el equipo.
         /// </summary>
-        public override string Concentrarse()
+        public override string RealizarConcentracion()
         {
             return $"{base.nombre} {base.apellido} se está concentrando con el equipo.";
         }
