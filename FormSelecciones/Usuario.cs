@@ -19,6 +19,30 @@ namespace FormSelecciones
         public int legajo { get; set; }
         public string correo { get; set; }
         public string clave { get; set; }
-        public string perfil { get; set; }      
+        public string perfil { get; set; }
+
+        public delegate void DelegadoString(string str);
+        public event DelegadoString notificarAccesoNoPermitido;
+
+        public event DelegadoString NotificarAccesoNoPermitido
+        {
+            add
+            {
+                notificarAccesoNoPermitido += value;
+            }
+            remove
+            {
+                notificarAccesoNoPermitido -= value;
+            }
+        }
+
+        public void NotificarAcceso(string mensaje)
+        {
+            notificarAccesoNoPermitido?.Invoke(mensaje);
+        }
+        //public string Mostrar()
+        //{
+        //    return $"{this.nombre} {this.apellido} no tiene permito entrar debido a su nivel de proteccion";
+        //}
     }
 }

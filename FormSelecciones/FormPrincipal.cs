@@ -42,7 +42,7 @@ namespace FormSelecciones
         private List<Masajista> masajeadoresFrancia = new List<Masajista>();
 
         private Usuario usuarioLog;
-        SQL sql;
+        private SQL sql;
 
         /// <summary>
         /// Constructor del formulario principal.
@@ -147,80 +147,95 @@ namespace FormSelecciones
         /// </summary>
         private void btnConvocar_Click(object sender, EventArgs e)
         {
-            Personal personalForm = new Personal();
-            personalForm.ShowDialog();
-
-            if (personalForm.DialogResult == DialogResult.OK)
+            if (usuarioLog != null)
             {
-                if (personalForm.nuevoJugador is Jugador jugador)
+                if (usuarioLog.perfil == "vendedor")
                 {
+                    usuarioLog.NotificarAccesoNoPermitido += MostrarMensaje;
+                    usuarioLog.NotificarAcceso("No tienes permitido utilizar esta opción.");
+                    usuarioLog.NotificarAccesoNoPermitido -= MostrarMensaje;
+                    return;
+                }
 
-                    // Es un jugador
-                    // Agregar el nuevo jugador al ListBox y a la lista correspondiente
-                    switch (jugador.Pais)
-                    {
-                        case EPaises.Brasil:
-                            Añadir(jugadoresBrasil, jugador, lstBrasil);
-                            break;
-                        case EPaises.Argentina:
-                            Añadir(jugadoresArgentina, jugador, lstArgentina);
-                            break;
-                        case EPaises.Italia:
-                            Añadir(jugadoresItalia, jugador, lstItalia);
-                            break;
-                        case EPaises.Alemania:
-                            Añadir(jugadoresAlemania, jugador, lstAlemania);
-                            break;
-                        case EPaises.Francia:
-                            Añadir(jugadoresFrancia, jugador, lstFrancia);
-                            break;
-                    }
-                }
-                else if (personalForm.nuevoEntrenador is Entrenador entrenador)
+                else if(usuarioLog.perfil == "administrador" || usuarioLog.perfil == "supervisor")
                 {
-                    switch (entrenador.Pais)
+                    Personal personalForm = new Personal();
+                    personalForm.ShowDialog();
+
+                    if (personalForm.DialogResult == DialogResult.OK)
                     {
-                        case EPaises.Brasil:
-                            SoloUnEntrenador(entrenadorBrasil, lstBrasilEntrenador, entrenador);
-                            break;
-                        case EPaises.Argentina:
-                            SoloUnEntrenador(entrenadorArgentina, lstArgentinaEntrenador, entrenador);
-                            break;
-                        case EPaises.Italia:
-                            SoloUnEntrenador(entrenadorItalia, lstItaliaEntrenador, entrenador);
-                            break;
-                        case EPaises.Alemania:
-                            SoloUnEntrenador(entrenadorAlemania, lstAlemaniaEntrenador, entrenador);
-                            break;
-                        case EPaises.Francia:
-                            SoloUnEntrenador(entrenadorFrancia, lstFranciaEntrenador, entrenador);
-                            break;
-                    }
-                }
-                else if (personalForm.nuevoMasajista is Masajista masajista)
-                {
-                    switch (masajista.Pais)
-                    {
-                        case EPaises.Brasil:
-                            Añadir(masajeadoresFrancia, masajista, lstFranciaMasajeador);
-                            break;
-                        case EPaises.Argentina:
-                            Añadir(masajeadoresArgentina, masajista, lstArgentinaMasajeador);
-                            break;
-                        case EPaises.Italia:
-                            Añadir(masajeadoresItalia, masajista, lstItaliaMasajeador);
-                            break;
-                        case EPaises.Alemania:
-                            Añadir(masajeadoresAlemania, masajista, lstAlemaniaMasajeador);
-                            break;
-                        case EPaises.Francia:
-                            Añadir(masajeadoresFrancia, masajista, lstFranciaMasajeador);
-                            break;
+                        if (personalForm.nuevoJugador is Jugador jugador)
+                        {
+
+                            // Es un jugador
+                            // Agregar el nuevo jugador al ListBox y a la lista correspondiente
+                            switch (jugador.Pais)
+                            {
+                                case EPaises.Brasil:
+                                    Añadir(jugadoresBrasil, jugador, lstBrasil);
+                                    break;
+                                case EPaises.Argentina:
+                                    Añadir(jugadoresArgentina, jugador, lstArgentina);
+                                    break;
+                                case EPaises.Italia:
+                                    Añadir(jugadoresItalia, jugador, lstItalia);
+                                    break;
+                                case EPaises.Alemania:
+                                    Añadir(jugadoresAlemania, jugador, lstAlemania);
+                                    break;
+                                case EPaises.Francia:
+                                    Añadir(jugadoresFrancia, jugador, lstFrancia);
+                                    break;
+                            }
+                        }
+                        else if (personalForm.nuevoEntrenador is Entrenador entrenador)
+                        {
+                            switch (entrenador.Pais)
+                            {
+                                case EPaises.Brasil:
+                                    SoloUnEntrenador(entrenadorBrasil, lstBrasilEntrenador, entrenador);
+                                    break;
+                                case EPaises.Argentina:
+                                    SoloUnEntrenador(entrenadorArgentina, lstArgentinaEntrenador, entrenador);
+                                    break;
+                                case EPaises.Italia:
+                                    SoloUnEntrenador(entrenadorItalia, lstItaliaEntrenador, entrenador);
+                                    break;
+                                case EPaises.Alemania:
+                                    SoloUnEntrenador(entrenadorAlemania, lstAlemaniaEntrenador, entrenador);
+                                    break;
+                                case EPaises.Francia:
+                                    SoloUnEntrenador(entrenadorFrancia, lstFranciaEntrenador, entrenador);
+                                    break;
+                            }
+                        }
+                        else if (personalForm.nuevoMasajista is Masajista masajista)
+                        {
+                            switch (masajista.Pais)
+                            {
+                                case EPaises.Brasil:
+                                    Añadir(masajeadoresFrancia, masajista, lstFranciaMasajeador);
+                                    break;
+                                case EPaises.Argentina:
+                                    Añadir(masajeadoresArgentina, masajista, lstArgentinaMasajeador);
+                                    break;
+                                case EPaises.Italia:
+                                    Añadir(masajeadoresItalia, masajista, lstItaliaMasajeador);
+                                    break;
+                                case EPaises.Alemania:
+                                    Añadir(masajeadoresAlemania, masajista, lstAlemaniaMasajeador);
+                                    break;
+                                case EPaises.Francia:
+                                    Añadir(masajeadoresFrancia, masajista, lstFranciaMasajeador);
+                                    break;
+                            }
+                        }
                     }
                 }
             }
         }
 
+               
         /// <summary>
         /// Manejador de eventos para el cambio en la selección del país en el ComboBox.
         /// Muestra el ListBox correspondiente al país seleccionado y oculta los demás.
@@ -269,7 +284,7 @@ namespace FormSelecciones
             try
 {
                 SQL sql = new SQL();
-                // Recorrer las listas y agregar los elementos a la base de datos
+
                 foreach (Jugador jugador in jugadoresArgentina)
                 {
                     sql.AgregarJugador(jugador);
@@ -294,7 +309,6 @@ namespace FormSelecciones
                     sql.AgregarJugador(jugador);
                 }
 
-                // Hacer lo mismo para entrenadores y masajistas
                 foreach (Entrenador entrenador in entrenadorArgentina)
                 {
                     sql.AgregarEntrenador(entrenador);
@@ -335,8 +349,6 @@ namespace FormSelecciones
                 {
                     sql.AgregarMasajista(masajista);
                 }
-
-
                 sql.CerrarConexion();
             }
             catch (Exception ex)
@@ -361,70 +373,81 @@ namespace FormSelecciones
         /// </summary>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (cmbPaises.SelectedItem != null)
+            if (usuarioLog != null)
             {
-                EPaises paisSeleccionado = (EPaises)cmbPaises.SelectedItem;
-
-                // Verifica si se ha seleccionado un elemento en el ListBox correspondiente al país seleccionado
-                bool elementoSeleccionado = false;
-
-                switch (paisSeleccionado)
+                if (usuarioLog.perfil == "vendedor" || usuarioLog.perfil == "supervisor")
                 {
-                    case EPaises.Argentina:
-                        elementoSeleccionado = lstArgentina.SelectedIndex != -1 || lstArgentinaEntrenador.SelectedIndex != -1 || lstArgentinaMasajeador.SelectedIndex != -1;
-                        break;
-                    case EPaises.Brasil:
-                        elementoSeleccionado = lstBrasil.SelectedIndex != -1 || lstBrasilEntrenador.SelectedIndex != -1 || lstBrasilMasajeador.SelectedIndex != -1;
-                        break;
-                    case EPaises.Italia:
-                        elementoSeleccionado = lstItalia.SelectedIndex != -1 || lstItaliaEntrenador.SelectedIndex != -1 || lstItaliaMasajeador.SelectedIndex != -1;
-                        break;
-                    case EPaises.Francia:
-                        elementoSeleccionado = lstFrancia.SelectedIndex != -1 || lstFranciaEntrenador.SelectedIndex != -1 || lstFranciaMasajeador.SelectedIndex != -1;
-                        break;
-                    case EPaises.Alemania:
-                        elementoSeleccionado = lstAlemania.SelectedIndex != -1 || lstAlemaniaEntrenador.SelectedIndex != -1 || lstAlemaniaMasajeador.SelectedIndex != -1;
-                        break;
+
+                    MessageBox.Show("No tienes permitido usar esta opción.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
 
-                if (!elementoSeleccionado)
+                else if (usuarioLog.perfil == "administrador")
                 {
-                    MessageBox.Show("Por favor, selecciona un elemento en la lista antes de intentar eliminarlo.", "Selección requerida", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return; // No se hace nada si no se selecciona ningún elemento
-                }
-
-                // Muestra un cuadro de diálogo de confirmación
-                DialogResult result = MessageBox.Show("¿Estás seguro de que deseas eliminar estos elementos?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
-                {
-                    switch (paisSeleccionado)
+                    if (cmbPaises.SelectedItem != null)
                     {
-                        case EPaises.Argentina:
-                            EliminarElemento(lstArgentina, jugadoresArgentina);
-                            EliminarElemento(lstArgentinaEntrenador, entrenadorArgentina);
-                            EliminarElemento(lstArgentinaMasajeador, masajeadoresArgentina);
-                            break;
-                        case EPaises.Brasil:
-                            EliminarElemento(lstBrasil, jugadoresBrasil);
-                            EliminarElemento(lstBrasilEntrenador, entrenadorBrasil);
-                            EliminarElemento(lstBrasilMasajeador, masajeadoresBrasil);
-                            break;
-                        case EPaises.Italia:
-                            EliminarElemento(lstItalia, jugadoresItalia);
-                            EliminarElemento(lstItaliaEntrenador, entrenadorItalia);
-                            EliminarElemento(lstItaliaMasajeador, masajeadoresItalia);
-                            break;
-                        case EPaises.Francia:
-                            EliminarElemento(lstFrancia, jugadoresFrancia);
-                            EliminarElemento(lstFranciaEntrenador, entrenadorFrancia);
-                            EliminarElemento(lstFranciaMasajeador, masajeadoresFrancia);
-                            break;
-                        case EPaises.Alemania:
-                            EliminarElemento(lstAlemania, jugadoresAlemania);
-                            EliminarElemento(lstAlemaniaEntrenador, entrenadorAlemania);
-                            EliminarElemento(lstAlemaniaMasajeador, masajeadoresAlemania);
-                            break;
+                        EPaises paisSeleccionado = (EPaises)cmbPaises.SelectedItem;
+
+                        bool elementoSeleccionado = false;
+
+                        switch (paisSeleccionado)
+                        {
+                            case EPaises.Argentina:
+                                elementoSeleccionado = lstArgentina.SelectedIndex != -1 || lstArgentinaEntrenador.SelectedIndex != -1 || lstArgentinaMasajeador.SelectedIndex != -1;
+                                break;
+                            case EPaises.Brasil:
+                                elementoSeleccionado = lstBrasil.SelectedIndex != -1 || lstBrasilEntrenador.SelectedIndex != -1 || lstBrasilMasajeador.SelectedIndex != -1;
+                                break;
+                            case EPaises.Italia:
+                                elementoSeleccionado = lstItalia.SelectedIndex != -1 || lstItaliaEntrenador.SelectedIndex != -1 || lstItaliaMasajeador.SelectedIndex != -1;
+                                break;
+                            case EPaises.Francia:
+                                elementoSeleccionado = lstFrancia.SelectedIndex != -1 || lstFranciaEntrenador.SelectedIndex != -1 || lstFranciaMasajeador.SelectedIndex != -1;
+                                break;
+                            case EPaises.Alemania:
+                                elementoSeleccionado = lstAlemania.SelectedIndex != -1 || lstAlemaniaEntrenador.SelectedIndex != -1 || lstAlemaniaMasajeador.SelectedIndex != -1;
+                                break;
+                        }
+
+                        if (!elementoSeleccionado)
+                        {
+                            MessageBox.Show("Por favor, selecciona un elemento en la lista antes de intentar eliminarlo.", "Selección requerida", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return;
+                        }
+
+                        DialogResult result = MessageBox.Show("¿Estás seguro de que deseas eliminar estos elementos?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (result == DialogResult.Yes)
+                        {
+                            switch (paisSeleccionado)
+                            {
+                                case EPaises.Argentina:
+                                    EliminarElemento(lstArgentina, jugadoresArgentina);
+                                    EliminarElemento(lstArgentinaEntrenador, entrenadorArgentina);
+                                    EliminarElemento(lstArgentinaMasajeador, masajeadoresArgentina);
+                                    break;
+                                case EPaises.Brasil:
+                                    EliminarElemento(lstBrasil, jugadoresBrasil);
+                                    EliminarElemento(lstBrasilEntrenador, entrenadorBrasil);
+                                    EliminarElemento(lstBrasilMasajeador, masajeadoresBrasil);
+                                    break;
+                                case EPaises.Italia:
+                                    EliminarElemento(lstItalia, jugadoresItalia);
+                                    EliminarElemento(lstItaliaEntrenador, entrenadorItalia);
+                                    EliminarElemento(lstItaliaMasajeador, masajeadoresItalia);
+                                    break;
+                                case EPaises.Francia:
+                                    EliminarElemento(lstFrancia, jugadoresFrancia);
+                                    EliminarElemento(lstFranciaEntrenador, entrenadorFrancia);
+                                    EliminarElemento(lstFranciaMasajeador, masajeadoresFrancia);
+                                    break;
+                                case EPaises.Alemania:
+                                    EliminarElemento(lstAlemania, jugadoresAlemania);
+                                    EliminarElemento(lstAlemaniaEntrenador, entrenadorAlemania);
+                                    EliminarElemento(lstAlemaniaMasajeador, masajeadoresAlemania);
+                                    break;
+                            }
+                        }
                     }
                 }
             }
@@ -437,37 +460,50 @@ namespace FormSelecciones
         /// </summary>
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (cmbPaises.SelectedItem != null)
+            if (usuarioLog != null)
             {
-                EPaises paisSeleccionado = (EPaises)cmbPaises.SelectedItem;
-
-                switch (paisSeleccionado)
+                if (usuarioLog.perfil == "vendedor")
                 {
-                    case EPaises.Argentina:
-                        ModificarElemento(lstArgentina, jugadoresArgentina);
-                        ModificarElemento(lstArgentinaEntrenador, entrenadorArgentina);
-                        ModificarElemento(lstArgentinaMasajeador, masajeadoresArgentina);
-                        break;
-                    case EPaises.Brasil:
-                        ModificarElemento(lstBrasil, jugadoresBrasil);
-                        ModificarElemento(lstBrasilEntrenador, entrenadorBrasil);
-                        ModificarElemento(lstBrasilMasajeador, masajeadoresBrasil);
-                        break;
-                    case EPaises.Italia:
-                        ModificarElemento(lstItalia, jugadoresItalia);
-                        ModificarElemento(lstItaliaEntrenador, entrenadorItalia);
-                        ModificarElemento(lstItaliaMasajeador, masajeadoresItalia);
-                        break;
-                    case EPaises.Francia:
-                        ModificarElemento(lstFrancia, jugadoresFrancia);
-                        ModificarElemento(lstFranciaEntrenador, entrenadorFrancia);
-                        ModificarElemento(lstFranciaMasajeador, masajeadoresFrancia);
-                        break;
-                    case EPaises.Alemania:
-                        ModificarElemento(lstAlemania, jugadoresAlemania);
-                        ModificarElemento(lstAlemaniaEntrenador, entrenadorAlemania);
-                        ModificarElemento(lstAlemaniaMasajeador, masajeadoresAlemania);
-                        break;
+                    //MessageBox.Show("No tienes permitido utilizar esta opción.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //Notificar("No tienes permitido utilizar esta opción.");
+                    return;
+                }
+
+                else if (usuarioLog.perfil == "administrador" || usuarioLog.perfil == "supervisor")
+                {
+                    if (cmbPaises.SelectedItem != null)
+                    {
+                        EPaises paisSeleccionado = (EPaises)cmbPaises.SelectedItem;
+
+                        switch (paisSeleccionado)
+                        {
+                            case EPaises.Argentina:
+                                ModificarElemento(lstArgentina, jugadoresArgentina);
+                                ModificarElemento(lstArgentinaEntrenador, entrenadorArgentina);
+                                ModificarElemento(lstArgentinaMasajeador, masajeadoresArgentina);
+                                break;
+                            case EPaises.Brasil:
+                                ModificarElemento(lstBrasil, jugadoresBrasil);
+                                ModificarElemento(lstBrasilEntrenador, entrenadorBrasil);
+                                ModificarElemento(lstBrasilMasajeador, masajeadoresBrasil);
+                                break;
+                            case EPaises.Italia:
+                                ModificarElemento(lstItalia, jugadoresItalia);
+                                ModificarElemento(lstItaliaEntrenador, entrenadorItalia);
+                                ModificarElemento(lstItaliaMasajeador, masajeadoresItalia);
+                                break;
+                            case EPaises.Francia:
+                                ModificarElemento(lstFrancia, jugadoresFrancia);
+                                ModificarElemento(lstFranciaEntrenador, entrenadorFrancia);
+                                ModificarElemento(lstFranciaMasajeador, masajeadoresFrancia);
+                                break;
+                            case EPaises.Alemania:
+                                ModificarElemento(lstAlemania, jugadoresAlemania);
+                                ModificarElemento(lstAlemaniaEntrenador, entrenadorAlemania);
+                                ModificarElemento(lstAlemaniaMasajeador, masajeadoresAlemania);
+                                break;
+                        }
+                    }
                 }
             }
         }
@@ -807,6 +843,11 @@ namespace FormSelecciones
             {
                 Añadir(lista, entrenador, lst);
             }
+        }
+
+        private void MostrarMensaje(string mensaje)
+        {
+            MessageBox.Show(mensaje, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
         #endregion
 

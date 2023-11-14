@@ -30,7 +30,7 @@
     </TypeIdentifier>
   </Class>
   <Interface Name="SegundoParcial.IPersonal">
-    <Position X="4.25" Y="0.75" Width="2.5" />
+    <Position X="14" Y="0.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAA=</HashCode>
       <FileName>IPersonal.cs</FileName>
