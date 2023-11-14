@@ -15,7 +15,7 @@ namespace SegundoParcial
         /// <summary>
         /// Constructor que inicializa un jugador con su información básica.
         /// </summary>
-        
+
         public Jugador ()
         {
 

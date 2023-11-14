@@ -15,12 +15,10 @@ namespace SegundoParcial
     {
         public string tactica;
 
-
-
         /// <summary>
         /// Constructor que inicializa un entrenador con su información básica y la táctica a utilizar.
         /// </summary>
-        
+
         public Entrenador()
         {
 

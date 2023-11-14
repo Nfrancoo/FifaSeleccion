@@ -12,6 +12,7 @@ namespace SegundoParcial
         private string lugarDeTituloDeEstudio;
 
 
+
         /// <summary>
         /// Constructor predeterminado que inicializa un masajista con un título de estudio en blanco.
         /// </summary>

@@ -42,6 +42,7 @@ namespace FormSelecciones
         private List<Masajista> masajeadoresFrancia = new List<Masajista>();
 
         private Usuario usuarioLog;
+        SQL sql;
 
         /// <summary>
         /// Constructor del formulario principal.
@@ -55,6 +56,8 @@ namespace FormSelecciones
             ModificarColores(Color.LightBlue);
             BordesBoton(FlatStyle.Flat, Color.LightSkyBlue, 2, btnConvocar, btnModificar, btnEliminar, btnOrdenar, btnGuardarManualmente, btnAccion, btnMostrar);
             this.usuarioLog = usuario;
+            this.sql = new SQL();
+
 
             if (usuario != null)
             {
@@ -131,7 +134,7 @@ namespace FormSelecciones
 
             try
             {
-                SQL sql = new SQL();
+
                 // JUGADORES
                 sql.CargarDatosDesdeBaseDeDatosJug(1, ref jugadoresArgentina);
                 ActualizarVisor(jugadoresArgentina, lstArgentina);
@@ -856,7 +859,11 @@ namespace FormSelecciones
             if (listBox.SelectedIndex != -1)
             {
                 int selectedIndex = listBox.SelectedIndex;
+
+                Jugador jugador = lista[selectedIndex];
+                sql.BorrarDato(jugador);
                 listBox.Items.RemoveAt(selectedIndex);
+                lista.RemoveAt(selectedIndex);
 
             }
         }
@@ -865,6 +872,10 @@ namespace FormSelecciones
             if (listBox.SelectedIndex != -1)
             {
                 int selectedIndex = listBox.SelectedIndex;
+
+                Entrenador jugador = lista[selectedIndex];
+                sql.BorrarDato(jugador);
+
                 listBox.Items.RemoveAt(selectedIndex);
                 lista.RemoveAt(selectedIndex);
             }
@@ -874,6 +885,10 @@ namespace FormSelecciones
             if (listBox.SelectedIndex != -1)
             {
                 int selectedIndex = listBox.SelectedIndex;
+
+                Masajista jugador = lista[selectedIndex];
+                sql.BorrarDato(jugador);
+
                 listBox.Items.RemoveAt(selectedIndex);
                 lista.RemoveAt(selectedIndex);
             }
@@ -889,27 +904,26 @@ namespace FormSelecciones
         /// <param name="personal">Lista de jugadores</param>
         private void ModificarList(ListBox lst, List<Jugador> personal)
         {
-            // Abre un formulario de edición para el jugador seleccionado
 
             Jugador jugadorSeleccionado = (Jugador)lst.SelectedItem;
             ConvocarJugador editarJugadorForm = new ConvocarJugador(jugadorSeleccionado);
 
-            // Pasa el jugador seleccionado al formulario de edición
+
             editarJugadorForm.JugadorParaEditar = jugadorSeleccionado;
 
             editarJugadorForm.ShowDialog();
 
             if (editarJugadorForm.DialogResult == DialogResult.OK)
             {
-                // Obtén el jugador modificado del formulario de edición
+
                 Jugador jugadorModificado = editarJugadorForm.NuevoJugador;
 
-                // Actualiza la lista con los cambios realizados por el usuario
                 int selectedIndex = lst.SelectedIndex;
 
-                // Actualiza el jugador en la lista y la ListBox
                 personal[selectedIndex] = jugadorModificado;
                 lst.Items[selectedIndex] = jugadorModificado;
+
+                sql.ModificarDato(jugadorModificado);
             }
         }
 
@@ -930,32 +944,31 @@ namespace FormSelecciones
 
                 personal[selectedIndex] = entrenadorModificado;
                 lst.Items[selectedIndex] = entrenadorModificado;
+
+                sql.ModificarDato(entrenadorModificado);
             }
         }
 
         private void ModificarList(ListBox lst, List<Masajista> personal)
         {
-            // Abre un formulario de edición para el jugador seleccionado
 
             Masajista masajistaSeleccionado = (Masajista)lst.SelectedItem;
             ConvocarMasajista editarEntrenadorForm = new ConvocarMasajista(masajistaSeleccionado);
 
-            // Pasa el jugador seleccionado al formulario de edición
             editarEntrenadorForm.MasajeadorParaEditar = masajistaSeleccionado;
 
             editarEntrenadorForm.ShowDialog();
 
             if (editarEntrenadorForm.DialogResult == DialogResult.OK)
             {
-                // Obtén el jugador modificado del formulario de edición
                 Masajista entrenadorModificado = editarEntrenadorForm.NuevoMasajista;
 
-                // Actualiza la lista con los cambios realizados por el usuario
                 int selectedIndex = lst.SelectedIndex;
 
-                // Actualiza el jugador en la lista y la ListBox
                 personal[selectedIndex] = entrenadorModificado;
                 lst.Items[selectedIndex] = entrenadorModificado;
+
+                sql.ModificarDato(entrenadorModificado);
             }
         }
 

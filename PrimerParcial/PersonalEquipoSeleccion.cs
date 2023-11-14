@@ -12,6 +12,7 @@ namespace SegundoParcial
         public string nombre;
         public string apellido;
         public EPaises paises;
+        public int id;
 
 
         public PersonalEquipoSeleccion()
