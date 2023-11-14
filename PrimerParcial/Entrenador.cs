@@ -15,9 +15,17 @@ namespace SegundoParcial
     {
         public string tactica;
 
+
+
         /// <summary>
         /// Constructor que inicializa un entrenador con su información básica y la táctica a utilizar.
         /// </summary>
+        
+        public Entrenador()
+        {
+
+        }
+
         public Entrenador(int edad, string nombre, string apellido, EPaises pais, string tactica) : base(edad, nombre, apellido, pais)
         {
             this.tactica = tactica;

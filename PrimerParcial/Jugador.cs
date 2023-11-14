@@ -15,6 +15,11 @@ namespace SegundoParcial
         /// <summary>
         /// Constructor que inicializa un jugador con su información básica.
         /// </summary>
+        
+        public Jugador ()
+        {
+
+        }
         public Jugador(int edad, string nombre, string apellido, EPaises pais, int dorsal, EPosicion posicion)
             : base(edad, nombre, apellido, pais)
         {

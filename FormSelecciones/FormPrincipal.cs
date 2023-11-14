@@ -92,41 +92,87 @@ namespace FormSelecciones
         /// </summary>
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
-            //JUGADORES
-            Deserializar("JugadorArgentina.json", ref jugadoresArgentina);
-            ActualizarVisor(jugadoresArgentina, lstArgentina);
-            Deserializar("JugadorBrasil.json", ref jugadoresBrasil);
-            ActualizarVisor(jugadoresBrasil, lstBrasil);
-            Deserializar("JugadorItalia.json", ref jugadoresItalia);
-            ActualizarVisor(jugadoresItalia, lstItalia);
-            Deserializar("JugadorFrancia.json", ref jugadoresFrancia);
-            ActualizarVisor(jugadoresFrancia, lstFrancia);
-            Deserializar("JugadorAlemania.json", ref jugadoresAlemania);
-            ActualizarVisor(jugadoresAlemania, lstAlemania);
+            ////JUGADORES
+            //Deserializar("JugadorArgentina.json", ref jugadoresArgentina);
+            //ActualizarVisor(jugadoresArgentina, lstArgentina);
+            //Deserializar("JugadorBrasil.json", ref jugadoresBrasil);
+            //ActualizarVisor(jugadoresBrasil, lstBrasil);
+            //Deserializar("JugadorItalia.json", ref jugadoresItalia);
+            //ActualizarVisor(jugadoresItalia, lstItalia);
+            //Deserializar("JugadorFrancia.json", ref jugadoresFrancia);
+            //ActualizarVisor(jugadoresFrancia, lstFrancia);
+            //Deserializar("JugadorAlemania.json", ref jugadoresAlemania);
+            //ActualizarVisor(jugadoresAlemania, lstAlemania);
 
-            //ENTRENADORES
-            Deserializar("EntrenadorArgentina.json", ref entrenadorArgentina);
-            ActualizarVisor(entrenadorArgentina, lstArgentinaEntrenador);
-            Deserializar("EntrenadorBrasil.json", ref entrenadorBrasil);
-            ActualizarVisor(entrenadorBrasil, lstBrasilEntrenador);
-            Deserializar("EntrenadorItalia.json", ref entrenadorItalia);
-            ActualizarVisor(entrenadorItalia, lstItaliaEntrenador);
-            Deserializar("EntrenadorFrancia.json", ref entrenadorFrancia);
-            ActualizarVisor(entrenadorFrancia, lstFranciaEntrenador);
-            Deserializar("EntrenadorAlemania.json", ref entrenadorAlemania);
-            ActualizarVisor(entrenadorAlemania, lstAlemaniaEntrenador);
+            ////ENTRENADORES
+            //Deserializar("EntrenadorArgentina.json", ref entrenadorArgentina);
+            //ActualizarVisor(entrenadorArgentina, lstArgentinaEntrenador);
+            //Deserializar("EntrenadorBrasil.json", ref entrenadorBrasil);
+            //ActualizarVisor(entrenadorBrasil, lstBrasilEntrenador);
+            //Deserializar("EntrenadorItalia.json", ref entrenadorItalia);
+            //ActualizarVisor(entrenadorItalia, lstItaliaEntrenador);
+            //Deserializar("EntrenadorFrancia.json", ref entrenadorFrancia);
+            //ActualizarVisor(entrenadorFrancia, lstFranciaEntrenador);
+            //Deserializar("EntrenadorAlemania.json", ref entrenadorAlemania);
+            //ActualizarVisor(entrenadorAlemania, lstAlemaniaEntrenador);
 
-            //MASAJISTAS
-            Deserializar("MasajistaArgentina.json", ref masajeadoresArgentina);
-            ActualizarVisor(masajeadoresArgentina, lstArgentinaMasajeador);
-            Deserializar("MasajistaBrasil.json", ref masajeadoresBrasil);
-            ActualizarVisor(masajeadoresBrasil, lstBrasilMasajeador);
-            Deserializar("MasajistaItalia.json", ref masajeadoresItalia);
-            ActualizarVisor(masajeadoresItalia, lstItaliaMasajeador);
-            Deserializar("MasajistaFrancia.json", ref masajeadoresFrancia);
-            ActualizarVisor(masajeadoresFrancia, lstFranciaMasajeador);
-            Deserializar("MasajistaFrancia.json", ref masajeadoresFrancia);
-            ActualizarVisor(masajeadoresAlemania, lstAlemaniaMasajeador);
+            ////MASAJISTAS
+            //Deserializar("MasajistaArgentina.json", ref masajeadoresArgentina);
+            //ActualizarVisor(masajeadoresArgentina, lstArgentinaMasajeador);
+            //Deserializar("MasajistaBrasil.json", ref masajeadoresBrasil);
+            //ActualizarVisor(masajeadoresBrasil, lstBrasilMasajeador);
+            //Deserializar("MasajistaItalia.json", ref masajeadoresItalia);
+            //ActualizarVisor(masajeadoresItalia, lstItaliaMasajeador);
+            //Deserializar("MasajistaFrancia.json", ref masajeadoresFrancia);
+            //ActualizarVisor(masajeadoresFrancia, lstFranciaMasajeador);
+            //Deserializar("MasajistaFrancia.json", ref masajeadoresFrancia);
+            //ActualizarVisor(masajeadoresAlemania, lstAlemaniaMasajeador);
+
+
+            try
+            {
+                SQL sql = new SQL();
+                // JUGADORES
+                sql.CargarDatosDesdeBaseDeDatosJug(1, ref jugadoresArgentina);
+                ActualizarVisor(jugadoresArgentina, lstArgentina);
+                sql.CargarDatosDesdeBaseDeDatosJug(2, ref jugadoresBrasil);
+                ActualizarVisor(jugadoresBrasil, lstBrasil);
+                sql.CargarDatosDesdeBaseDeDatosJug(3, ref jugadoresAlemania);
+                ActualizarVisor(jugadoresAlemania, lstAlemania);
+                sql.CargarDatosDesdeBaseDeDatosJug(4, ref jugadoresItalia);
+                ActualizarVisor(jugadoresItalia, lstItalia);
+                sql.CargarDatosDesdeBaseDeDatosJug(0, ref jugadoresFrancia);
+                ActualizarVisor(jugadoresFrancia, lstFrancia);
+
+                //ENTRENADORES
+                sql.CargarDatosDesdeBaseDeDatosEntre(1, ref entrenadorArgentina);
+                ActualizarVisor(entrenadorArgentina, lstArgentinaEntrenador);
+                sql.CargarDatosDesdeBaseDeDatosEntre(2, ref entrenadorBrasil);
+                ActualizarVisor(entrenadorBrasil, lstBrasilEntrenador);
+                sql.CargarDatosDesdeBaseDeDatosEntre(3, ref entrenadorAlemania);
+                ActualizarVisor(entrenadorAlemania, lstAlemaniaEntrenador);
+                sql.CargarDatosDesdeBaseDeDatosEntre(4, ref entrenadorItalia);
+                ActualizarVisor(entrenadorItalia, lstItaliaEntrenador);
+                sql.CargarDatosDesdeBaseDeDatosEntre(0, ref entrenadorFrancia);
+                ActualizarVisor(entrenadorFrancia, lstFranciaEntrenador);
+
+                //MASAJISTA
+                sql.CargarDatosDesdeBaseDeDatosMasaj(1, ref masajeadoresArgentina);
+                ActualizarVisor(masajeadoresArgentina, lstArgentinaMasajeador);
+                sql.CargarDatosDesdeBaseDeDatosMasaj(2, ref masajeadoresBrasil);
+                ActualizarVisor(masajeadoresBrasil, lstBrasilMasajeador);
+                sql.CargarDatosDesdeBaseDeDatosMasaj(3, ref masajeadoresAlemania);
+                ActualizarVisor(masajeadoresAlemania, lstAlemaniaMasajeador);
+                sql.CargarDatosDesdeBaseDeDatosMasaj(4, ref masajeadoresItalia);
+                ActualizarVisor(masajeadoresItalia, lstItaliaMasajeador);
+                sql.CargarDatosDesdeBaseDeDatosMasaj(0, ref masajeadoresFrancia);
+                ActualizarVisor(masajeadoresFrancia, lstFranciaMasajeador);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al cargar datos desde la base de datos: " + ex.Message);
+            }
         }
 
         /// <summary>
@@ -253,26 +299,7 @@ namespace FormSelecciones
         /// </summary>
         private void FormPrincipal_FormClosing(object sender, FormClosingEventArgs e)
         {
-            ////JUGADORES
-            //Serializar("JugadorArgentina.json", jugadoresArgentina);
-            //Serializar("JugadorBrasil.json", jugadoresBrasil);
-            //Serializar("JugadorItalia.json", jugadoresItalia);
-            //Serializar("JugadorFrancia.json", jugadoresFrancia);
-            //Serializar("JugadorAlemania.json", jugadoresAlemania);
-
-            ////ENTRENADORES
-            //Serializar("EntrenadorArgentina.json", entrenadorArgentina);
-            //Serializar("EntrenadorBrasil.json", entrenadorBrasil);
-            //Serializar("EntrenadorItalia.json", entrenadorItalia);
-            //Serializar("EntrenadorFrancia.json", entrenadorFrancia);
-            //Serializar("EntrenadorAlemania.json", entrenadorAlemania);
-
-            ////MASAJISTAS
-            //Serializar("MasajistaArgentina.json", masajeadoresArgentina);
-            //Serializar("MasajistaBrasil.json", masajeadoresBrasil);
-            //Serializar("MasajistaItalia.json", masajeadoresItalia);
-            //Serializar("MasajistaFrancia.json", masajeadoresFrancia);
-            //Serializar("MasajistaAlemania.json", masajeadoresAlemania);
+            
             try
 {
                 SQL sql = new SQL();
@@ -343,9 +370,7 @@ namespace FormSelecciones
                     sql.AgregarMasajista(masajista);
                 }
 
-                // Repite el proceso para las otras listas y tipos de personal
 
-                // Cierra la conexión después de agregar todos los elementos
                 sql.CerrarConexion();
             }
             catch (Exception ex)
@@ -1259,5 +1284,6 @@ namespace FormSelecciones
         }
 
         #endregion
+
     }
 }
