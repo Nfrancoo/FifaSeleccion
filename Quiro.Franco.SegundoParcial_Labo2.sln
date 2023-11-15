@@ -5,8 +5,6 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SegundoParcial", "PrimerParcial\SegundoParcial.csproj", "{3002BA4C-82AB-4045-9D24-176F0D5B08D1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{6B1E5235-5962-4A81-A4C9-FBB17D4E8AC6}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormSelecciones", "FormSelecciones\FormSelecciones.csproj", "{77D6D07F-62A3-4424-BD09-5CE2FDA90685}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{3002BA4C-82AB-4045-9D24-176F0D5B08D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3002BA4C-82AB-4045-9D24-176F0D5B08D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3002BA4C-82AB-4045-9D24-176F0D5B08D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6B1E5235-5962-4A81-A4C9-FBB17D4E8AC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B1E5235-5962-4A81-A4C9-FBB17D4E8AC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B1E5235-5962-4A81-A4C9-FBB17D4E8AC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B1E5235-5962-4A81-A4C9-FBB17D4E8AC6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{77D6D07F-62A3-4424-BD09-5CE2FDA90685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{77D6D07F-62A3-4424-BD09-5CE2FDA90685}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77D6D07F-62A3-4424-BD09-5CE2FDA90685}.Release|Any CPU.ActiveCfg = Release|Any CPU
