@@ -23,12 +23,19 @@ namespace FormSelecciones
         public Jugador nuevoJugador;
         public Entrenador nuevoEntrenador;
         public Masajista nuevoMasajista;
+        public bool esJugador;
+        public bool esEntrenador;
+        public bool esMasajista;
+
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="Personal"/>.
         /// </summary>
         public Personal()
         {
+            this.esJugador = false;
+            this.esEntrenador = false;
+            this.esMasajista = false;
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
 
@@ -43,6 +50,7 @@ namespace FormSelecciones
             ConvocarJugador jugador = new ConvocarJugador();
             jugador.ShowDialog();
 
+            this.esJugador = true;
             if (jugador.DialogResult == DialogResult.OK)
             {
                 nuevoJugador = jugador.NuevoJugador;
@@ -61,14 +69,16 @@ namespace FormSelecciones
             ConvocarEntrenador entrenador = new ConvocarEntrenador();
             entrenador.ShowDialog();
 
+
+            this.esMasajista = true;
             if (entrenador.DialogResult == DialogResult.OK)
             {
                 nuevoEntrenador = entrenador.NuevoEntrenador;
-                this.DialogResult = DialogResult.OK; // Establece DialogResult en OK
+                this.DialogResult = DialogResult.OK;
             }
             else
             {
-                this.DialogResult = DialogResult.Cancel; // Establece DialogResult en Cancel si se presiona el botón Cancelar
+                this.DialogResult = DialogResult.Cancel;
             }
 
             this.Close();
@@ -83,6 +93,7 @@ namespace FormSelecciones
             ConvocarMasajista masajista = new ConvocarMasajista();
             masajista.ShowDialog();
 
+            this.esMasajista = true;
             if (masajista.DialogResult == DialogResult.OK)
             {
                 nuevoMasajista = masajista.NuevoMasajista;

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using SegundoParcial;
+using System;
 using System.Text;
-using System.Text.Json.Serialization;
+
 
 namespace SegundoParcial
 {
@@ -16,10 +17,11 @@ namespace SegundoParcial
         /// Constructor que inicializa un jugador con su información básica.
         /// </summary>
 
-        public Jugador ()
+        public Jugador() : base()
         {
 
         }
+
         public Jugador(int edad, string nombre, string apellido, EPaises pais, int dorsal, EPosicion posicion)
             : base(edad, nombre, apellido, pais)
         {
@@ -39,7 +41,6 @@ namespace SegundoParcial
         /// <summary>
         /// Propiedad para obtener o establecer la posición del jugador con conversión JSON.
         /// </summary>
-        [JsonConverter(typeof(JsonStringEnumConverter))]
         public EPosicion Posicion
         {
             get { return this.posicion; }
@@ -55,7 +56,7 @@ namespace SegundoParcial
             StringBuilder sb = new StringBuilder(baseInfo);
 
             // Agrega la información específica del Jugador
-            sb.Append($", Posicion: {this.posicion}, Dorsal: {this.dorsal}");
+            sb.Append($", Posicion: {this.posicion}, Dorsal: {this.dorsal}, Personal: Jugador");
 
             return sb.ToString();
         }
@@ -71,11 +72,12 @@ namespace SegundoParcial
         /// <summary>
         /// Método que describe la acción de concentración del jugador.
         /// </summary>
-        public override string RealizarConcentracion()
+        public override string Concentrarse()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append($"{this.nombre} {this.apellido} se está concentrando.");
             return sb.ToString().Trim();
+            //Console.WriteLine($"{this.nombre} {this.apellido} se está concentrando.");
         }
 
         public override bool Equals(object? obj)
@@ -85,26 +87,15 @@ namespace SegundoParcial
             {
                 retorno = this == (Jugador)obj;
             }
-            return retorno;
-        }
-
-        public static List<Jugador> operator +(List<Jugador> lista, Jugador entrenador)
-        {
-            if (!lista.Contains(entrenador))
+            else if (obj is Entrenador)
             {
-                lista.Add(entrenador);
+                retorno = this == (Entrenador)obj;
             }
-            return lista;
-        }
-
-        public static bool operator ==(Jugador uno, Jugador dos)
-        {
-            return uno.Nombre == dos.Nombre && uno.Apellido == dos.Apellido;
-        }
-
-        public static bool operator !=(Jugador uno, Jugador dos)
-        {
-            return !(uno == dos);
+            else if (obj is Masajista)
+            {
+                retorno = this == (Masajista)obj;
+            }
+            return retorno;
         }
     }
 }

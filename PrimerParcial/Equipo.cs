@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using SegundoParcial;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace SegundoParcial
 {
@@ -11,52 +15,102 @@ namespace SegundoParcial
     /// </summary>
     public class Equipo
     {
-        private List<PersonalEquipoSeleccion> miembros = new List<PersonalEquipoSeleccion>();
+        private List<PersonalEquipoSeleccion> listaPersonal;
 
-        /// <summary>
-        /// Sobrecarga del operador '+' para agregar un miembro al equipo.
-        /// </summary>
-        public static Equipo operator +(Equipo equipo, PersonalEquipoSeleccion miembro)
+
+        public List<PersonalEquipoSeleccion> ListaPesonal
         {
-            equipo.miembros.Add(miembro);
-            return equipo;
+            get { return this.listaPersonal; }
+            set { this.listaPersonal = value; }
         }
 
-        /// <summary>
-        /// Sobrecarga del operador '-' para eliminar un miembro del equipo.
-        /// </summary>
-        public static Equipo operator -(Equipo equipo, PersonalEquipoSeleccion miembro)
+        public Equipo()
         {
-            equipo.miembros.Remove(miembro);
-            return equipo;
+            this.listaPersonal = new List<PersonalEquipoSeleccion>();
         }
-
-        /// <summary>
-        /// Sobrecarga del operador '==' para verificar si un miembro está en el equipo.
-        /// </summary>
-        public static bool operator ==(Equipo equipo, PersonalEquipoSeleccion miembro)
+        public static bool operator +(Equipo r, PersonalEquipoSeleccion j)
         {
-            return equipo.miembros.Contains(miembro);
-        }
-
-        /// <summary>
-        /// Sobrecarga del operador '!=' para verificar si un miembro no está en el equipo.
-        /// </summary>
-        public static bool operator !=(Equipo equipo, PersonalEquipoSeleccion miembro)
-        {
-            return !equipo.miembros.Contains(miembro);
-        }
-
-        /// <summary>
-        /// Muestra en la consola los miembros del equipo con sus respectivas representaciones en cadena.
-        /// </summary>
-        public void MostrarMiembros()
-        {
-            Console.WriteLine("Miembros del equipo:");
-            foreach (var miembro in miembros)
+            bool agregado = true;
+            if (r.listaPersonal.Count > 0)
             {
-                Console.WriteLine(miembro.ToString());
+                foreach (PersonalEquipoSeleccion personal in r.ListaPesonal)
+                {
+                    if (personal.Equals(j))
+                    {
+                        agregado = false;
+                        break;
+                    }
+
+                }
             }
+
+            if (agregado || r.ListaPesonal.Count == 0)
+            {
+                r.ListaPesonal.Add(j);
+
+            }
+            return agregado;
+        }
+        public static bool operator -(Equipo r, PersonalEquipoSeleccion j)
+        {
+            bool eliminado = false;
+            if (r.listaPersonal.Count > 0)
+            {
+                foreach (PersonalEquipoSeleccion personal in r.listaPersonal)
+                {
+                    if (personal.Equals(j))
+                    {
+                        r.listaPersonal.Remove(personal);
+                        eliminado = true;
+                        break;
+                    }
+                }
+            }
+
+            return eliminado;
+        }
+
+
+        public static int OrdenarPorEdadAS(PersonalEquipoSeleccion j1, PersonalEquipoSeleccion j2) // forma ascendente
+        {
+            if (j1.Edad < j2.Edad)
+            {
+                return -1;
+            }
+            else if (j1.Edad > j2.Edad)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public static int OrdenarPorEdadDes(PersonalEquipoSeleccion j1, PersonalEquipoSeleccion j2) // forma descendente
+        {
+            if (j1.Edad > j2.Edad)
+            {
+                return -1;
+            }
+            else if (j1.Edad < j2.Edad)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public static int OrdenarPorPaisAs(PersonalEquipoSeleccion j1, PersonalEquipoSeleccion j2)
+        {
+            return j1.Pais.CompareTo(j2.Pais);
+        }
+
+        public static int OrdenarPorPaisDes(PersonalEquipoSeleccion j1, PersonalEquipoSeleccion j2)
+        {
+            return j2.Pais.CompareTo(j1.Pais);
         }
     }
 }

@@ -19,9 +19,8 @@ namespace SegundoParcial
         /// Constructor que inicializa un entrenador con su información básica y la táctica a utilizar.
         /// </summary>
 
-        public Entrenador()
+        public Entrenador() : base()
         {
-
         }
 
         public Entrenador(int edad, string nombre, string apellido, EPaises pais, string tactica) : base(edad, nombre, apellido, pais)
@@ -41,7 +40,7 @@ namespace SegundoParcial
         /// <summary>
         /// Método que describe la acción de concentración del entrenador con el equipo.
         /// </summary>
-        public override string RealizarConcentracion()
+        public override string Concentrarse()
         {
             return $"{base.nombre} {base.apellido} se está concentrando con el equipo.";
         }
@@ -63,7 +62,7 @@ namespace SegundoParcial
             StringBuilder sb = new StringBuilder(baseInfo);
 
             // Agrega la información específica del Entrenador
-            sb.Append($", Tactica a usar: {this.tactica}");
+            sb.Append($", Tactica a usar: {this.tactica}, Personal: Entrenador");
 
             return sb.ToString();
         }
@@ -77,26 +76,5 @@ namespace SegundoParcial
             }
             return retorno;
         }
-
-
-        public static List<Entrenador> operator +(List<Entrenador> lista, Entrenador entrenador)
-        {
-            if (!lista.Contains(entrenador))
-            {
-                lista.Add(entrenador);
-            }
-            return lista;
-        }
-
-        public static bool operator ==(Entrenador uno, Entrenador dos)
-        {
-            return uno.Nombre == dos.Nombre && uno.Apellido == dos.Apellido;
-        }
-
-        public static bool operator !=(Entrenador uno, Entrenador dos)
-        {
-            return !(uno == dos);
-        }
-
     }
 }

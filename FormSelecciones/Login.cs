@@ -9,7 +9,7 @@ namespace FormSelecciones
     {
         private List<Usuario> usuarios;
 
-        
+
         /// <summary>
         /// Constructor de la clase Login.
         /// </summary>
@@ -18,7 +18,9 @@ namespace FormSelecciones
             InitializeComponent();
             usuarios = LeerUsuariosDesdeJSON(@"..//..//..//..//MOCK_DATA.json");
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.txtContraseña.PasswordChar = '*';
+            this.BackColor = Color.LightCyan;
+            ModificarColores(Color.LightBlue);
+            BordesBoton(FlatStyle.Flat, Color.LightSkyBlue, 2, btnIniciarSesion);
 
         }
 
@@ -33,7 +35,7 @@ namespace FormSelecciones
             string correo = this.txtCorreo.Text;
             string contraseña = this.txtContraseña.Text;
 
-            
+
             Usuario usuario = usuarios.Find(u => u.correo == correo && u.clave == contraseña);
 
 
@@ -87,7 +89,34 @@ namespace FormSelecciones
 
         private void Login_Load(object sender, EventArgs e)
         {
+            this.txtContraseña.UseSystemPasswordChar = true;
+            this.lblOcultar.Visible = false;
+        }
 
+        private void lblOcultar_Click_1(object sender, EventArgs e)
+        {
+            this.txtContraseña.UseSystemPasswordChar = true;
+            this.lblOcultar.Visible = false;
+            this.lblMostrar.Visible = true;
+        }
+
+        private void lblMostrar_Click_1(object sender, EventArgs e)
+        {
+            this.txtContraseña.UseSystemPasswordChar = false;
+            this.lblMostrar.Visible = false;
+            this.lblOcultar.Visible = true;
+        }
+
+        private void ModificarColores(Color colorin)
+        {
+            btnIniciarSesion.BackColor = colorin;
+        }
+
+        private void BordesBoton(FlatStyle flat, Color colorin, int tamaño, Button FrmCRUD1)
+        {
+            FrmCRUD1.FlatStyle = flat;
+            FrmCRUD1.FlatAppearance.BorderColor = colorin; // Color del borde
+            FrmCRUD1.FlatAppearance.BorderSize = tamaño; // Grosor del borde en píxeles
         }
     }
 }

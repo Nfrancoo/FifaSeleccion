@@ -7,6 +7,10 @@ using Microsoft.Data.SqlClient;
 using System.ComponentModel.Design;
 using System.Data.SqlClient;
 using SegundoParcial;
+using Microsoft.Win32;
+using System;
+using System.IO;
+
 
 namespace SegundoParcial
 {
@@ -27,7 +31,7 @@ namespace SegundoParcial
             this.conexion = new SqlConnection(SQL.cadena_conexion);
         }
 
-        public void AgregarJugador(Jugador jugador)
+        public void AgregarJugador(Jugador jugador, Equipo equipo)
         {
             try
             {
@@ -58,6 +62,9 @@ namespace SegundoParcial
                 if (filasAfectadas == 1)
                 {
                 }
+
+                equipo.ListaPesonal.Add(jugador);
+
             }
             catch (Exception ex)
             {
@@ -69,7 +76,7 @@ namespace SegundoParcial
             }
         }
 
-        public void AgregarEntrenador(Entrenador entrenador)
+        public void AgregarEntrenador(Entrenador entrenador, Equipo equipo)
         {
             try
             {
@@ -99,6 +106,8 @@ namespace SegundoParcial
                 if (filasAfectadas == 1)
                 {
                 }
+
+                equipo.ListaPesonal.Add(entrenador);
             }
             catch (Exception ex)
             {
@@ -109,7 +118,7 @@ namespace SegundoParcial
                 this.conexion.Close();
             }
         }
-        public void AgregarMasajista(Masajista masajista)
+        public void AgregarMasajista(Masajista masajista, Equipo equipo)
         {
             try
             {
@@ -140,6 +149,8 @@ namespace SegundoParcial
                 {
                     // Éxito: se actualizó o insertó un registro
                 }
+
+                equipo.ListaPesonal.Add(masajista);
             }
             catch (Exception ex)
             {
@@ -164,139 +175,6 @@ namespace SegundoParcial
             catch (Exception ex)
             {
                 Console.WriteLine("Error al cerrar la conexión: " + ex.Message);
-            }
-        }
-
-        public void CargarDatosDesdeBaseDeDatosJug<T>(int pais, ref List<T> lista) where T : Jugador, new()
-        {
-            try
-            {
-                this.comando = new SqlCommand();
-                this.comando.CommandType = System.Data.CommandType.Text;
-                this.comando.CommandText = $"SELECT * FROM jugador WHERE pais = @pais";
-                this.comando.Parameters.AddWithValue("@pais", pais);
-                this.comando.Connection = this.conexion;
-
-                this.conexion.Open();
-
-                this.lector = this.comando.ExecuteReader();
-
-                while (this.lector.Read())
-                {
-                    T jugador = new T();
-                    jugador.Edad = (int)this.lector["edad"];
-                    jugador.Nombre = this.lector["nombre"].ToString();
-                    jugador.Apellido = this.lector["apellido"].ToString();
-                    jugador.Pais = (EPaises)pais;
-                    jugador.Dorsal = (int)this.lector["dorsal"];
-
-                    // Intentar convertir el valor de 'posicion' a EPosicion
-                    if (Enum.TryParse(this.lector["posicion"].ToString(), out EPosicion posicionEnum))
-                    {
-                        jugador.Posicion = posicionEnum;
-                    }
-                    else
-                    {
-                        // Manejo de error: No se pudo convertir el valor a EPosicion
-                        Console.WriteLine("Error al convertir el valor de 'posicion' a EPosicion.");
-                    }
-
-                    lista.Add(jugador);
-                }
-
-                this.lector.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al cargar datos desde la base de datos: " + ex.Message);
-            }
-            finally
-            {
-                if (this.conexion.State == System.Data.ConnectionState.Open)
-                {
-                    this.conexion.Close();
-                }
-            }
-        }
-        public void CargarDatosDesdeBaseDeDatosEntre<T>(int pais, ref List<T> lista) where T : Entrenador, new()
-        {
-            try
-            {
-                this.comando = new SqlCommand();
-                this.comando.CommandType = System.Data.CommandType.Text;
-                this.comando.CommandText = $"SELECT * FROM entrenador WHERE pais = @pais";
-                this.comando.Parameters.AddWithValue("@pais", pais);
-                this.comando.Connection = this.conexion;
-
-                this.conexion.Open();
-
-                this.lector = this.comando.ExecuteReader();
-
-                while (this.lector.Read())
-                {
-                    T entrenador = new T();
-                    entrenador.Edad = (int)this.lector["edad"];
-                    entrenador.Nombre = this.lector["nombre"].ToString();
-                    entrenador.Apellido = this.lector["apellido"].ToString();
-                    entrenador.Pais = (EPaises)pais;
-                    entrenador.Tactica = this.lector["tactica"].ToString();
-
-                    lista.Add(entrenador);
-                }
-
-                this.lector.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al cargar datos desde la base de datos: " + ex.Message);
-            }
-            finally
-            {
-                if (this.conexion.State == System.Data.ConnectionState.Open)
-                {
-                    this.conexion.Close();
-                }
-            }
-        }
-
-        public void CargarDatosDesdeBaseDeDatosMasaj<T>(int pais, ref List<T> lista) where T : Masajista, new()
-        {
-            try
-            {
-                this.comando = new SqlCommand();
-                this.comando.CommandType = System.Data.CommandType.Text;
-                this.comando.CommandText = $"SELECT * FROM masajistas WHERE pais = @pais";
-                this.comando.Parameters.AddWithValue("@pais", pais);
-                this.comando.Connection = this.conexion;
-
-                this.conexion.Open();
-
-                this.lector = this.comando.ExecuteReader();
-
-                while (this.lector.Read())
-                {
-                    T masajistas = new T();
-                    masajistas.Edad = (int)this.lector["edad"];
-                    masajistas.Nombre = this.lector["nombre"].ToString();
-                    masajistas.Apellido = this.lector["apellido"].ToString();
-                    masajistas.Pais = (EPaises)pais;
-                    masajistas.CertificadoMasaje = this.lector["lugarDeEstudio"].ToString();
-
-                    lista.Add(masajistas);
-                }
-
-                this.lector.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al cargar datos desde la base de datos: " + ex.Message);
-            }
-            finally
-            {
-                if (this.conexion.State == System.Data.ConnectionState.Open)
-                {
-                    this.conexion.Close();
-                }
             }
         }
 
@@ -421,7 +299,7 @@ namespace SegundoParcial
             return retorno;
         }
 
-        public bool BorrarDato(Jugador jugador)
+        public bool BorrarDato(Jugador jugador, Equipo equipo)
         {
             bool result = false;
             try
@@ -452,10 +330,12 @@ namespace SegundoParcial
                 }
             }
 
+            equipo.ListaPesonal.Remove(jugador);
+
             return result;
         }
 
-        public bool BorrarDato(Entrenador jugador)
+        public bool BorrarDato(Entrenador jugador, Equipo equipo)
         {
             bool result = false;
             try
@@ -486,10 +366,12 @@ namespace SegundoParcial
                 }
             }
 
+            equipo.ListaPesonal.Remove(jugador);
+
             return result;
         }
 
-        public bool BorrarDato(Masajista jugador)
+        public bool BorrarDato(Masajista jugador, Equipo equipo)
         {
             bool result = false;
             try
@@ -520,7 +402,156 @@ namespace SegundoParcial
                 }
             }
 
+            equipo.ListaPesonal.Remove(jugador);
+
             return result;
         }
+
+
+        public void CargarJugadoresDesdeBaseDeDatos(List<PersonalEquipoSeleccion> personal)
+        {
+            try
+            {
+                // Aquí debes ajustar la consulta y el mapeo según tu esquema de base de datos.
+                this.comando = new SqlCommand();
+                this.comando.CommandType = System.Data.CommandType.Text;
+                this.comando.CommandText = "SELECT * FROM jugador";
+                this.comando.Connection = this.conexion;
+
+                this.conexion.Open();
+
+                this.lector = this.comando.ExecuteReader();
+
+                while (this.lector.Read())
+                {
+                    Jugador jugador = new Jugador();
+                    jugador.Edad = (int)this.lector["edad"];
+                    jugador.Nombre = this.lector["nombre"].ToString();
+                    jugador.Apellido = this.lector["apellido"].ToString();
+                    jugador.Pais = (EPaises)Convert.ToInt32(this.lector["pais"]);
+                    jugador.Dorsal = (int)this.lector["dorsal"];
+                    if (Enum.TryParse(this.lector["posicion"].ToString(), out EPosicion posicionEnum))
+                    {
+                        jugador.Posicion = posicionEnum;
+                    }
+                    else
+                    {
+                        // Manejo de error: No se pudo convertir el valor a EPosicion
+                        Console.WriteLine("Error al convertir el valor de 'posicion' a EPosicion.");
+                    }
+                    // Otros mapeos específicos para la clase Jugador
+
+                    personal.Add(jugador);
+                }
+
+                this.lector.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al cargar datos de jugadores desde la base de datos: " + ex.Message);
+            }
+            finally
+            {
+                if (this.conexion.State == System.Data.ConnectionState.Open)
+                {
+                    this.conexion.Close();
+                }
+            }
+        }
+
+        public void CargarEntrenadoresDesdeBaseDeDatos(List<PersonalEquipoSeleccion> lista)
+        {
+            try
+            {
+                this.comando = new SqlCommand();
+                this.comando.CommandType = System.Data.CommandType.Text;
+                this.comando.CommandText = "SELECT * FROM entrenador";
+                this.comando.Connection = this.conexion;
+
+                this.conexion.Open();
+
+                this.lector = this.comando.ExecuteReader();
+
+                while (this.lector.Read())
+                {
+                    Entrenador entrenador = new Entrenador();
+                    entrenador.Edad = (int)this.lector["edad"];
+                    entrenador.Nombre = this.lector["nombre"].ToString();
+                    entrenador.Apellido = this.lector["apellido"].ToString();
+                    entrenador.Pais = (EPaises)Convert.ToInt32(this.lector["pais"]);
+                    entrenador.Tactica = this.lector["tactica"].ToString();
+
+                    lista.Add(entrenador);
+                }
+
+                this.lector.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al cargar datos desde la base de datos: " + ex.Message);
+            }
+            finally
+            {
+                if (this.conexion.State == System.Data.ConnectionState.Open)
+                {
+                    this.conexion.Close();
+                }
+            }
+        }
+
+        public void CargarMasajistaDesdeBaseDeDatos(List<PersonalEquipoSeleccion> lista)
+        {
+            try
+            {
+                this.comando = new SqlCommand();
+                this.comando.CommandType = System.Data.CommandType.Text;
+                this.comando.CommandText = "SELECT * FROM masajistas";
+                this.comando.Connection = this.conexion;
+
+                this.conexion.Open();
+
+                this.lector = this.comando.ExecuteReader();
+
+                while (this.lector.Read())
+                {
+                    Masajista masajistas = new Masajista();
+                    masajistas.Edad = (int)this.lector["edad"];
+                    masajistas.Nombre = this.lector["nombre"].ToString();
+                    masajistas.Apellido = this.lector["apellido"].ToString();
+                    masajistas.Pais = (EPaises)Convert.ToInt32(this.lector["pais"]);
+                    masajistas.CertificadoMasaje = this.lector["lugarDeEstudio"].ToString();
+
+                    lista.Add(masajistas);
+                }
+
+                this.lector.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al cargar datos desde la base de datos: " + ex.Message);
+            }
+            finally
+            {
+                if (this.conexion.State == System.Data.ConnectionState.Open)
+                {
+                    this.conexion.Close();
+                }
+            }
+        }
+
+        public void CargarDatosDesdeBaseDeDatos(List<PersonalEquipoSeleccion> lista)
+        {
+            try
+            {
+                CargarJugadoresDesdeBaseDeDatos(lista);
+                CargarEntrenadoresDesdeBaseDeDatos(lista);
+                CargarMasajistaDesdeBaseDeDatos(lista);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al cargar datos desde la base de datos: " + ex.Message);
+            }
+        }
+
     }
 }

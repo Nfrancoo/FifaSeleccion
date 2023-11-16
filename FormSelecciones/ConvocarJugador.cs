@@ -129,7 +129,7 @@ namespace FormSelecciones
 
             if (this.DialogResult == DialogResult.OK)
             {
-                MessageBox.Show(NuevoJugador.RealizarConcentracion());
+                MessageBox.Show(NuevoJugador.Concentrarse());
             }
 
 

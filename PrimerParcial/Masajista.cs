@@ -10,13 +10,12 @@ namespace SegundoParcial
     public class Masajista : PersonalEquipoSeleccion
     {
         private string lugarDeTituloDeEstudio;
-
+        
 
 
         /// <summary>
         /// Constructor predeterminado que inicializa un masajista con un título de estudio en blanco.
         /// </summary>
-        [JsonConstructor]
         public Masajista()
         {
             this.lugarDeTituloDeEstudio = "";
@@ -51,7 +50,7 @@ namespace SegundoParcial
         /// <summary>
         /// Método que describe la acción de concentración del masajista.
         /// </summary>
-        public override string RealizarConcentracion()
+        public override string Concentrarse()
         {
             return $"{base.nombre} {base.apellido} se está concentrando con el equipo.";
         }
@@ -65,7 +64,7 @@ namespace SegundoParcial
             StringBuilder sb = new StringBuilder(baseInfo);
 
             // Agrega la información específica del Masajista
-            sb.Append($", Facultad donde estudió: {this.lugarDeTituloDeEstudio}");
+            sb.Append($", Facultad donde estudió: {this.lugarDeTituloDeEstudio}, Personal: Masajista");
 
             return sb.ToString();
         }
@@ -80,24 +79,5 @@ namespace SegundoParcial
             return retorno;
         }
 
-
-        public static List<Masajista> operator +(List<Masajista> lista, Masajista masajista)
-        {
-            if (!lista.Contains(masajista))
-            {
-                lista.Add(masajista);
-            }
-            return lista;
-        }
-
-        public static bool operator ==(Masajista uno, Masajista dos)
-        {
-            return uno.Nombre == dos.Nombre && uno.Apellido == dos.Apellido;
-        }
-
-        public static bool operator !=(Masajista uno, Masajista dos)
-        {
-            return !(uno == dos);
-        }
     }
 }

@@ -1,9 +1,16 @@
-﻿using System.Text;
-using System.Text.Json.Serialization;
+﻿using SegundoParcial;
+using System.Net;
+using System.Text;
+using System.Xml.Serialization;
+
 
 namespace SegundoParcial
 {
-    public abstract class PersonalEquipoSeleccion : IPersonal
+
+    [XmlInclude(typeof(Jugador))]
+    [XmlInclude(typeof(Entrenador))]
+    [XmlInclude(typeof(Masajista))]
+    public abstract class PersonalEquipoSeleccion
     {
         /// <summary>
         /// Constructor predeterminado que inicializa valores por defecto.
@@ -13,6 +20,7 @@ namespace SegundoParcial
         public string apellido;
         public EPaises paises;
         public int id;
+
 
 
         public PersonalEquipoSeleccion()
@@ -63,7 +71,7 @@ namespace SegundoParcial
         /// <summary>
         /// Método virtual que puede ser sobrescrito por las clases derivadas para representar la acción de concentración.
         /// </summary>
-        public virtual string RealizarConcentracion()
+        public virtual string Concentrarse()
         {
             return $"{this.nombre} {this.apellido}";
         }
@@ -129,26 +137,19 @@ namespace SegundoParcial
         /// <summary>
         /// Propiedad para obtener o establecer el país del personal con conversión JSON.
         /// </summary>
-        [JsonConverter(typeof(JsonStringEnumConverter))]
         public EPaises Pais
         {
             get { return this.paises; }
             set { this.paises = value; }
         }
+        public static bool operator ==(PersonalEquipoSeleccion p1, PersonalEquipoSeleccion p2)
+        {
+            return p1.Nombre == p2.Nombre && p1.Apellido == p2.Apellido;
+        }
 
-        //public static bool operator ==(GenteEquipoSeleccion a, GenteEquipoSeleccion b)
-        //{
-        //    if (ReferenceEquals(a, b))
-        //        return true;
-        //    if (a is null || b is null)
-        //        return false;
-
-        //    return a.Equals(b);
-        //}
-
-        //public static bool operator !=(GenteEquipoSeleccion a, GenteEquipoSeleccion b)
-        //{
-        //    return !(a == b);
-        //}
+        public static bool operator !=(PersonalEquipoSeleccion p1, PersonalEquipoSeleccion p2)
+        {
+            return !(p1 == p2);
+        }
     }
 }
