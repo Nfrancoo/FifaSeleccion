@@ -162,22 +162,6 @@ namespace SegundoParcial
             }
         }
 
-        public void CerrarConexion()
-        {
-            try
-            {
-                if (conexion.State != System.Data.ConnectionState.Closed)
-                {
-                    conexion.Close();
-                    Console.WriteLine("Conexión cerrada correctamente.");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al cerrar la conexión: " + ex.Message);
-            }
-        }
-
         public bool ModificarDato(Jugador jugador)
         {
             bool retorno = false;

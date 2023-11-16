@@ -144,11 +144,22 @@ namespace SegundoParcial
         }
         public static bool operator ==(PersonalEquipoSeleccion p1, PersonalEquipoSeleccion p2)
         {
-            return p1.Nombre == p2.Nombre && p1.Apellido == p2.Apellido;
+            if (ReferenceEquals(p1, null) && ReferenceEquals(p2, null))
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(p1, null) || ReferenceEquals(p2, null))
+            {
+                return false;
+            }
+
+            return p1.Nombre == p2.Nombre && p1.Apellido == p2.Apellido && p1.Pais == p2.Pais;
         }
 
         public static bool operator !=(PersonalEquipoSeleccion p1, PersonalEquipoSeleccion p2)
         {
+
             return !(p1 == p2);
         }
     }
