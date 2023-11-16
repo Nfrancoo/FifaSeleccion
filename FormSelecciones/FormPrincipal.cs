@@ -24,6 +24,8 @@ namespace FormSelecciones
         private List<PersonalEquipoSeleccion> personal;
         private Equipo registro;
         private Usuario usuarioLog;
+        private int segundosTranscurridos;
+        private int minutosTranscurridos;
 
         private SQL sql;
 
@@ -33,6 +35,7 @@ namespace FormSelecciones
         public FormPrincipal(Usuario usuario)
         {
             InitializeComponent();
+            InicializarCronometro();
             this.personal = new List<PersonalEquipoSeleccion>();
             this.registro = new Equipo();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -41,6 +44,7 @@ namespace FormSelecciones
             BordesBoton(FlatStyle.Flat, Color.LightSkyBlue, 2, btnConvocar, btnModificar, btnEliminar, btnOrdenar, btnGuardarManualmente, btnAccion, btnMostrar);
             this.usuarioLog = usuario;
             this.sql = new SQL();
+
 
 
             if (usuario != null)
@@ -398,7 +402,7 @@ namespace FormSelecciones
             MessageBox.Show(mensaje, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
-        private void ActualizarRegistro<T>(List<T> registro) where T: PersonalEquipoSeleccion
+        private void ActualizarRegistro<T>(List<T> registro) where T : PersonalEquipoSeleccion
         {
             this.lstPersonal.Items.Clear();
 
@@ -514,24 +518,6 @@ namespace FormSelecciones
         }
         #endregion
 
-
-        #region Añadir
-        public void Añadir<T>(List<T> lista, T personal, ListBox lst) where T : PersonalEquipoSeleccion
-        {
-            bool elementoRepetido = lista.Any(item => item.Equals(personal));
-
-            if (elementoRepetido)
-            {
-                MessageBox.Show("El elemento ya existe en la lista.");
-            }
-            else
-            {
-                lista.Add(personal);
-                lst.Items.Add(personal);
-            }
-        }
-        #endregion
-
         #region guardarManualmenteSqlData
 
         public void GuardarArchivo<T>(List<T> lista) where T : PersonalEquipoSeleccion
@@ -584,6 +570,35 @@ namespace FormSelecciones
             }
         }
         #endregion
+
+        private void ActualizarCronometro()
+        {
+            segundosTranscurridos++;
+
+            if (segundosTranscurridos == 60)
+            {
+                segundosTranscurridos = 0;
+                minutosTranscurridos++;
+            }
+
+            // Actualiza la interfaz de usuario
+            labelTiempo.Text = $"Tiempo transcurrido: {minutosTranscurridos} minutos {segundosTranscurridos} segundos";
+        }
+
+        private async void InicializarCronometro()
+        {
+            await Task.Run(() =>
+            {
+                while (true)
+                {
+                    // Espera 1 segundo antes de realizar la siguiente actualización
+                    Task.Delay(1000).Wait();
+
+                    // Ejecuta ActualizarCronometro en el hilo de la interfaz de usuario utilizando Invoke
+                    this.Invoke(new Action(ActualizarCronometro));
+                }
+            });
+        }
 
     }
 }

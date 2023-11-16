@@ -55,6 +55,7 @@
             groupBox6 = new GroupBox();
             btnCargarDatos = new Button();
             pictureBox1 = new PictureBox();
+            labelTiempo = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -67,10 +68,10 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Sitka Small", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Sitka Small", 11F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(6, 44);
             label1.Name = "label1";
-            label1.Size = new Size(275, 24);
+            label1.Size = new Size(262, 23);
             label1.TabIndex = 0;
             label1.Text = "Convocar Personal a la Seleccion";
             // 
@@ -78,7 +79,7 @@
             // 
             btnConvocar.Font = new Font("Sylfaen", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnConvocar.ForeColor = SystemColors.ActiveCaptionText;
-            btnConvocar.Location = new Point(77, 71);
+            btnConvocar.Location = new Point(53, 71);
             btnConvocar.Name = "btnConvocar";
             btnConvocar.Size = new Size(152, 58);
             btnConvocar.TabIndex = 3;
@@ -90,16 +91,16 @@
             // 
             lstPersonal.FormattingEnabled = true;
             lstPersonal.ItemHeight = 15;
-            lstPersonal.Location = new Point(320, 37);
+            lstPersonal.Location = new Point(290, 41);
             lstPersonal.Name = "lstPersonal";
-            lstPersonal.Size = new Size(567, 439);
+            lstPersonal.Size = new Size(594, 424);
             lstPersonal.TabIndex = 17;
             // 
             // btnEliminar
             // 
             btnEliminar.Font = new Font("Sylfaen", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnEliminar.ForeColor = SystemColors.ActiveCaptionText;
-            btnEliminar.Location = new Point(77, 206);
+            btnEliminar.Location = new Point(53, 206);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(152, 58);
             btnEliminar.TabIndex = 22;
@@ -110,20 +111,20 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Sitka Small", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Font = new Font("Sitka Small", 11F, FontStyle.Regular, GraphicsUnit.Point);
             label5.Location = new Point(4, 179);
             label5.Name = "label5";
-            label5.Size = new Size(275, 24);
+            label5.Size = new Size(262, 23);
             label5.TabIndex = 23;
             label5.Text = "Convocar Personal a la Seleccion";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Sitka Small", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Font = new Font("Sitka Small", 11F, FontStyle.Regular, GraphicsUnit.Point);
             label6.Location = new Point(7, 318);
             label6.Name = "label6";
-            label6.Size = new Size(243, 24);
+            label6.Size = new Size(229, 23);
             label6.TabIndex = 24;
             label6.Text = "Modificar datos del personal";
             // 
@@ -131,7 +132,7 @@
             // 
             btnModificar.Font = new Font("Sylfaen", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnModificar.ForeColor = SystemColors.ActiveCaptionText;
-            btnModificar.Location = new Point(77, 345);
+            btnModificar.Location = new Point(53, 345);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(152, 58);
             btnModificar.TabIndex = 25;
@@ -256,9 +257,9 @@
             groupBox2.Controls.Add(label1);
             groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(btnEliminar);
-            groupBox2.Location = new Point(12, 13);
+            groupBox2.Location = new Point(12, 34);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(302, 463);
+            groupBox2.Size = new Size(275, 431);
             groupBox2.TabIndex = 40;
             groupBox2.TabStop = false;
             groupBox2.Text = "Personal";
@@ -288,7 +289,7 @@
             // groupBox4
             // 
             groupBox4.Controls.Add(btnMostrar);
-            groupBox4.Location = new Point(893, 219);
+            groupBox4.Location = new Point(893, 259);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(178, 100);
             groupBox4.TabIndex = 42;
@@ -298,7 +299,7 @@
             // groupBox5
             // 
             groupBox5.Controls.Add(btnAccion);
-            groupBox5.Location = new Point(893, 358);
+            groupBox5.Location = new Point(893, 365);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(178, 100);
             groupBox5.TabIndex = 43;
@@ -342,18 +343,28 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(893, 12);
+            pictureBox1.Location = new Point(890, 34);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(178, 111);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 46;
             pictureBox1.TabStop = false;
             // 
+            // labelTiempo
+            // 
+            labelTiempo.AutoSize = true;
+            labelTiempo.Font = new Font("Segoe UI Emoji", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelTiempo.Location = new Point(16, 11);
+            labelTiempo.Name = "labelTiempo";
+            labelTiempo.Size = new Size(0, 17);
+            labelTiempo.TabIndex = 47;
+            // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1083, 615);
+            Controls.Add(labelTiempo);
             Controls.Add(pictureBox1);
             Controls.Add(groupBox6);
             Controls.Add(groupBox5);
@@ -426,5 +437,6 @@
         private GroupBox groupBox6;
         private Button btnCargarDatos;
         private PictureBox pictureBox1;
+        private Label labelTiempo;
     }
 }
