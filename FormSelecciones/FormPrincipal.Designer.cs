@@ -272,7 +272,7 @@
             groupBox3.Size = new Size(298, 121);
             groupBox3.TabIndex = 41;
             groupBox3.TabStop = false;
-            groupBox3.Text = "Guardar json manualmente";
+            groupBox3.Text = "Guardar manualmente en xml";
             // 
             // btnMostrar
             // 
@@ -321,7 +321,7 @@
             // groupBox6
             // 
             groupBox6.Controls.Add(btnCargarDatos);
-            groupBox6.Location = new Point(450, 482);
+            groupBox6.Location = new Point(460, 482);
             groupBox6.Name = "groupBox6";
             groupBox6.Size = new Size(298, 121);
             groupBox6.TabIndex = 45;

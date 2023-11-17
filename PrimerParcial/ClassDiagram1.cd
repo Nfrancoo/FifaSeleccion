@@ -3,29 +3,28 @@
   <Class Name="SegundoParcial.PersonalEquipoSeleccion">
     <Position X="8" Y="0.5" Width="5.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAQAAACEgAAAgAAAEAAAAgAQAAIAAAAAIgQ=</HashCode>
+      <HashCode>AACAAAAAAAQAAACEgAAAgAAAAAAAAgAQAAIAAAAAIiQ=</HashCode>
       <FileName>PersonalEquipoSeleccion.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="SegundoParcial.Entrenador">
-    <Position X="2.5" Y="6" Width="5" />
+    <Position X="2.5" Y="6.25" Width="5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAEwAAAAAAAEAAAAAAQAAAACAAAAig=</HashCode>
+      <HashCode>AACAAAAAAAAAAAAEgAAAAAAAAAAAAAAQAAAACAAAAAg=</HashCode>
       <FileName>Entrenador.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SegundoParcial.Jugador">
-    <Position X="7.75" Y="6" Width="5.75" />
+    <Position X="7.75" Y="6.25" Width="5.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAgAAAAIAEwAAAAAAAEAAAAAAQAAQAAAAEAiA=</HashCode>
+      <HashCode>AACAAAAAgAAAAIAEgAAAAAAAAAAAAAAQAAQAAAAEAAA=</HashCode>
       <FileName>Jugador.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SegundoParcial.Masajista">
-    <Position X="14" Y="6" Width="6" />
+    <Position X="14" Y="6.25" Width="6" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAAAAAAAEwAAAAAAAEAAAAAAQACAAAAAAAiA=</HashCode>
+      <HashCode>AACAAIAAAAAAAAAEgAAAAAAAAAAAAAAQACAAAAAAAAA=</HashCode>
       <FileName>Masajista.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -36,5 +35,26 @@
       <FileName>IPersonal.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Interface Name="SegundoParcial.IConvocar">
+    <Position X="5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAABAEA=</HashCode>
+      <FileName>IPrincipal.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="EPaises">
+    <Position X="5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAEAAAAICAAAAAE=</HashCode>
+      <FileName>EPaises.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EPosicion">
+    <Position X="9.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAABAAAAAAAAEgAAAAAAA=</HashCode>
+      <FileName>EPosiciones.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

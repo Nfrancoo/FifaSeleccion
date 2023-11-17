@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SegundoParcial;
 using System.IO;
-using System.Text.Json;
-using Newtonsoft.Json;
 using System.Security.Principal;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace FormSelecciones
 {
@@ -335,7 +335,7 @@ namespace FormSelecciones
         }
         private void btnGuardarManualmente_Click(object sender, EventArgs e)
         {
-            GuardarArchivo(this.registro.ListaPesonal);
+            GuardarDatosManualmente();
         }
 
         #region metodos
@@ -570,6 +570,8 @@ namespace FormSelecciones
             }
         }
         #endregion
+               
+        #region hilos
 
         private void ActualizarCronometro()
         {
@@ -598,6 +600,31 @@ namespace FormSelecciones
                     this.Invoke(new Action(ActualizarCronometro));
                 }
             });
+        }
+        #endregion
+
+
+        public void GuardarDatosManualmente()
+        {
+            try
+            {
+                SaveFileDialog guardarDatos = new SaveFileDialog();
+
+                if (guardarDatos.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = guardarDatos.FileName;
+                    using (XmlTextWriter escritorxml = new XmlTextWriter(filePath, Encoding.UTF8))
+                    {
+                        XmlSerializer serializador = new XmlSerializer(typeof(List<PersonalEquipoSeleccion>));
+                        serializador.Serialize(escritorxml, this.registro.ListaPesonal);
+                        MessageBox.Show("se pudieron guardar los datos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK);
+            }
         }
     }
 }

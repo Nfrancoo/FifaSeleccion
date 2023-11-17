@@ -16,16 +16,9 @@ Esta aplicación sirve como una herramienta para gestionar la información del p
 ### Digrama de clases
 =======
 ## Digrama de clases:
->>>>>>> f5e11568607247b3fb503c71e3d78e240cb94027
 
-![Alt text](<Captura de pantalla 2023-10-17 121245.png>)
+![Alt text](ClassDiagram1.png)
 
-<<<<<<< HEAD
 ### Diseño principal de mi Form
 
-![Alt text](<Captura de pantalla 2023-10-17 121340.png>)
-=======
-## Diseño principal de mi Form:
-
-![Alt text](<Captura de pantalla 2023-10-16 222841.png>)
->>>>>>> f5e11568607247b3fb503c71e3d78e240cb94027
+![Alt text](<Captura de pantalla 2023-11-17 155619.png>)
