@@ -183,9 +183,9 @@
             label8.AutoSize = true;
             label8.Location = new Point(278, 27);
             label8.Name = "label8";
-            label8.Size = new Size(73, 15);
+            label8.Size = new Size(49, 15);
             label8.TabIndex = 37;
-            label8.Text = "Por posicion";
+            label8.Text = "Por pais";
             // 
             // btnOrdenar
             // 
