@@ -83,11 +83,12 @@
             // 
             lblMostrar.AutoSize = true;
             lblMostrar.BackColor = SystemColors.ButtonHighlight;
-            lblMostrar.Location = new Point(264, 132);
+            lblMostrar.Location = new Point(262, 132);
             lblMostrar.Name = "lblMostrar";
             lblMostrar.Size = new Size(48, 15);
             lblMostrar.TabIndex = 10;
             lblMostrar.Text = "Mostrar";
+            lblMostrar.Click += lblMostrar_Click;
             // 
             // lblOcultar
             // 
@@ -98,6 +99,7 @@
             lblOcultar.Size = new Size(46, 15);
             lblOcultar.TabIndex = 11;
             lblOcultar.Text = "Ocultar";
+            lblOcultar.Click += lblOcultar_Click;
             // 
             // Login
             // 

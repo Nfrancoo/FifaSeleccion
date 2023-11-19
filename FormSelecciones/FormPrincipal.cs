@@ -117,7 +117,10 @@ namespace FormSelecciones
             }
             else
             {
-                MessageBox.Show("No tienes el rango suficiente para usar esta opción.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    usuarioLog.NotificarAccesoNoPermitido += MostrarMensaje;
+                    usuarioLog.NotificarAcceso("No tienes permitido utilizar esta opción.");
+                    usuarioLog.NotificarAccesoNoPermitido -= MostrarMensaje;
+                    return;
             }
         }
 
@@ -583,7 +586,6 @@ namespace FormSelecciones
                 minutosTranscurridos++;
             }
 
-            // Actualiza la interfaz de usuario
             labelTiempo.Text = $"Tiempo transcurrido: {minutosTranscurridos} minutos {segundosTranscurridos} segundos";
         }
 
@@ -593,10 +595,8 @@ namespace FormSelecciones
             {
                 while (true)
                 {
-                    // Espera 1 segundo antes de realizar la siguiente actualización
                     Task.Delay(1000).Wait();
 
-                    // Ejecuta ActualizarCronometro en el hilo de la interfaz de usuario utilizando Invoke
                     this.Invoke(new Action(ActualizarCronometro));
                 }
             });

@@ -40,9 +40,5 @@ namespace FormSelecciones
         {
             notificarAccesoNoPermitido?.Invoke(mensaje);
         }
-        //public string Mostrar()
-        //{
-        //    return $"{this.nombre} {this.apellido} no tiene permito entrar debido a su nivel de proteccion";
-        //}
     }
 }

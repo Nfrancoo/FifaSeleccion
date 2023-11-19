@@ -93,20 +93,6 @@ namespace FormSelecciones
             this.lblOcultar.Visible = false;
         }
 
-        private void lblOcultar_Click_1(object sender, EventArgs e)
-        {
-            this.txtContraseña.UseSystemPasswordChar = true;
-            this.lblOcultar.Visible = false;
-            this.lblMostrar.Visible = true;
-        }
-
-        private void lblMostrar_Click_1(object sender, EventArgs e)
-        {
-            this.txtContraseña.UseSystemPasswordChar = false;
-            this.lblMostrar.Visible = false;
-            this.lblOcultar.Visible = true;
-        }
-
         private void ModificarColores(Color colorin)
         {
             btnIniciarSesion.BackColor = colorin;
@@ -115,8 +101,22 @@ namespace FormSelecciones
         private void BordesBoton(FlatStyle flat, Color colorin, int tamaño, Button FrmCRUD1)
         {
             FrmCRUD1.FlatStyle = flat;
-            FrmCRUD1.FlatAppearance.BorderColor = colorin; // Color del borde
-            FrmCRUD1.FlatAppearance.BorderSize = tamaño; // Grosor del borde en píxeles
+            FrmCRUD1.FlatAppearance.BorderColor = colorin;
+            FrmCRUD1.FlatAppearance.BorderSize = tamaño;
+        }
+
+        private void lblMostrar_Click(object sender, EventArgs e)
+        {
+            this.txtContraseña.UseSystemPasswordChar = false;
+            this.lblMostrar.Visible = false;
+            this.lblOcultar.Visible = true;
+        }
+
+        private void lblOcultar_Click(object sender, EventArgs e)
+        {
+            this.txtContraseña.UseSystemPasswordChar = true;
+            this.lblOcultar.Visible = false;
+            this.lblMostrar.Visible = true;
         }
     }
 }
