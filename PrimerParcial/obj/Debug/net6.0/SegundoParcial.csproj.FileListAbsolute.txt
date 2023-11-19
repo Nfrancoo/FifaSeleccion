@@ -1,0 +1,14 @@
+C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\PrimerParcial\bin\Debug\net6.0\SegundoParcial.deps.json
+C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\PrimerParcial\bin\Debug\net6.0\SegundoParcial.dll
+C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\PrimerParcial\bin\Debug\net6.0\SegundoParcial.pdb
+C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\PrimerParcial\obj\Debug\net6.0\SegundoParcial.csproj.AssemblyReference.cache
+C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\PrimerParcial\obj\Debug\net6.0\SegundoParcial.Properties.Resources.resources
+C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\PrimerParcial\obj\Debug\net6.0\SegundoParcial.csproj.GenerateResource.cache
+C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\PrimerParcial\obj\Debug\net6.0\SegundoParcial.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\PrimerParcial\obj\Debug\net6.0\SegundoParcial.AssemblyInfoInputs.cache
+C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\PrimerParcial\obj\Debug\net6.0\SegundoParcial.AssemblyInfo.cs
+C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\PrimerParcial\obj\Debug\net6.0\SegundoParcial.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\PrimerParcial\obj\Debug\net6.0\SegundoParcial.dll
+C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\PrimerParcial\obj\Debug\net6.0\refint\SegundoParcial.dll
+C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\PrimerParcial\obj\Debug\net6.0\SegundoParcial.pdb
+C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\PrimerParcial\obj\Debug\net6.0\ref\SegundoParcial.dll
