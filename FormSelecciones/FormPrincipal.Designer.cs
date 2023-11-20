@@ -52,8 +52,6 @@
             groupBox4 = new GroupBox();
             groupBox5 = new GroupBox();
             btnAccion = new Button();
-            groupBox6 = new GroupBox();
-            btnCargarDatos = new Button();
             pictureBox1 = new PictureBox();
             labelTiempo = new Label();
             groupBox1.SuspendLayout();
@@ -61,7 +59,6 @@
             groupBox3.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox5.SuspendLayout();
-            groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -289,7 +286,7 @@
             // groupBox4
             // 
             groupBox4.Controls.Add(btnMostrar);
-            groupBox4.Location = new Point(893, 259);
+            groupBox4.Location = new Point(893, 250);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(178, 100);
             groupBox4.TabIndex = 42;
@@ -318,28 +315,6 @@
             btnAccion.UseVisualStyleBackColor = true;
             btnAccion.Click += btnAccion_Click;
             // 
-            // groupBox6
-            // 
-            groupBox6.Controls.Add(btnCargarDatos);
-            groupBox6.Location = new Point(460, 482);
-            groupBox6.Name = "groupBox6";
-            groupBox6.Size = new Size(298, 121);
-            groupBox6.TabIndex = 45;
-            groupBox6.TabStop = false;
-            groupBox6.Text = "Cargar Base de Datos";
-            // 
-            // btnCargarDatos
-            // 
-            btnCargarDatos.Font = new Font("Sylfaen", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnCargarDatos.ForeColor = SystemColors.ActiveCaptionText;
-            btnCargarDatos.Location = new Point(75, 31);
-            btnCargarDatos.Name = "btnCargarDatos";
-            btnCargarDatos.Size = new Size(152, 58);
-            btnCargarDatos.TabIndex = 33;
-            btnCargarDatos.Text = "Cargar Datos";
-            btnCargarDatos.UseVisualStyleBackColor = true;
-            btnCargarDatos.Click += btnCargarDatos_Click;
-            // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
@@ -366,7 +341,6 @@
             ClientSize = new Size(1083, 615);
             Controls.Add(labelTiempo);
             Controls.Add(pictureBox1);
-            Controls.Add(groupBox6);
             Controls.Add(groupBox5);
             Controls.Add(groupBox4);
             Controls.Add(groupBox3);
@@ -386,7 +360,6 @@
             groupBox3.ResumeLayout(false);
             groupBox4.ResumeLayout(false);
             groupBox5.ResumeLayout(false);
-            groupBox6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -434,8 +407,6 @@
         private GroupBox groupBox4;
         private GroupBox groupBox5;
         private Button btnAccion;
-        private GroupBox groupBox6;
-        private Button btnCargarDatos;
         private PictureBox pictureBox1;
         private Label labelTiempo;
     }

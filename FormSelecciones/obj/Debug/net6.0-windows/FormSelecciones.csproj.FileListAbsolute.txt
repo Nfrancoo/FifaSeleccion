@@ -50,3 +50,4 @@ C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\FormSelecciones
 C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\FormSelecciones\obj\Debug\net6.0-windows\FormSelecciones.pdb
 C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\FormSelecciones\obj\Debug\net6.0-windows\FormSelecciones.genruntimeconfig.cache
 C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\FormSelecciones\obj\Debug\net6.0-windows\ref\FormSelecciones.dll
+C:\Users\User\Documents\progra\Quiro.Franco.SegundoParcial_Labo2\FormSelecciones\obj\Debug\net6.0-windows\FormSelecciones.RecuperarContraseña.resources

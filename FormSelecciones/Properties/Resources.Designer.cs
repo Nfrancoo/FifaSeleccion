@@ -59,5 +59,26 @@ namespace FormSelecciones.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap klipartz_com {
+            get {
+                object obj = ResourceManager.GetObject("klipartz.com", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap png_transparent_world_cup_nigeria_national_football_team_fifa_international_football_association_board_football_text_team_logo {
+            get {
+                object obj = ResourceManager.GetObject("png-transparent-world-cup-nigeria-national-football-team-fifa-international-footb" +
+                        "all-association-board-football-text-team-logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

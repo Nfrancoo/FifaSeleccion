@@ -82,7 +82,12 @@ namespace FormSelecciones
         /// </summary>
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                sql.CargarDatosDesdeBaseDeDatos(this.registro.ListaPesonal);
+                ActualizarRegistro();
+            }
+            catch { throw new ExcepSql("Error modificando objeto de base de datos"); }
         }
 
         /// <summary>
@@ -93,34 +98,71 @@ namespace FormSelecciones
         {
             if (usuarioLog != null && (usuarioLog.perfil == "administrador" || usuarioLog.perfil == "supervisor"))
             {
-                Personal personalForm = new Personal();
-                personalForm.ShowDialog();
+                try
+                {
+                    Personal personalForm = new Personal();
+                    personalForm.ShowDialog();
 
-                if (personalForm.esJugador && personalForm.DialogResult == DialogResult.OK)
-                {
-                    Jugador jugador = personalForm.nuevoJugador;
-                    sql.AgregarJugador(jugador, this.registro);
-                    ActualizarRegistro(this.registro.ListaPesonal);
+                    if (personalForm.DialogResult == DialogResult.OK)
+                    {
+                        if (personalForm.esJugador)
+                        {
+                            Jugador jugador = personalForm.nuevoJugador;
+
+                            // Verificar si el jugador ya existe en la lista
+                            if (!ExistePersonal(jugador))
+                            {
+                                sql.AgregarJugador(jugador, this.registro);
+                                ActualizarRegistro();
+                            }
+                            else
+                            {
+                                throw new ExcepIguales("Este jugador ya existe en la base de datos.");
+                            }
+                        }
+                        else if (personalForm.esEntrenador)
+                        {
+                            Entrenador entrenador = personalForm.nuevoEntrenador;
+
+                            // Verificar si el entrenador ya existe en la lista
+                            if (!ExistePersonal(entrenador))
+                            {
+                                sql.AgregarEntrenador(entrenador, this.registro);
+                                ActualizarRegistro();
+                            }
+                            else
+                            {
+                                throw new ExcepIguales("Este entrenador ya existe en la base de datos.");
+                            }
+                        }
+                        else if (personalForm.esMasajista)
+                        {
+                            Masajista masajista = personalForm.nuevoMasajista;
+
+                            // Verificar si el masajista ya existe en la lista
+                            if (!ExistePersonal(masajista))
+                            {
+                                sql.AgregarMasajista(masajista, this.registro);
+                                ActualizarRegistro();
+                            }
+                            else
+                            {
+                                throw new ExcepIguales("Este masajista ya existe en la base de datos.");
+                            }
+                        }
+                    }
                 }
-                else if (personalForm.esEntrenador && personalForm.DialogResult == DialogResult.OK)
+                catch (ExcepIguales ex)
                 {
-                    Entrenador entrenador = personalForm.nuevoEntrenador;
-                    sql.AgregarEntrenador(entrenador, this.registro);
-                    ActualizarRegistro(this.registro.ListaPesonal);
-                }
-                else if (personalForm.esMasajista && personalForm.DialogResult == DialogResult.OK)
-                {
-                    Masajista masajista = personalForm.nuevoMasajista;
-                    sql.AgregarMasajista(masajista, this.registro);
-                    ActualizarRegistro(this.registro.ListaPesonal);
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                    usuarioLog.NotificarAccesoNoPermitido += MostrarMensaje;
-                    usuarioLog.NotificarAcceso("No tienes permitido utilizar esta opción.");
-                    usuarioLog.NotificarAccesoNoPermitido -= MostrarMensaje;
-                    return;
+                usuarioLog.NotificarAccesoNoPermitido += MostrarMensaje;
+                usuarioLog.NotificarAcceso("No tienes permitido utilizar esta opción.");
+                usuarioLog.NotificarAccesoNoPermitido -= MostrarMensaje;
+                return;
             }
         }
 
@@ -187,19 +229,19 @@ namespace FormSelecciones
                         {
                             Jugador jugador = (Jugador)personal;
                             this.sql.BorrarDato(jugador, this.registro);
-                            this.ActualizarRegistro(this.registro.ListaPesonal);
+                            this.ActualizarRegistro();
                         }
                         else if (personal is Entrenador)
                         {
                             Entrenador entrenador = (Entrenador)personal;
                             this.sql.BorrarDato(entrenador, this.registro);
-                            this.ActualizarRegistro(this.registro.ListaPesonal);
+                            this.ActualizarRegistro();
                         }
                         else if (personal is Masajista)
                         {
                             Masajista masajista = (Masajista)personal;
                             this.sql.BorrarDato(masajista, this.registro);
-                            this.ActualizarRegistro(this.registro.ListaPesonal);
+                            this.ActualizarRegistro();
                         }
                         else
                         {
@@ -315,24 +357,24 @@ namespace FormSelecciones
             if (this.rdoAscendenteEdad.Checked)
             {
                 this.registro.ListaPesonal.Sort(Equipo.OrdenarPorEdadAS);
-                ActualizarRegistro(this.registro.ListaPesonal);
+                ActualizarRegistro();
 
             }
             else if (this.rdoDescendenteEdad.Checked)
             {
                 this.registro.ListaPesonal.Sort(Equipo.OrdenarPorEdadDes);
-                ActualizarRegistro(this.registro.ListaPesonal);
+                ActualizarRegistro();
 
             }
             else if (this.rdoAscendentePosicion.Checked)
             {
                 this.registro.ListaPesonal.Sort(Equipo.OrdenarPorPaisAs);
-                ActualizarRegistro(this.registro.ListaPesonal);
+                ActualizarRegistro();
             }
             else
             {
                 this.registro.ListaPesonal.Sort(Equipo.OrdenarPorPaisDes);
-                ActualizarRegistro(this.registro.ListaPesonal);
+                ActualizarRegistro();
             }
 
         }
@@ -356,7 +398,6 @@ namespace FormSelecciones
             btnGuardarManualmente.BackColor = colorin;
             btnMostrar.BackColor = colorin;
             btnAccion.BackColor = colorin;
-            btnCargarDatos.BackColor = colorin;
         }
 
         /// <summary>
@@ -395,9 +436,7 @@ namespace FormSelecciones
             FrmCRUD7.FlatStyle = flat;
             FrmCRUD7.FlatAppearance.BorderColor = colorin;
             FrmCRUD7.FlatAppearance.BorderSize = tamaño;
-            btnCargarDatos.FlatStyle = flat;
-            btnCargarDatos.FlatAppearance.BorderColor = colorin;
-            btnCargarDatos.FlatAppearance.BorderSize = tamaño;
+
         }
 
         private void MostrarMensaje(string mensaje)
@@ -405,15 +444,16 @@ namespace FormSelecciones
             MessageBox.Show(mensaje, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
-        private void ActualizarRegistro<T>(List<T> registro) where T : PersonalEquipoSeleccion
+        private void ActualizarRegistro()
         {
             this.lstPersonal.Items.Clear();
 
-            foreach (PersonalEquipoSeleccion personal in registro)
+            foreach (PersonalEquipoSeleccion personal in this.registro.ListaPesonal)
             {
                 lstPersonal.Items.Add(personal.ToString());
             }
         }
+
         #endregion
 
         #region Metodos Modificar
@@ -506,74 +546,9 @@ namespace FormSelecciones
                 ModificarList(listBox, lista);
             }
         }
-
-        private void btnCargarDatos_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                sql.CargarDatosDesdeBaseDeDatos(this.registro.ListaPesonal);
-                ActualizarRegistro(this.registro.ListaPesonal);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al cargar datos desde la base de datos: " + ex.Message);
-            }
-        }
         #endregion
 
-        #region guardarManualmenteSqlData
 
-        public void GuardarArchivo<T>(List<T> lista) where T : PersonalEquipoSeleccion
-        {
-            try
-            {
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "Archivos SQL (*.sql)|*.sql";
-
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    string rutaCompleta = saveFileDialog.FileName;
-
-                    using (StreamWriter writer = new StreamWriter(rutaCompleta))
-                    {
-                        foreach (var item in lista)
-                        {
-                            string scriptSql = GenerarScriptSql(item);
-                            writer.WriteLine(scriptSql);
-                        }
-                    }
-
-                    Console.WriteLine("Archivo SQL guardado exitosamente en: " + rutaCompleta);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al guardar el archivo: " + ex.Message);
-            }
-        }
-
-        private string GenerarScriptSql(PersonalEquipoSeleccion item)
-        {
-            if (item is Jugador jugador)
-            {
-                return $"INSERT INTO jugador (nombre, apellido, edad, pais, dorsal, posicion) VALUES ('{jugador.Nombre}', '{jugador.Apellido}', {jugador.Edad}, {(int)jugador.Pais}, {jugador.Dorsal}, {(int)jugador.Posicion});";
-            }
-            else if (item is Entrenador entrenador)
-            {
-                return $"INSERT INTO entrenador (nombre, apellido, edad, pais, tactica) VALUES ('{entrenador.Nombre}', '{entrenador.Apellido}', {entrenador.Edad}, {(int)entrenador.Pais}, '{entrenador.Tactica}');";
-            }
-            else if (item is Masajista masajista)
-            {
-                return $"INSERT INTO masajists (nombre, apellido, edad, pais, lugarDeEstudio) VALUES ('{masajista.Nombre}', '{masajista.Apellido}', {masajista.Edad}, {(int)masajista.Pais}, '{masajista.CertificadoMasaje}');";
-            }
-            else
-            {
-                // Manejar otro tipo de PersonalEquipoSeleccion si es necesario
-                return string.Empty;
-            }
-        }
-        #endregion
-               
         #region hilos
 
         private void ActualizarCronometro()
@@ -625,6 +600,19 @@ namespace FormSelecciones
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK);
             }
+        }
+
+        private bool ExistePersonal<T>(T nuevoPersonal) where T : PersonalEquipoSeleccion
+        {
+            // Verificar si el personal ya existe en la lista
+            foreach (PersonalEquipoSeleccion personal in this.registro.ListaPesonal)
+            {
+                if (personal is T personalExistente && personalExistente == nuevoPersonal)
+                {
+                    return true; // El personal ya existe en la lista
+                }
+            }
+            return false; // El personal no existe en la lista
         }
     }
 }

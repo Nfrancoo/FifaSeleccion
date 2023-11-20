@@ -20,6 +20,9 @@
     <Compile Update="Personal.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="RecuperarContraseña.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="VerLogForm.cs">
       <SubType>Form</SubType>
     </Compile>

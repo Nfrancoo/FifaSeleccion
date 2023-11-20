@@ -63,13 +63,10 @@ namespace SegundoParcial
                 {
                 }
 
-                equipo.ListaPesonal.Add(jugador);
+                equipo = equipo + jugador;
 
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al agregar Jugador a la base de datos: " + ex.Message);
-            }
+            catch {throw new ExcepSql("Error agregando objeto de base de datos"); }
             finally
             {
                 this.conexion.Close();
@@ -107,12 +104,9 @@ namespace SegundoParcial
                 {
                 }
 
-                equipo.ListaPesonal.Add(entrenador);
+                equipo = equipo + entrenador;
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al agregar Entrenador a la base de datos: " + ex.Message);
-            }
+            catch{ throw new ExcepSql("Error agregando objeto de base de datos"); }
             finally
             {
                 this.conexion.Close();
@@ -150,12 +144,9 @@ namespace SegundoParcial
                     // Éxito: se actualizó o insertó un registro
                 }
 
-                equipo.ListaPesonal.Add(masajista);
+                equipo = equipo + masajista;
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al agregar Masajista a la base de datos: " + ex.Message);
-            }
+            catch { throw new ExcepSql("Error agregando objeto de base de datos"); }
             finally
             {
                 this.conexion.Close();
@@ -188,10 +179,7 @@ namespace SegundoParcial
                     retorno = true;
                 }
             }
-            catch (Exception ex)
-            {
-
-            }
+            catch { throw new ExcepSql("Error modificando objeto de base de datos"); }
             finally
             {
                 if (this.conexion.State == System.Data.ConnectionState.Open)
@@ -228,10 +216,7 @@ namespace SegundoParcial
                     retorno = true;
                 }
             }
-            catch (Exception ex)
-            {
-
-            }
+            catch { throw new ExcepSql("Error modificando objeto de base de datos"); }
             finally
             {
                 if (this.conexion.State == System.Data.ConnectionState.Open)
@@ -268,10 +253,7 @@ namespace SegundoParcial
                     retorno = true;
                 }
             }
-            catch (Exception ex)
-            {
-
-            }
+            catch { throw new ExcepSql("Error modificando objeto de base de datos"); }
             finally
             {
                 if (this.conexion.State == System.Data.ConnectionState.Open)
@@ -302,10 +284,7 @@ namespace SegundoParcial
                     result = true;
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            catch { throw new ExcepSql("Error borrando objeto de base de datos"); }
             finally
             {
                 if (this.conexion.State == System.Data.ConnectionState.Open)
@@ -314,7 +293,7 @@ namespace SegundoParcial
                 }
             }
 
-            equipo.ListaPesonal.Remove(jugador);
+            equipo = equipo - jugador;
 
             return result;
         }
@@ -338,10 +317,7 @@ namespace SegundoParcial
                     result = true;
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            catch { throw new ExcepSql("Error borrando objeto de base de datos"); }
             finally
             {
                 if (this.conexion.State == System.Data.ConnectionState.Open)
@@ -350,7 +326,7 @@ namespace SegundoParcial
                 }
             }
 
-            equipo.ListaPesonal.Remove(jugador);
+            equipo = equipo - jugador;
 
             return result;
         }
@@ -374,10 +350,7 @@ namespace SegundoParcial
                     result = true;
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            catch { throw new ExcepSql("Error borrando objeto de base de datos"); }
             finally
             {
                 if (this.conexion.State == System.Data.ConnectionState.Open)
@@ -386,7 +359,7 @@ namespace SegundoParcial
                 }
             }
 
-            equipo.ListaPesonal.Remove(jugador);
+            equipo = equipo - jugador;
 
             return result;
         }
@@ -531,10 +504,7 @@ namespace SegundoParcial
                 CargarEntrenadoresDesdeBaseDeDatos(lista);
                 CargarMasajistaDesdeBaseDeDatos(lista);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error al cargar datos desde la base de datos: " + ex.Message);
-            }
+            catch { throw new ExcepSql("Error al traer el catalogo desde la base de datos"); }
         }
 
     }

@@ -8,6 +8,7 @@ namespace FormSelecciones
     public partial class Login : Form
     {
         private List<Usuario> usuarios;
+        private System.Windows.Forms.Timer timerHora = new System.Windows.Forms.Timer();
 
 
         /// <summary>
@@ -22,6 +23,16 @@ namespace FormSelecciones
             ModificarColores(Color.LightBlue);
             BordesBoton(FlatStyle.Flat, Color.LightSkyBlue, 2, btnIniciarSesion);
 
+            // Configurar el Timer para actualizar la hora cada segundo
+            timerHora.Interval = 1000;
+            timerHora.Tick += TimerHora_Tick;
+            timerHora.Start();
+        }
+
+        private void TimerHora_Tick(object sender, EventArgs e)
+        {
+            // Actualizar la hora en la etiqueta
+            lblHoraActual.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
         /// <summary>
@@ -117,6 +128,19 @@ namespace FormSelecciones
             this.txtContraseña.UseSystemPasswordChar = true;
             this.lblOcultar.Visible = false;
             this.lblMostrar.Visible = true;
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            RecuperarContraseña recuperarForm = new RecuperarContraseña(usuarios);
+
+            // Mostrar el formulario de recuperación de contraseña
+            DialogResult result = recuperarForm.ShowDialog();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

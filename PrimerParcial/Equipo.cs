@@ -28,46 +28,35 @@ namespace SegundoParcial
         {
             this.listaPersonal = new List<PersonalEquipoSeleccion>();
         }
-        public static bool operator +(Equipo r, PersonalEquipoSeleccion j)
+        public static Equipo operator +(Equipo equipo, PersonalEquipoSeleccion personal)
         {
-            bool agregado = true;
-            if (r.listaPersonal.Count > 0)
+            if (equipo != null && personal != null)
             {
-                foreach (PersonalEquipoSeleccion personal in r.ListaPesonal)
-                {
-                    if (personal.Equals(j))
-                    {
-                        agregado = false;
-                        break;
-                    }
+                bool existe = equipo.ListaPesonal.Any(p => p.Equals(personal));
 
+                if (!existe)
+                {
+                    equipo.ListaPesonal.Add(personal);  // Agrega el nuevo miembro al equipo existente
                 }
             }
 
-            if (agregado || r.ListaPesonal.Count == 0)
-            {
-                r.ListaPesonal.Add(j);
-
-            }
-            return agregado;
+            return equipo;
         }
-        public static bool operator -(Equipo r, PersonalEquipoSeleccion j)
+
+        public static Equipo operator -(Equipo equipo, PersonalEquipoSeleccion personal)
         {
-            bool eliminado = false;
-            if (r.listaPersonal.Count > 0)
+            if (equipo != null && personal != null)
             {
-                foreach (PersonalEquipoSeleccion personal in r.listaPersonal)
+                // Intenta encontrar y eliminar el miembro en el equipo existente
+                PersonalEquipoSeleccion miembroAEliminar = equipo.ListaPesonal.FirstOrDefault(p => p.Equals(personal));
+
+                if (miembroAEliminar != null)
                 {
-                    if (personal.Equals(j))
-                    {
-                        r.listaPersonal.Remove(personal);
-                        eliminado = true;
-                        break;
-                    }
+                    equipo.ListaPesonal.Remove(miembroAEliminar);  // Elimina el miembro del equipo existente
                 }
             }
 
-            return eliminado;
+            return equipo;
         }
 
 
