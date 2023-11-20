@@ -19,6 +19,11 @@ namespace FormSelecciones
             this.BackColor = Color.LightCyan;
         }
 
+        /// <summary>
+        /// miro los usuarios que ingresaron a la aplicacion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void VerLogForm_Load(object sender, EventArgs e)
         {
             string rutaArchivoLog = "usuarios.log";

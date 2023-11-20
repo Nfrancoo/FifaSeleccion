@@ -11,12 +11,25 @@ using System.Windows.Forms;
 
 namespace FormSelecciones
 {
+    /// <summary>
+    /// Formulario para la convocatoria de un entrenador.
+    /// </summary>
     public partial class ConvocarEntrenador : Form, IConvocar
     {
+        /// <summary>
+        /// Nuevo entrenador creado o editado.
+        /// </summary>
         public Entrenador NuevoEntrenador;
-        public Entrenador EntrendorParaEditar { get; set; }
+
+        /// <summary>
+        /// Obtiene o establece el entrenador para editar.
+        /// </summary>
         public Entrenador EntrenadorParaEditar { get; internal set; }
 
+        /// <summary>
+        /// Constructor de la clase ConvocarEntrenador que recibe un entrenador para su edición.
+        /// </summary>
+        /// <param name="jug">El entrenador a editar.</param>
         public ConvocarEntrenador(Entrenador jug)
         {
             InitializeComponent();
@@ -24,6 +37,10 @@ namespace FormSelecciones
             this.BackColor = Color.LightCyan;
             Modificador(jug);
         }
+
+        /// <summary>
+        /// Constructor de la clase ConvocarEntrenador para la creación de un nuevo entrenador.
+        /// </summary>
         public ConvocarEntrenador()
         {
             InitializeComponent();
@@ -33,6 +50,9 @@ namespace FormSelecciones
             cmbPaises.DataSource = Enum.GetValues(typeof(EPaises));
         }
 
+        /// <summary>
+        /// Maneja el evento Click del botón "Aceptar".
+        /// </summary>
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             string nombre = this.txtNombre.Text;
@@ -66,7 +86,7 @@ namespace FormSelecciones
             string tactica = this.txtTactica.Text;
             if (string.IsNullOrEmpty(tactica))
             {
-                MessageBox.Show("Por favor, ingrese un valor en el campo de tactica.");
+                MessageBox.Show("Por favor, ingrese un valor en el campo de táctica.");
                 return;
             }
 
@@ -79,11 +99,8 @@ namespace FormSelecciones
                 return;
             }
 
-
             // Crear el nuevo entrenador
             NuevoEntrenador = new Entrenador(edad, nombre, apellido, pais, tactica);
-
-
 
             // Establecer el resultado del formulario como "Aceptar"
             this.DialogResult |= DialogResult.OK;
@@ -91,29 +108,42 @@ namespace FormSelecciones
             // Cerrar el formulario
             this.Close();
 
-
             if (this.DialogResult == DialogResult.OK)
             {
-                MessageBox.Show(NuevoEntrenador.Concentrarse());
+                MessageBox.Show(NuevoEntrenador.RealizarConcentracion());
             }
         }
+
+        /// <summary>
+        /// Maneja el evento Click del botón "Cancelar".
+        /// </summary>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
         }
 
-
         #region Metodos
+
+        /// <summary>
+        /// Verifica si el texto contiene solo caracteres alfabéticos.
+        /// </summary>
+        /// <param name="texto">El texto a verificar.</param>
+        /// <returns><c>true</c> si el texto contiene solo caracteres alfabéticos; de lo contrario, <c>false</c>.</returns>
         bool IConvocar.EsTextoValido(string texto)
         {
             return System.Text.RegularExpressions.Regex.IsMatch(texto, @"^[a-zA-Z]+$");
         }
 
+        /// <summary>
+        /// Modifica los campos del formulario con los datos del entrenador existente.
+        /// </summary>
+        /// <typeparam name="T">Tipo de personal que debe derivar de la interfaz PersonalEquipoSeleccion.</typeparam>
+        /// <param name="personal">El entrenador a modificar.</param>
         public void Modificador<T>(T personal) where T : PersonalEquipoSeleccion
         {
             if (personal is Entrenador entre)
             {
-                // Realizar las operaciones específicas para entreista
+                // Realizar las operaciones específicas para entrenador
                 this.txtApellido.Text = entre.Apellido;
                 this.txtNombre.Text = entre.Nombre;
                 this.txtEdad.Text = entre.Edad.ToString();
@@ -127,6 +157,11 @@ namespace FormSelecciones
             }
         }
 
+        /// <summary>
+        /// Convierte la primera letra del texto en mayúscula y el resto en minúscula.
+        /// </summary>
+        /// <param name="input">El texto de entrada.</param>
+        /// <returns>El texto con la primera letra en mayúscula y el resto en minúscula.</returns>
         public string Capitalize(string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -137,6 +172,7 @@ namespace FormSelecciones
             // Convierte el primer carácter a mayúscula y el resto a minúscula
             return char.ToUpper(input[0]) + input.Substring(1).ToLower();
         }
+
         #endregion
     }
 }

@@ -47,11 +47,9 @@ namespace FormSelecciones
             this.usuarioLog = usuario;
             this.sql = new SQL();
 
-
-
             if (usuario != null)
             {
-                this.Text = $"Operador: {usuario.nombre} - fecha actual: {DateTime.Now.ToShortDateString()}";
+                this.Text = $"Operador: {usuario.Nombre} - fecha actual: {DateTime.Now.ToShortDateString()}";
             }
 
             string rutaArchivoLog = "usuarios.log";
@@ -59,7 +57,7 @@ namespace FormSelecciones
             {
                 using (StreamWriter sw = File.AppendText(rutaArchivoLog))
                 {
-                    sw.WriteLine($"Nombre: {usuario.nombre} - Apellido: {usuario.apellido} - Horario de entrada: {DateTime.Now}");
+                    sw.WriteLine($"Nombre: {usuario.Nombre} - Apellido: {usuario.Apellido} - Horario de entrada: {DateTime.Now}");
                 }
             }
             catch (Exception ex)
@@ -68,19 +66,22 @@ namespace FormSelecciones
             }
 
             this.Click += FormPrincipal_Click;
-
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Método que maneja el evento Click del botón "Ver Log". 
+        /// Abre el formulario para visualizar el log de usuarios.
+        /// </summary>
+        private void Button1_Click(object sender, EventArgs e)
         {
             VerLogForm archivo = new VerLogForm();
-
             archivo.ShowDialog();
         }
 
         /// <summary>
         /// Manejador de eventos al cargar el formulario.
         /// Carga datos de jugadores, entrenadores y masajistas.
+        /// Tambien usando task para mostrar la hira
         /// </summary>
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
@@ -92,18 +93,16 @@ namespace FormSelecciones
             catch { throw new ExcepSql("Error modificando objeto de base de datos"); }
 
 
-            Task taskFecha = Task.Run(() => this.BucleTiempoHora());
+            Task taskFecha = Task.Run(() => this.Hora());
         }
 
-       
-
         /// <summary>
-        /// Manejador de eventos para el botón de convocar.
+        /// Método que maneja el evento Click del botón "Convocar". 
         /// Abre el formulario de creación de personal y agrega el nuevo personal a las listas correspondientes.
         /// </summary>
         private void btnConvocar_Click(object sender, EventArgs e)
         {
-            if (usuarioLog != null && (usuarioLog.perfil == "administrador" || usuarioLog.perfil == "supervisor"))
+            if (usuarioLog != null && (usuarioLog.Perfil == "administrador" || usuarioLog.Perfil == "supervisor"))
             {
                 try
                 {
@@ -173,16 +172,53 @@ namespace FormSelecciones
             }
         }
 
-
-
         /// <summary>
-        /// Manejador de eventos para el cambio en la selección del país en el ComboBox.
-        /// Muestra el ListBox correspondiente al país seleccionado y oculta los demás.
+        /// Método que maneja el evento FormClosed del formulario de recuperación de contraseña.
+        /// Realiza la acción correspondiente al cerrar el formulario de recuperación de contraseña.
         /// </summary>
+        private void RecuperarContraseñaFormClosed(object sender, EventArgs e)
+        {
+            // Realizar la acción correspondiente al cerrar el formulario de recuperación de contraseña
+            // Por ejemplo, habilitar los controles que estaban deshabilitados.
+            // Puedes implementar tu lógica aquí.
+        }
 
         /// <summary>
-        /// Manejador de eventos al cerrar el formulario.
-        /// Realiza la serialización de los datos de jugadores, entrenadores y masajistas.
+        /// Método que maneja el evento FormClosed del formulario de ver log de usuarios.
+        /// Realiza la acción correspondiente al cerrar el formulario de ver log de usuarios.
+        /// </summary>
+        private void VerLogFormClosed(object sender, EventArgs e)
+        {
+            // Realizar la acción correspondiente al cerrar el formulario de ver log de usuarios
+            // Por ejemplo, habilitar los controles que estaban deshabilitados.
+            // Puedes implementar tu lógica aquí.
+        }
+
+        /// <summary>
+        /// Método que maneja el evento FormClosed del formulario de creación de personal.
+        /// Realiza la acción correspondiente al cerrar el formulario de creación de personal.
+        /// </summary>
+        private void PersonalFormClosed(object sender, EventArgs e)
+        {
+            // Realizar la acción correspondiente al cerrar el formulario de creación de personal
+            // Por ejemplo, habilitar los controles que estaban deshabilitados.
+            // Puedes implementar tu lógica aquí.
+        }
+
+        /// <summary>
+        /// Método que maneja el evento FormClosed del formulario principal.
+        /// Realiza la acción correspondiente al cerrar el formulario principal.
+        /// </summary>
+        private void FormPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Realizar la acción correspondiente al cerrar el formulario principal
+            // Por ejemplo, guardar los datos antes de cerrar la aplicación.
+            // Puedes implementar tu lógica aquí.
+        }
+
+        /// <summary>
+        /// Método que maneja el evento FormClosing del formulario principal.
+        /// Realiza la acción correspondiente antes de cerrar el formulario principal.
         /// </summary>
         private void FormPrincipal_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -199,23 +235,21 @@ namespace FormSelecciones
         }
 
         /// <summary>
-        /// Manejador de eventos para el botón de eliminar.
+        /// Método que maneja el evento Click del botón "Eliminar". 
         /// Elimina el elemento seleccionado en el ListBox correspondiente al país seleccionado.
         /// </summary>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (usuarioLog != null)
             {
-                if (usuarioLog.perfil == "vendedor" || usuarioLog.perfil == "supervisor")
+                if (usuarioLog.Perfil == "vendedor" || usuarioLog.Perfil == "supervisor")
                 {
-
                     usuarioLog.NotificarAccesoNoPermitido += MostrarMensaje;
                     usuarioLog.NotificarAcceso("No tienes permitido utilizar esta opción.");
                     usuarioLog.NotificarAccesoNoPermitido -= MostrarMensaje;
                     return;
                 }
-
-                else if (usuarioLog.perfil == "administrador")
+                else if (usuarioLog.Perfil == "administrador")
                 {
                     int indice = this.lstPersonal.SelectedIndex;
 
@@ -268,7 +302,7 @@ namespace FormSelecciones
         {
             if (usuarioLog != null)
             {
-                if (usuarioLog.perfil == "vendedor")
+                if (usuarioLog.Perfil == "vendedor")
                 {
                     usuarioLog.NotificarAccesoNoPermitido += MostrarMensaje;
                     usuarioLog.NotificarAcceso("No tienes permitido utilizar esta opción.");
@@ -276,7 +310,7 @@ namespace FormSelecciones
                     return;
                 }
 
-                else if (usuarioLog.perfil == "administrador" || usuarioLog.perfil == "supervisor")
+                else if (usuarioLog.Perfil == "administrador" || usuarioLog.Perfil == "supervisor")
                 {
                     int indice = this.lstPersonal.SelectedIndex;
 
@@ -309,6 +343,10 @@ namespace FormSelecciones
             }
         }
 
+        /// <summary>
+        /// Manejador de eventos para el botón "Realizar Acción". 
+        /// Realiza una acción específica según el tipo de personal seleccionado (jugador, entrenador, masajista).
+        /// </summary>
         private void btnAccion_Click(object sender, EventArgs e)
         {
             int indice = this.lstPersonal.SelectedIndex;
@@ -317,10 +355,11 @@ namespace FormSelecciones
             {
                 return;
             }
-            PersonalEquipoSeleccion jugadorAModificar = this.registro.ListaPesonal[indice];
+
+            PersonalEquipoSeleccion personalSeleccionado = this.registro.ListaPesonal[indice];
 
             // Verifica si el objeto seleccionado es de tipo Jugador.
-            if (jugadorAModificar is Jugador jugador)
+            if (personalSeleccionado is Jugador jugador)
             {
                 // Llama al método RealizarAccion del jugador seleccionado.
                 string accion = jugador.RealizarAccion();
@@ -328,16 +367,16 @@ namespace FormSelecciones
                 // Puedes mostrar la acción en un MessageBox o en otro lugar según tus necesidades.
                 MessageBox.Show(accion, "Acción del Jugador", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            if (jugadorAModificar is Entrenador entrenador)
+            else if (personalSeleccionado is Entrenador entrenador)
             {
                 string accion = entrenador.RealizarAccion();
 
                 // Puedes mostrar la acción en un MessageBox o en otro lugar según tus necesidades.
                 MessageBox.Show(accion, "Acción del Entrenador", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            if (jugadorAModificar is Masajista masajista)
+            else if (personalSeleccionado is Masajista masajista)
             {
-                // Llama al método RealizarAccion del jugador seleccionado.
+                // Llama al método RealizarAccion del masajista seleccionado.
                 string accion = masajista.RealizarAccion();
 
                 // Puedes mostrar la acción en un MessageBox o en otro lugar según tus necesidades.
@@ -346,7 +385,8 @@ namespace FormSelecciones
         }
 
         /// <summary>
-        /// Maneja el evento Click del formulario principal y deselecciona todos los elementos en las listas.
+        /// Manejador de eventos para el clic en el formulario principal. 
+        /// Deselecciona todos los elementos en las listas.
         /// </summary>
         private void FormPrincipal_Click(object sender, EventArgs e)
         {
@@ -356,8 +396,8 @@ namespace FormSelecciones
         /// <summary>
         /// Método que maneja el evento Click del botón "Ordenar". 
         /// Ordena los elementos de la lista correspondiente (jugadores, entrenadores o masajistas) 
-        /// en función de la opción seleccionada (ascendente o descendente) y el país seleccionado
-        /// Los jugadores de van a poder ordenar en cuanto a posicion y edad y los entrenador y masajistas solo por edad
+        /// en función de la opción seleccionada (ascendente o descendente)
+        /// esta se va a poder ordenar en cuanto a pais o edad
         /// </summary>
         private void btnOrdenar_Click(object sender, EventArgs e)
         {
@@ -365,30 +405,49 @@ namespace FormSelecciones
             {
                 this.registro.ListaPesonal.Sort(Equipo.OrdenarPorEdadAS);
                 ActualizarRegistro();
-
             }
             else if (this.rdoDescendenteEdad.Checked)
             {
                 this.registro.ListaPesonal.Sort(Equipo.OrdenarPorEdadDes);
                 ActualizarRegistro();
-
             }
             else if (this.rdoAscendentePosicion.Checked)
             {
-                this.registro.ListaPesonal.Sort(Equipo.OrdenarPorPaisAs);
-                ActualizarRegistro();
+                // Verifica si la lista contiene al menos un jugador para poder ordenar por posición.
+                if (this.registro.ListaPesonal.Any(p => p is Jugador))
+                {
+                    this.registro.ListaPesonal.Sort(Equipo.OrdenarPorPaisAs);
+                    ActualizarRegistro();
+                }
+                else
+                {
+                    MessageBox.Show("No hay jugadores en la lista para ordenar por posición.", "Sin jugadores", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             else
             {
-                this.registro.ListaPesonal.Sort(Equipo.OrdenarPorPaisDes);
-                ActualizarRegistro();
+                // Verifica si la lista contiene al menos un jugador para poder ordenar por posición.
+                if (this.registro.ListaPesonal.Any(p => p is Jugador))
+                {
+                    this.registro.ListaPesonal.Sort(Equipo.OrdenarPorPaisDes);
+                    ActualizarRegistro();
+                }
+                else
+                {
+                    MessageBox.Show("No hay jugadores en la lista para ordenar por posición.", "Sin jugadores", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
-
         }
+
+        /// <summary>
+        /// Manejador de eventos para el clic en el botón "Guardar Manualmente".
+        /// Guarda manualmente los datos en algún almacenamiento, según la lógica implementada en el método GuardarDatosManualmente().
+        /// </summary>
         private void btnGuardarManualmente_Click(object sender, EventArgs e)
         {
             GuardarDatosManualmente();
         }
+
 
         #region metodos
 
@@ -446,15 +505,23 @@ namespace FormSelecciones
 
         }
 
+        /// <summary>
+        /// Muestra un mensaje de advertencia en un cuadro de diálogo.
+        /// </summary>
+        /// <param name="mensaje">Mensaje a mostrar.</param>
         private void MostrarMensaje(string mensaje)
         {
             MessageBox.Show(mensaje, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
+        /// <summary>
+        /// Actualiza el contenido del ListBox con los elementos de la lista de personal del equipo.
+        /// </summary>
         private void ActualizarRegistro()
         {
             this.lstPersonal.Items.Clear();
 
+            // Recorre la lista de personal y agrega sus representaciones de cadena al ListBox.
             foreach (PersonalEquipoSeleccion personal in this.registro.ListaPesonal)
             {
                 lstPersonal.Items.Add(personal.ToString());
@@ -464,12 +531,14 @@ namespace FormSelecciones
         #endregion
 
         #region Metodos Modificar
+
         /// <summary>
-        /// Estos tres metodos abreb un formulario de edición para modificar el personal
-        /// seleccionado y actualiza la lista con los cambios realizados.
+        /// Modifica un elemento seleccionado en el ListBox según su tipo (Jugador, Entrenador, Masajista).
+        /// Abre un formulario de edición correspondiente y actualiza la lista y la base de datos según los cambios.
         /// </summary>
-        /// <param name="lst">ListBox que contiene la lista de jugadores</param>
-        /// <param name="personal">Lista de jugadores</param>
+        /// <typeparam name="T">Tipo de personal (Jugador, Entrenador, Masajista).</typeparam>
+        /// <param name="lst">ListBox que contiene la lista de personal.</param>
+        /// <param name="personal">Lista de personal del equipo.</param>
         private void ModificarList<T>(ListBox lst, List<T> personal) where T : PersonalEquipoSeleccion
         {
             int selectedIndex = lst.SelectedIndex;
@@ -541,11 +610,12 @@ namespace FormSelecciones
         }
 
         /// <summary>
-        /// Estos tres metodos abren un formulario de edición para el elemento seleccionado en la ListBox 
-        /// y lo modifica en la lista llamando a el metodo ModificarList().
+        /// Modifica el elemento seleccionado en el ListBox de acuerdo con su tipo (Jugador, Entrenador, Masajista).
         /// </summary>
-        /// <param name="listBox">ListBox que contiene el elemento a modificar</param>
-        /// <param name="lista">Lista de elementos del mismo tipo</param
+        /// <typeparam name="T">Tipo de personal (Jugador, Entrenador, Masajista).</typeparam>
+        /// <param name="listBox">ListBox que contiene la lista de personal.</param>
+        /// <param name="lista">Lista de personal del equipo.</param>
+
         public void ModificarElemento<T>(ListBox listBox, List<T> lista) where T : PersonalEquipoSeleccion
         {
             if (listBox.SelectedIndex != -1)
@@ -556,8 +626,11 @@ namespace FormSelecciones
         #endregion
 
 
-        #region hilos
+        #region Cronómetro y Hora
 
+        /// <summary>
+        /// Actualiza el cronómetro sumando un segundo al tiempo transcurrido y actualiza la etiqueta correspondiente.
+        /// </summary>
         private void ActualizarCronometro()
         {
             segundosTranscurridos++;
@@ -571,6 +644,9 @@ namespace FormSelecciones
             labelTiempo.Text = $"Tiempo transcurrido: {minutosTranscurridos} minutos {segundosTranscurridos} segundos";
         }
 
+        /// <summary>
+        /// Inicializa el cronómetro mediante una tarea que se ejecuta en segundo plano.
+        /// </summary>
         private async void InicializarCronometro()
         {
             await Task.Run(() =>
@@ -584,8 +660,10 @@ namespace FormSelecciones
             });
         }
 
-
-        private void BucleTiempoHora()
+        /// <summary>
+        /// Actualiza la hora mostrada en la etiqueta lblHora utilizando un hilo separado.
+        /// </summary>
+        private void Hora()
         {
             do
             {
@@ -597,7 +675,10 @@ namespace FormSelecciones
             } while (true);
         }
 
-
+        /// <summary>
+        /// Actualiza la etiqueta de fecha con la fecha proporcionada.
+        /// </summary>
+        /// <param name="fecha">Fecha a mostrar.</param>
         private void ActualizarFecha(DateTime fecha)
         {
             if (this.lblHora.InvokeRequired)
@@ -609,10 +690,14 @@ namespace FormSelecciones
             }
             else this.lblHora.Text = fecha.ToString();
         }
+
         #endregion
 
+        #region Funciones XML y Verificación de Existencia de Personal
 
-        #region xml
+        /// <summary>
+        /// Guarda los datos manualmente en un archivo XML seleccionado por el usuario.
+        /// </summary>
         public void GuardarDatosManualmente()
         {
             try
@@ -626,7 +711,7 @@ namespace FormSelecciones
                     {
                         XmlSerializer serializador = new XmlSerializer(typeof(List<PersonalEquipoSeleccion>));
                         serializador.Serialize(escritorxml, this.registro.ListaPesonal);
-                        MessageBox.Show("se pudieron guardar los datos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Se pudieron guardar los datos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
@@ -636,12 +721,12 @@ namespace FormSelecciones
             }
         }
 
-        private void lblHora_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
+        /// <summary>
+        /// Verifica si un nuevo personal ya existe en la lista del equipo.
+        /// </summary>
+        /// <typeparam name="T">Tipo de personal (Jugador, Entrenador, Masajista).</typeparam>
+        /// <param name="nuevoPersonal">Nuevo personal a verificar.</param>
+        /// <returns>True si el personal ya existe, False si no.</returns>
         private bool ExistePersonal<T>(T nuevoPersonal) where T : PersonalEquipoSeleccion
         {
             // Verificar si el personal ya existe en la lista
@@ -654,6 +739,7 @@ namespace FormSelecciones
             }
             return false; // El personal no existe en la lista
         }
+
         #endregion
     }
 }

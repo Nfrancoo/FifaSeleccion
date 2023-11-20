@@ -11,13 +11,30 @@ using System.Windows.Forms;
 
 namespace FormSelecciones
 {
+    /// <summary>
+    /// Formulario para la convocatoria de un masajista.
+    /// </summary>
     public partial class ConvocarMasajista : Form, IConvocar
     {
+        /// <summary>
+        /// Masajista para editar.
+        /// </summary>
         public Masajista MasajeadorParaEditar { get; set; }
+
+        /// <summary>
+        /// Obtiene o establece el masajista para editar.
+        /// </summary>
         public Masajista MasajistaParaEditar { get; internal set; }
 
+        /// <summary>
+        /// Nuevo masajista creado o editado.
+        /// </summary>
         public Masajista NuevoMasajista;
 
+        /// <summary>
+        /// Constructor de la clase ConvocarMasajista que recibe un masajista para su edición.
+        /// </summary>
+        /// <param name="masaj">El masajista a editar.</param>
         public ConvocarMasajista(Masajista masaj)
         {
             InitializeComponent();
@@ -26,6 +43,9 @@ namespace FormSelecciones
             Modificador(masaj);
         }
 
+        /// <summary>
+        /// Constructor de la clase ConvocarMasajista para la creación de un nuevo masajista.
+        /// </summary>
         public ConvocarMasajista()
         {
             InitializeComponent();
@@ -35,6 +55,9 @@ namespace FormSelecciones
             cmbPaises.DataSource = Enum.GetValues(typeof(EPaises));
         }
 
+        /// <summary>
+        /// Maneja el evento Click del botón "Aceptar".
+        /// </summary>
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             string nombre = this.txtNombre.Text;
@@ -63,7 +86,7 @@ namespace FormSelecciones
             string titulo = this.txtTitulo.Text;
             if (string.IsNullOrEmpty(titulo))
             {
-                MessageBox.Show("Por favor, ingrese un valor en el campo de titulo.");
+                MessageBox.Show("Por favor, ingrese un valor en el campo de título.");
                 return;
             }
 
@@ -89,28 +112,42 @@ namespace FormSelecciones
             // Cerrar el formulario
             this.Close();
 
-
             if (this.DialogResult == DialogResult.OK)
             {
-                MessageBox.Show(NuevoMasajista.Concentrarse());
+                MessageBox.Show(NuevoMasajista.RealizarConcentracion());
             }
         }
+
+        /// <summary>
+        /// Maneja el evento Click del botón "Cancelar".
+        /// </summary>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
         }
+
         #region Metodos
 
+        /// <summary>
+        /// Verifica si el texto contiene solo caracteres alfabéticos.
+        /// </summary>
+        /// <param name="texto">El texto a verificar.</param>
+        /// <returns><c>true</c> si el texto contiene solo caracteres alfabéticos; de lo contrario, <c>false</c>.</returns>
         bool IConvocar.EsTextoValido(string texto)
         {
             return System.Text.RegularExpressions.Regex.IsMatch(texto, @"^[a-zA-Z]+$");
         }
 
+        /// <summary>
+        /// Modifica los campos del formulario con los datos del masajista existente.
+        /// </summary>
+        /// <typeparam name="T">Tipo de personal que debe derivar de la interfaz PersonalEquipoSeleccion.</typeparam>
+        /// <param name="personal">El masajista a modificar.</param>
         public void Modificador<T>(T personal) where T : PersonalEquipoSeleccion
         {
             if (personal is Masajista masaj)
             {
-                // Realizar las operaciones específicas para Masajista
+                // Realizar las operaciones específicas para masajista
                 this.txtApellido.Text = masaj.Apellido;
                 this.txtNombre.Text = masaj.Nombre;
                 this.txtEdad.Text = masaj.Edad.ToString();
@@ -123,7 +160,12 @@ namespace FormSelecciones
                 this.cmbPaises.Enabled = false;
             }
         }
-    
+
+        /// <summary>
+        /// Convierte la primera letra del texto en mayúscula y el resto en minúscula.
+        /// </summary>
+        /// <param name="input">El texto de entrada.</param>
+        /// <returns>El texto con la primera letra en mayúscula y el resto en minúscula.</returns>
         public string Capitalize(string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -134,6 +176,7 @@ namespace FormSelecciones
             // Convierte el primer carácter a mayúscula y el resto a minúscula
             return char.ToUpper(input[0]) + input.Substring(1).ToLower();
         }
+
         #endregion
     }
 }

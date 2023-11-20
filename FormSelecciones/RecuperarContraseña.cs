@@ -4,12 +4,19 @@ using System.Windows.Forms;
 
 namespace FormSelecciones
 {
+    /// <summary>
+    /// Formulario para la recuperación de contraseñas.
+    /// </summary>
     public partial class RecuperarContraseña : Form
     {
         private List<Usuario> usuarios;
         private System.Windows.Forms.Timer timerHora = new System.Windows.Forms.Timer();
         public event EventHandler RecuperarContraseñaFormClosed;
 
+        /// <summary>
+        /// Constructor de la clase RecuperarContraseña.
+        /// </summary>
+        /// <param name="usuarios">Lista de usuarios para la recuperación de contraseñas.</param>
         public RecuperarContraseña(List<Usuario> usuarios)
         {
             InitializeComponent();
@@ -23,15 +30,19 @@ namespace FormSelecciones
             timerHora.Interval = 1000;
             timerHora.Tick += TimerHora_Tick;
             timerHora.Start();
-
         }
 
+        /// <summary>
+        /// Maneja el evento Tick del Timer para actualizar la hora.
+        /// </summary>
         private void TimerHora_Tick(object sender, EventArgs e)
         {
             lblHoraActual.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
-
+        /// <summary>
+        /// Maneja el evento Click del botón "Recuperar Contraseña".
+        /// </summary>
         private void btnRecuperarContraseña_Click(object sender, EventArgs e)
         {
             // Obtener el correo ingresado por el usuario
@@ -53,11 +64,17 @@ namespace FormSelecciones
             }
         }
 
+        /// <summary>
+        /// Modifica el color de fondo del botón.
+        /// </summary>
         private void ModificarColores(Color colorin)
         {
             btnRecuperarContraseña.BackColor = colorin;
         }
 
+        /// <summary>
+        /// Configura los bordes del botón.
+        /// </summary>
         private void BordesBoton(FlatStyle flat, Color colorin, int tamaño, Button FrmCRUD1)
         {
             FrmCRUD1.FlatStyle = flat;
@@ -70,6 +87,9 @@ namespace FormSelecciones
 
         }
 
+        /// <summary>
+        /// Invoca un evento creado por mi cuando se cierra el formulario.
+        /// </summary>
         protected virtual void OnRecuperarContraseñaFormClosed()
         {
             RecuperarContraseñaFormClosed?.Invoke(this, EventArgs.Empty);

@@ -16,13 +16,20 @@ namespace SegundoParcial
         public string tactica;
 
         /// <summary>
-        /// Constructor que inicializa un entrenador con su información básica y la táctica a utilizar.
+        /// Constructor predeterminado que inicializa un entrenador con su información básica y sin táctica definida.
         /// </summary>
-
         public Entrenador() : base()
         {
         }
 
+        /// <summary>
+        /// Constructor que inicializa un entrenador con su información básica y la táctica a utilizar.
+        /// </summary>
+        /// <param name="edad">Edad del entrenador.</param>
+        /// <param name="nombre">Nombre del entrenador.</param>
+        /// <param name="apellido">Apellido del entrenador.</param>
+        /// <param name="pais">País del entrenador.</param>
+        /// <param name="tactica">Táctica a utilizar por el entrenador.</param>
         public Entrenador(int edad, string nombre, string apellido, EPaises pais, string tactica) : base(edad, nombre, apellido, pais)
         {
             this.tactica = tactica;
@@ -40,7 +47,7 @@ namespace SegundoParcial
         /// <summary>
         /// Método que describe la acción de concentración del entrenador con el equipo.
         /// </summary>
-        public override string Concentrarse()
+        public override string RealizarConcentracion()
         {
             return $"{base.nombre} {base.apellido} se está concentrando con el equipo.";
         }
@@ -50,7 +57,7 @@ namespace SegundoParcial
         /// </summary>
         public override string RealizarAccion()
         {
-            return $"{this.nombre} {this.apellido} esta preparando al equipo para salir con la tactica: {this.tactica}.";
+            return $"{this.nombre} {this.apellido} está preparando al equipo para salir con la táctica: {this.tactica}.";
         }
 
         /// <summary>
@@ -62,11 +69,14 @@ namespace SegundoParcial
             StringBuilder sb = new StringBuilder(baseInfo);
 
             // Agrega la información específica del Entrenador
-            sb.Append($", Tactica a usar: {this.tactica}, Personal: Entrenador");
+            sb.Append($", Táctica a usar: {this.tactica}, Personal: Entrenador");
 
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Método que verifica la igualdad entre dos objetos Entrenador.
+        /// </summary>
         public override bool Equals(object? obj)
         {
             bool retorno = false;

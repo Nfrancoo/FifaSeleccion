@@ -2,7 +2,6 @@
 using System;
 using System.Text;
 
-
 namespace SegundoParcial
 {
     /// <summary>
@@ -14,14 +13,22 @@ namespace SegundoParcial
         private EPosicion posicion;
 
         /// <summary>
-        /// Constructor que inicializa un jugador con su información básica.
+        /// Constructor predeterminado que inicializa un jugador con su información básica.
         /// </summary>
-
         public Jugador() : base()
         {
 
         }
 
+        /// <summary>
+        /// Constructor que inicializa un jugador con su información detallada.
+        /// </summary>
+        /// <param name="edad">Edad del jugador.</param>
+        /// <param name="nombre">Nombre del jugador.</param>
+        /// <param name="apellido">Apellido del jugador.</param>
+        /// <param name="pais">País del jugador.</param>
+        /// <param name="dorsal">Número dorsal del jugador.</param>
+        /// <param name="posicion">Posición del jugador.</param>
         public Jugador(int edad, string nombre, string apellido, EPaises pais, int dorsal, EPosicion posicion)
             : base(edad, nombre, apellido, pais)
         {
@@ -72,28 +79,20 @@ namespace SegundoParcial
         /// <summary>
         /// Método que describe la acción de concentración del jugador.
         /// </summary>
-        public override string Concentrarse()
+        public override string RealizarConcentracion()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append($"{this.nombre} {this.apellido} se está concentrando.");
-            return sb.ToString().Trim();
-            //Console.WriteLine($"{this.nombre} {this.apellido} se está concentrando.");
+            return $"{this.nombre} {this.apellido} se está concentrando.";
         }
 
+        /// <summary>
+        /// Método que verifica la igualdad entre dos objetos Jugador.
+        /// </summary>
         public override bool Equals(object? obj)
         {
             bool retorno = false;
             if (obj is Jugador)
             {
                 retorno = this == (Jugador)obj;
-            }
-            else if (obj is Entrenador)
-            {
-                retorno = this == (Entrenador)obj;
-            }
-            else if (obj is Masajista)
-            {
-                retorno = this == (Masajista)obj;
             }
             return retorno;
         }

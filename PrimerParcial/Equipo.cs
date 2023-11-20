@@ -17,17 +17,29 @@ namespace SegundoParcial
     {
         private List<PersonalEquipoSeleccion> listaPersonal;
 
-
+        /// <summary>
+        /// Obtiene o establece la lista de miembros del equipo.
+        /// </summary>
         public List<PersonalEquipoSeleccion> ListaPesonal
         {
             get { return this.listaPersonal; }
             set { this.listaPersonal = value; }
         }
 
+        /// <summary>
+        /// Constructor predeterminado de la clase Equipo.
+        /// </summary>
         public Equipo()
         {
             this.listaPersonal = new List<PersonalEquipoSeleccion>();
         }
+
+        /// <summary>
+        /// Operador de adición. Agrega un nuevo miembro al equipo si no existe.
+        /// </summary>
+        /// <param name="equipo">Equipo al que se agregará el miembro.</param>
+        /// <param name="personal">Miembro a agregar al equipo.</param>
+        /// <returns>El equipo con el nuevo miembro agregado.</returns>
         public static Equipo operator +(Equipo equipo, PersonalEquipoSeleccion personal)
         {
             if (equipo != null && personal != null)
@@ -43,6 +55,12 @@ namespace SegundoParcial
             return equipo;
         }
 
+        /// <summary>
+        /// Operador de sustracción. Intenta eliminar un miembro del equipo si existe.
+        /// </summary>
+        /// <param name="equipo">Equipo del que se eliminará el miembro.</param>
+        /// <param name="personal">Miembro a eliminar del equipo.</param>
+        /// <returns>El equipo con el miembro eliminado, si existía.</returns>
         public static Equipo operator -(Equipo equipo, PersonalEquipoSeleccion personal)
         {
             if (equipo != null && personal != null)
@@ -59,8 +77,10 @@ namespace SegundoParcial
             return equipo;
         }
 
-
-        public static int OrdenarPorEdadAS(PersonalEquipoSeleccion j1, PersonalEquipoSeleccion j2) // forma ascendente
+        /// <summary>
+        /// Método de ordenación por edad de forma ascendente.
+        /// </summary>
+        public static int OrdenarPorEdadAS(PersonalEquipoSeleccion j1, PersonalEquipoSeleccion j2)
         {
             if (j1.Edad < j2.Edad)
             {
@@ -76,7 +96,10 @@ namespace SegundoParcial
             }
         }
 
-        public static int OrdenarPorEdadDes(PersonalEquipoSeleccion j1, PersonalEquipoSeleccion j2) // forma descendente
+        /// <summary>
+        /// Método de ordenación por edad de forma descendente.
+        /// </summary>
+        public static int OrdenarPorEdadDes(PersonalEquipoSeleccion j1, PersonalEquipoSeleccion j2)
         {
             if (j1.Edad > j2.Edad)
             {
@@ -92,11 +115,17 @@ namespace SegundoParcial
             }
         }
 
+        /// <summary>
+        /// Método de ordenación por país de forma ascendente.
+        /// </summary>
         public static int OrdenarPorPaisAs(PersonalEquipoSeleccion j1, PersonalEquipoSeleccion j2)
         {
             return j1.Pais.CompareTo(j2.Pais);
         }
 
+        /// <summary>
+        /// Método de ordenación por país de forma descendente.
+        /// </summary>
         public static int OrdenarPorPaisDes(PersonalEquipoSeleccion j1, PersonalEquipoSeleccion j2)
         {
             return j2.Pais.CompareTo(j1.Pais);

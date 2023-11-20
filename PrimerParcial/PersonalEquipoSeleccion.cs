@@ -1,16 +1,15 @@
-﻿using SegundoParcial;
-using System.Net;
-using System.Text;
+﻿using System.Text;
 using System.Xml.Serialization;
-
 
 namespace SegundoParcial
 {
-
+    /// <summary>
+    /// Clase abstracta que representa al personal del equipo de selección.
+    /// </summary>
     [XmlInclude(typeof(Jugador))]
     [XmlInclude(typeof(Entrenador))]
     [XmlInclude(typeof(Masajista))]
-    public abstract class PersonalEquipoSeleccion
+    public abstract class PersonalEquipoSeleccion : IPersonal
     {
         /// <summary>
         /// Constructor predeterminado que inicializa valores por defecto.
@@ -21,8 +20,9 @@ namespace SegundoParcial
         public EPaises paises;
         public int id;
 
-
-
+        /// <summary>
+        /// Constructor predeterminado que inicializa valores por defecto.
+        /// </summary>
         public PersonalEquipoSeleccion()
         {
             this.edad = 0;
@@ -64,49 +64,6 @@ namespace SegundoParcial
         }
 
         /// <summary>
-        /// Método abstracto que debe ser implementado por las clases derivadas.
-        /// </summary>
-        public abstract string RealizarAccion();
-
-        /// <summary>
-        /// Método virtual que puede ser sobrescrito por las clases derivadas para representar la acción de concentración.
-        /// </summary>
-        public virtual string Concentrarse()
-        {
-            return $"{this.nombre} {this.apellido}";
-        }
-
-        /// <summary>
-        /// Método virtual que puede ser sobrescrito por las clases derivadas para representar la acción de viajar.
-        /// </summary>
-        public virtual string Viajar()
-        {
-            return $"{this.nombre} {this.apellido}";
-        }
-
-        /// <summary>
-        /// Método que devuelve una representación en cadena del objeto.
-        /// </summary>
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append($"Nombre: {this.nombre}, Apellido: {this.apellido}, Edad: {this.edad}, País: {this.paises}");
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Método que verifica la igualdad entre dos objetos.
-        /// </summary>
-        public override bool Equals(object? obj)
-        {
-            if (obj is PersonalEquipoSeleccion otro)
-            {
-                return this.Nombre == otro.Nombre && this.Apellido == otro.Apellido;
-            }
-            return false;
-        }
-
-        /// <summary>
         /// Propiedad para obtener o establecer el nombre del personal.
         /// </summary>
         public string Nombre
@@ -142,6 +99,37 @@ namespace SegundoParcial
             get { return this.paises; }
             set { this.paises = value; }
         }
+
+        /// <summary>
+        /// Método abstracto que debe ser implementado por las clases derivadas.
+        /// </summary>
+        public abstract string RealizarAccion();
+
+        /// <summary>
+        /// Método virtual que puede ser sobrescrito por las clases derivadas para representar la acción de concentración.
+        /// </summary>
+        public virtual string RealizarConcentracion()
+        {
+            return $"{this.nombre} {this.apellido}";
+        }
+
+        // Otros métodos virtuales...
+
+        /// <summary>
+        /// Método que devuelve una representación en cadena del objeto.
+        /// </summary>
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"Nombre: {this.nombre}, Apellido: {this.apellido}, Edad: {this.edad}, País: {this.paises}");
+            return sb.ToString();
+        }
+
+        // Otros métodos y propiedades...
+
+        /// <summary>
+        /// Operador de igualdad que verifica la igualdad entre dos objetos PersonalEquipoSeleccion.
+        /// </summary>
         public static bool operator ==(PersonalEquipoSeleccion p1, PersonalEquipoSeleccion p2)
         {
             if (ReferenceEquals(p1, null) && ReferenceEquals(p2, null))
@@ -157,9 +145,11 @@ namespace SegundoParcial
             return p1.Nombre == p2.Nombre && p1.Apellido == p2.Apellido && p1.Pais == p2.Pais;
         }
 
+        /// <summary>
+        /// Operador de desigualdad que verifica la desigualdad entre dos objetos PersonalEquipoSeleccion.
+        /// </summary>
         public static bool operator !=(PersonalEquipoSeleccion p1, PersonalEquipoSeleccion p2)
         {
-
             return !(p1 == p2);
         }
     }

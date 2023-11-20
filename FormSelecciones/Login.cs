@@ -5,11 +5,11 @@ namespace FormSelecciones
 {
     /// <summary>
     /// Formulario de inicio de sesión de la aplicación.
+    /// </summary>
     public partial class Login : Form
     {
         private List<Usuario> usuarios;
         private System.Windows.Forms.Timer timerHora = new System.Windows.Forms.Timer();
-
 
         /// <summary>
         /// Constructor de la clase Login.
@@ -37,18 +37,16 @@ namespace FormSelecciones
 
         /// <summary>
         /// Maneja el evento Click del botón de inicio de sesión.
-        /// busca que el correo y la clave sean iguales al json usuario
-        /// y luego abro mi FormPrincipal, con el lambda verifico que si se creo el evento FormClosed
-        /// cierra el form Usuario(tuve que hacerlo asi por un error que no me dejaba cerrarlo)
+        /// Busca que el correo y la clave sean iguales al JSON del usuario.
+        /// Luego abre el FormPrincipal. Con el lambda verifica si se creó el evento FormClosed y cierra el form Usuario
+        /// (necesario por un error que no permitía cerrarlo).
         /// </summary>
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
             string correo = this.txtCorreo.Text;
             string contraseña = this.txtContraseña.Text;
 
-
             Usuario usuario = usuarios.Find(u => u.correo == correo && u.clave == contraseña);
-
 
             if (usuario != null)
             {
@@ -61,15 +59,12 @@ namespace FormSelecciones
 
                 formPrincipal.Show();
 
-                //manejo el evento FormClosed del FormPrincipal
+                // Manejar el evento FormClosed del FormPrincipal
                 formPrincipal.FormClosed += (s, args) =>
-                //expresion lambda que se va a ejecutar cuando el evento FormClosed pase
                 {
                     // Cerrar otros formularios si es necesario
                     this.Close();
                 };
-
-
             }
             else
             {
@@ -142,6 +137,9 @@ namespace FormSelecciones
 
             recuperarForm.ShowDialog();
         }
+        /// <summary>
+        /// vuelvo a abrir el form una vez recordado la contraseña al usuario
+        /// </summary>
 
         private void RecuperarForm_RecuperarContraseñaFormClosed(object sender, EventArgs e)
         {

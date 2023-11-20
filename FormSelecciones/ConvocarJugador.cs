@@ -129,7 +129,7 @@ namespace FormSelecciones
 
             if (this.DialogResult == DialogResult.OK)
             {
-                MessageBox.Show(NuevoJugador.Concentrarse());
+                MessageBox.Show(NuevoJugador.RealizarConcentracion());
             }
 
 
@@ -145,10 +145,10 @@ namespace FormSelecciones
 
         #region Metodos
         /// <summary>
-        /// Modifica los campos del formulario con los datos del jugador existente pero desabilitando
-        /// la edicion de algunos TextBox
+        /// Modifica los campos del formulario con los datos del personal existente.
         /// </summary>
-        /// <param name="jug">El jugador a editar.</param>
+        /// <typeparam name="T">Tipo de personal que debe derivar de la interfaz PersonalEquipoSeleccion.</typeparam>
+        /// <param name="personal">El personal a modificar.</param>
         public void Modificador<T>(T personal) where T : PersonalEquipoSeleccion
         {
             if (personal is Jugador jug)
@@ -170,6 +170,7 @@ namespace FormSelecciones
         }
 
 
+
         /// <summary>
         /// Verifica si el texto contiene solo caracteres alfabéticos.
         /// </summary>
@@ -179,6 +180,7 @@ namespace FormSelecciones
         {
             return System.Text.RegularExpressions.Regex.IsMatch(texto, @"^[a-zA-Z]+$");
         }
+
 
         /// <summary>
         /// Convierte la primera letra del texto en mayúscula y el resto en minúscula.

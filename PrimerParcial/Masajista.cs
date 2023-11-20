@@ -10,8 +10,6 @@ namespace SegundoParcial
     public class Masajista : PersonalEquipoSeleccion
     {
         private string lugarDeTituloDeEstudio;
-        
-
 
         /// <summary>
         /// Constructor predeterminado que inicializa un masajista con un título de estudio en blanco.
@@ -24,7 +22,11 @@ namespace SegundoParcial
         /// <summary>
         /// Constructor que inicializa un masajista con su información básica y el lugar donde obtuvo el título de estudio.
         /// </summary>
-
+        /// <param name="edad">Edad del masajista.</param>
+        /// <param name="nombre">Nombre del masajista.</param>
+        /// <param name="apellido">Apellido del masajista.</param>
+        /// <param name="pais">País del masajista.</param>
+        /// <param name="lugarDeTituloDeEstudio">Lugar donde el masajista obtuvo su título de estudio.</param>
         public Masajista(int edad, string nombre, string apellido, EPaises pais, string lugarDeTituloDeEstudio) : base(edad, nombre, apellido, pais)
         {
             this.lugarDeTituloDeEstudio = lugarDeTituloDeEstudio;
@@ -50,7 +52,7 @@ namespace SegundoParcial
         /// <summary>
         /// Método que describe la acción de concentración del masajista.
         /// </summary>
-        public override string Concentrarse()
+        public override string RealizarConcentracion()
         {
             return $"{base.nombre} {base.apellido} se está concentrando con el equipo.";
         }
@@ -69,6 +71,9 @@ namespace SegundoParcial
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Método que verifica la igualdad entre dos objetos Masajista.
+        /// </summary>
         public override bool Equals(object? obj)
         {
             bool retorno = false;
@@ -78,6 +83,5 @@ namespace SegundoParcial
             }
             return retorno;
         }
-
     }
 }
