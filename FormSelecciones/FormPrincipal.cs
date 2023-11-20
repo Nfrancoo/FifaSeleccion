@@ -26,6 +26,8 @@ namespace FormSelecciones
         private Usuario usuarioLog;
         private int segundosTranscurridos;
         private int minutosTranscurridos;
+        private CancellationToken cancelarFlujo;
+        public delegate void DelegadoFecha(DateTime fecha);
 
         private SQL sql;
 
@@ -88,7 +90,12 @@ namespace FormSelecciones
                 ActualizarRegistro();
             }
             catch { throw new ExcepSql("Error modificando objeto de base de datos"); }
+
+
+            Task taskFecha = Task.Run(() => this.BucleTiempoHora());
         }
+
+       
 
         /// <summary>
         /// Manejador de eventos para el botón de convocar.
@@ -576,9 +583,36 @@ namespace FormSelecciones
                 }
             });
         }
+
+
+        private void BucleTiempoHora()
+        {
+            do
+            {
+                if (this.cancelarFlujo.IsCancellationRequested) break;
+
+                this.ActualizarFecha(DateTime.Now);
+                Thread.Sleep(1000);
+
+            } while (true);
+        }
+
+
+        private void ActualizarFecha(DateTime fecha)
+        {
+            if (this.lblHora.InvokeRequired)
+            {
+                DelegadoFecha d = new DelegadoFecha(ActualizarFecha);
+                object[] arrayParametro = { fecha };
+
+                this.lblHora.Invoke(d, fecha);
+            }
+            else this.lblHora.Text = fecha.ToString();
+        }
         #endregion
 
 
+        #region xml
         public void GuardarDatosManualmente()
         {
             try
@@ -602,6 +636,12 @@ namespace FormSelecciones
             }
         }
 
+        private void lblHora_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
         private bool ExistePersonal<T>(T nuevoPersonal) where T : PersonalEquipoSeleccion
         {
             // Verificar si el personal ya existe en la lista
@@ -614,5 +654,6 @@ namespace FormSelecciones
             }
             return false; // El personal no existe en la lista
         }
+        #endregion
     }
 }

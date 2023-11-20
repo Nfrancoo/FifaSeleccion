@@ -63,6 +63,16 @@ namespace FormSelecciones.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap fifa_logo {
+            get {
+                object obj = ResourceManager.GetObject("fifa-logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap klipartz_com {
             get {
                 object obj = ResourceManager.GetObject("klipartz.com", resourceCulture);

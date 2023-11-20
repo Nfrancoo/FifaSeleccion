@@ -68,6 +68,8 @@ namespace FormSelecciones
                     // Cerrar otros formularios si es necesario
                     this.Close();
                 };
+
+
             }
             else
             {
@@ -134,8 +136,16 @@ namespace FormSelecciones
         {
             RecuperarContraseña recuperarForm = new RecuperarContraseña(usuarios);
 
-            // Mostrar el formulario de recuperación de contraseña
-            DialogResult result = recuperarForm.ShowDialog();
+            recuperarForm.RecuperarContraseñaFormClosed += RecuperarForm_RecuperarContraseñaFormClosed;
+
+            this.Hide();
+
+            recuperarForm.ShowDialog();
+        }
+
+        private void RecuperarForm_RecuperarContraseñaFormClosed(object sender, EventArgs e)
+        {
+            this.Show();
         }
 
         private void label2_Click(object sender, EventArgs e)

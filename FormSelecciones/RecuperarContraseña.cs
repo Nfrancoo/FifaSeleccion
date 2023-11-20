@@ -8,6 +8,7 @@ namespace FormSelecciones
     {
         private List<Usuario> usuarios;
         private System.Windows.Forms.Timer timerHora = new System.Windows.Forms.Timer();
+        public event EventHandler RecuperarContraseñaFormClosed;
 
         public RecuperarContraseña(List<Usuario> usuarios)
         {
@@ -18,6 +19,16 @@ namespace FormSelecciones
             ModificarColores(Color.LightBlue);
             BordesBoton(FlatStyle.Flat, Color.LightSkyBlue, 2, btnRecuperarContraseña);
 
+            // Configurar el Timer para actualizar la hora cada segundo
+            timerHora.Interval = 1000;
+            timerHora.Tick += TimerHora_Tick;
+            timerHora.Start();
+
+        }
+
+        private void TimerHora_Tick(object sender, EventArgs e)
+        {
+            lblHoraActual.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
 
@@ -31,11 +42,10 @@ namespace FormSelecciones
 
             if (usuarioRecuperado != null)
             {
-                // Mostrar la contraseña en un MessageBox
                 MessageBox.Show($"La contraseña del usuario {usuarioRecuperado.nombre} {usuarioRecuperado.apellido} es: {usuarioRecuperado.clave}", "Contraseña Recuperada", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Cerrar el formulario
-                this.Close();
+                // Lanzar el evento personalizado
+                OnRecuperarContraseñaFormClosed();
             }
             else
             {
@@ -58,6 +68,11 @@ namespace FormSelecciones
         private void RecuperarContraseña_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected virtual void OnRecuperarContraseñaFormClosed()
+        {
+            RecuperarContraseñaFormClosed?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -54,6 +54,7 @@
             btnAccion = new Button();
             pictureBox1 = new PictureBox();
             labelTiempo = new Label();
+            lblHora = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -65,10 +66,10 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Sitka Small", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             label1.Location = new Point(6, 44);
             label1.Name = "label1";
-            label1.Size = new Size(262, 23);
+            label1.Size = new Size(234, 20);
             label1.TabIndex = 0;
             label1.Text = "Convocar Personal a la Seleccion";
             // 
@@ -108,20 +109,20 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Sitka Small", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             label5.Location = new Point(4, 179);
             label5.Name = "label5";
-            label5.Size = new Size(262, 23);
+            label5.Size = new Size(234, 20);
             label5.TabIndex = 23;
             label5.Text = "Convocar Personal a la Seleccion";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Sitka Small", 11F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             label6.Location = new Point(7, 318);
             label6.Name = "label6";
-            label6.Size = new Size(229, 23);
+            label6.Size = new Size(208, 20);
             label6.TabIndex = 24;
             label6.Text = "Modificar datos del personal";
             // 
@@ -146,6 +147,7 @@
             groupBox1.Controls.Add(rdoDescendenteEdad);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(rdoAscendenteEdad);
+            groupBox1.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             groupBox1.Location = new Point(12, 482);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(432, 121);
@@ -158,7 +160,7 @@
             rdoDescendentePosicion.AutoSize = true;
             rdoDescendentePosicion.Location = new Point(278, 82);
             rdoDescendentePosicion.Name = "rdoDescendentePosicion";
-            rdoDescendentePosicion.Size = new Size(93, 19);
+            rdoDescendentePosicion.Size = new Size(117, 24);
             rdoDescendentePosicion.TabIndex = 39;
             rdoDescendentePosicion.TabStop = true;
             rdoDescendentePosicion.Text = "Descendente";
@@ -169,7 +171,7 @@
             rdoAscendentePosicion.AutoSize = true;
             rdoAscendentePosicion.Location = new Point(278, 49);
             rdoAscendentePosicion.Name = "rdoAscendentePosicion";
-            rdoAscendentePosicion.Size = new Size(87, 19);
+            rdoAscendentePosicion.Size = new Size(109, 24);
             rdoAscendentePosicion.TabIndex = 38;
             rdoAscendentePosicion.TabStop = true;
             rdoAscendentePosicion.Text = "Ascendente";
@@ -180,7 +182,7 @@
             label8.AutoSize = true;
             label8.Location = new Point(278, 27);
             label8.Name = "label8";
-            label8.Size = new Size(49, 15);
+            label8.Size = new Size(65, 20);
             label8.TabIndex = 37;
             label8.Text = "Por pais";
             // 
@@ -200,7 +202,7 @@
             rdoDescendenteEdad.AutoSize = true;
             rdoDescendenteEdad.Location = new Point(18, 82);
             rdoDescendenteEdad.Name = "rdoDescendenteEdad";
-            rdoDescendenteEdad.Size = new Size(93, 19);
+            rdoDescendenteEdad.Size = new Size(117, 24);
             rdoDescendenteEdad.TabIndex = 35;
             rdoDescendenteEdad.TabStop = true;
             rdoDescendenteEdad.Text = "Descendente";
@@ -211,7 +213,7 @@
             label7.AutoSize = true;
             label7.Location = new Point(18, 27);
             label7.Name = "label7";
-            label7.Size = new Size(54, 15);
+            label7.Size = new Size(71, 20);
             label7.TabIndex = 34;
             label7.Text = "Por edad";
             // 
@@ -220,7 +222,7 @@
             rdoAscendenteEdad.AutoSize = true;
             rdoAscendenteEdad.Location = new Point(18, 52);
             rdoAscendenteEdad.Name = "rdoAscendenteEdad";
-            rdoAscendenteEdad.Size = new Size(87, 19);
+            rdoAscendenteEdad.Size = new Size(109, 24);
             rdoAscendenteEdad.TabIndex = 33;
             rdoAscendenteEdad.TabStop = true;
             rdoAscendenteEdad.Text = "Ascendente";
@@ -254,6 +256,7 @@
             groupBox2.Controls.Add(label1);
             groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(btnEliminar);
+            groupBox2.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             groupBox2.Location = new Point(12, 34);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(275, 431);
@@ -264,6 +267,7 @@
             // groupBox3
             // 
             groupBox3.Controls.Add(btnGuardarManualmente);
+            groupBox3.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
             groupBox3.Location = new Point(773, 482);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(298, 121);
@@ -286,7 +290,8 @@
             // groupBox4
             // 
             groupBox4.Controls.Add(btnMostrar);
-            groupBox4.Location = new Point(893, 250);
+            groupBox4.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            groupBox4.Location = new Point(893, 270);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(178, 100);
             groupBox4.TabIndex = 42;
@@ -296,7 +301,8 @@
             // groupBox5
             // 
             groupBox5.Controls.Add(btnAccion);
-            groupBox5.Location = new Point(893, 365);
+            groupBox5.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            groupBox5.Location = new Point(893, 376);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(178, 100);
             groupBox5.TabIndex = 43;
@@ -318,7 +324,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(890, 34);
+            pictureBox1.Location = new Point(893, 41);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(178, 111);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -334,11 +340,23 @@
             labelTiempo.Size = new Size(0, 17);
             labelTiempo.TabIndex = 47;
             // 
+            // lblHora
+            // 
+            lblHora.AutoSize = true;
+            lblHora.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            lblHora.Location = new Point(867, 11);
+            lblHora.Margin = new Padding(2, 0, 2, 0);
+            lblHora.Name = "lblHora";
+            lblHora.Size = new Size(0, 20);
+            lblHora.TabIndex = 48;
+            lblHora.Click += lblHora_Click;
+            // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1083, 615);
+            Controls.Add(lblHora);
             Controls.Add(labelTiempo);
             Controls.Add(pictureBox1);
             Controls.Add(groupBox5);
@@ -409,5 +427,8 @@
         private Button btnAccion;
         private PictureBox pictureBox1;
         private Label labelTiempo;
+        private Label lblHora;
+        private GroupBox groupBox6;
+        private Button btnCerrarSesion;
     }
 }
