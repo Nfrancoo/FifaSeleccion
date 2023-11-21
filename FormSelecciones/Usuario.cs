@@ -12,34 +12,15 @@ namespace FormSelecciones
     public class Usuario
     {
         /// <summary>
-        /// Obtiene o establece el apellido del usuario.
+        /// Obtiene o establece a cada uno de los elementos del Json.
         /// </summary>
-        public string Apellido { get; set; }
+        public string apellido { get; set; }
+        public string nombre { get; set; }
+        public int legajo { get; set; }
+        public string correo { get; set; }
+        public string clave { get; set; }
+        public string perfil { get; set; }
 
-        /// <summary>
-        /// Obtiene o establece el nombre del usuario.
-        /// </summary>
-        public string Nombre { get; set; }
-
-        /// <summary>
-        /// Obtiene o establece el número de legajo del usuario.
-        /// </summary>
-        public int Legajo { get; set; }
-
-        /// <summary>
-        /// Obtiene o establece el correo del usuario.
-        /// </summary>
-        public string Correo { get; set; }
-
-        /// <summary>
-        /// Obtiene o establece la contraseña del usuario.
-        /// </summary>
-        public string Clave { get; set; }
-
-        /// <summary>
-        /// Obtiene o establece el perfil del usuario.
-        /// </summary>
-        public string Perfil { get; set; }
 
         /// <summary>
         /// Delegado para notificar acceso no permitido.
@@ -50,6 +31,7 @@ namespace FormSelecciones
         /// Evento para notificar acceso no permitido.
         /// </summary>
         public event DelegadoString notificarAccesoNoPermitido;
+
 
         /// <summary>
         /// Agrega un suscriptor al evento NotificarAccesoNoPermitido.

@@ -285,7 +285,7 @@
             btnMostrar.TabIndex = 34;
             btnMostrar.Text = "Mostrar";
             btnMostrar.UseVisualStyleBackColor = true;
-            btnMostrar.Click += button1_Click;
+
             // 
             // groupBox4
             // 
@@ -349,7 +349,6 @@
             lblHora.Name = "lblHora";
             lblHora.Size = new Size(0, 20);
             lblHora.TabIndex = 48;
-            lblHora.Click += lblHora_Click;
             // 
             // FormPrincipal
             // 

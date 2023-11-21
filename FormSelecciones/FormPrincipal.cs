@@ -12,13 +12,14 @@ using System.IO;
 using System.Security.Principal;
 using System.Xml.Serialization;
 using System.Xml;
+using Microsoft.Identity.Client;
 
 namespace FormSelecciones
 {
     /// <summary>
     /// Formulario principal que gestiona los miembros de los equipos de selección.
     /// </summary>
-    public partial class FormPrincipal : Form
+    public partial class FormPrincipal : Form, IPrincipal<PersonalEquipoSeleccion>
     {
         //JUGADORES
         private List<PersonalEquipoSeleccion> personal;
@@ -49,7 +50,7 @@ namespace FormSelecciones
 
             if (usuario != null)
             {
-                this.Text = $"Operador: {usuario.Nombre} - fecha actual: {DateTime.Now.ToShortDateString()}";
+                this.Text = $"Operador: {usuario.nombre} - fecha actual: {DateTime.Now.ToShortDateString()}";
             }
 
             string rutaArchivoLog = "usuarios.log";
@@ -57,7 +58,7 @@ namespace FormSelecciones
             {
                 using (StreamWriter sw = File.AppendText(rutaArchivoLog))
                 {
-                    sw.WriteLine($"Nombre: {usuario.Nombre} - Apellido: {usuario.Apellido} - Horario de entrada: {DateTime.Now}");
+                    sw.WriteLine($"Nombre: {usuario.nombre} - Apellido: {usuario.apellido} - Horario de entrada: {DateTime.Now}");
                 }
             }
             catch (Exception ex)
@@ -102,7 +103,7 @@ namespace FormSelecciones
         /// </summary>
         private void btnConvocar_Click(object sender, EventArgs e)
         {
-            if (usuarioLog != null && (usuarioLog.Perfil == "administrador" || usuarioLog.Perfil == "supervisor"))
+            if (usuarioLog != null && (usuarioLog.perfil == "administrador" || usuarioLog.perfil == "supervisor"))
             {
                 try
                 {
@@ -173,50 +174,6 @@ namespace FormSelecciones
         }
 
         /// <summary>
-        /// Método que maneja el evento FormClosed del formulario de recuperación de contraseña.
-        /// Realiza la acción correspondiente al cerrar el formulario de recuperación de contraseña.
-        /// </summary>
-        private void RecuperarContraseñaFormClosed(object sender, EventArgs e)
-        {
-            // Realizar la acción correspondiente al cerrar el formulario de recuperación de contraseña
-            // Por ejemplo, habilitar los controles que estaban deshabilitados.
-            // Puedes implementar tu lógica aquí.
-        }
-
-        /// <summary>
-        /// Método que maneja el evento FormClosed del formulario de ver log de usuarios.
-        /// Realiza la acción correspondiente al cerrar el formulario de ver log de usuarios.
-        /// </summary>
-        private void VerLogFormClosed(object sender, EventArgs e)
-        {
-            // Realizar la acción correspondiente al cerrar el formulario de ver log de usuarios
-            // Por ejemplo, habilitar los controles que estaban deshabilitados.
-            // Puedes implementar tu lógica aquí.
-        }
-
-        /// <summary>
-        /// Método que maneja el evento FormClosed del formulario de creación de personal.
-        /// Realiza la acción correspondiente al cerrar el formulario de creación de personal.
-        /// </summary>
-        private void PersonalFormClosed(object sender, EventArgs e)
-        {
-            // Realizar la acción correspondiente al cerrar el formulario de creación de personal
-            // Por ejemplo, habilitar los controles que estaban deshabilitados.
-            // Puedes implementar tu lógica aquí.
-        }
-
-        /// <summary>
-        /// Método que maneja el evento FormClosed del formulario principal.
-        /// Realiza la acción correspondiente al cerrar el formulario principal.
-        /// </summary>
-        private void FormPrincipal_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            // Realizar la acción correspondiente al cerrar el formulario principal
-            // Por ejemplo, guardar los datos antes de cerrar la aplicación.
-            // Puedes implementar tu lógica aquí.
-        }
-
-        /// <summary>
         /// Método que maneja el evento FormClosing del formulario principal.
         /// Realiza la acción correspondiente antes de cerrar el formulario principal.
         /// </summary>
@@ -242,14 +199,14 @@ namespace FormSelecciones
         {
             if (usuarioLog != null)
             {
-                if (usuarioLog.Perfil == "vendedor" || usuarioLog.Perfil == "supervisor")
+                if (usuarioLog.perfil == "vendedor" || usuarioLog.perfil == "supervisor")
                 {
                     usuarioLog.NotificarAccesoNoPermitido += MostrarMensaje;
                     usuarioLog.NotificarAcceso("No tienes permitido utilizar esta opción.");
                     usuarioLog.NotificarAccesoNoPermitido -= MostrarMensaje;
                     return;
                 }
-                else if (usuarioLog.Perfil == "administrador")
+                else if (usuarioLog.perfil == "administrador")
                 {
                     int indice = this.lstPersonal.SelectedIndex;
 
@@ -302,7 +259,7 @@ namespace FormSelecciones
         {
             if (usuarioLog != null)
             {
-                if (usuarioLog.Perfil == "vendedor")
+                if (usuarioLog.perfil == "vendedor")
                 {
                     usuarioLog.NotificarAccesoNoPermitido += MostrarMensaje;
                     usuarioLog.NotificarAcceso("No tienes permitido utilizar esta opción.");
@@ -310,7 +267,7 @@ namespace FormSelecciones
                     return;
                 }
 
-                else if (usuarioLog.Perfil == "administrador" || usuarioLog.Perfil == "supervisor")
+                else if (usuarioLog.perfil == "administrador" || usuarioLog.perfil == "supervisor")
                 {
                     int indice = this.lstPersonal.SelectedIndex;
 
@@ -325,19 +282,19 @@ namespace FormSelecciones
                     {
                         Jugador futbolista = (Jugador)personalAModificar;
                         ConvocarJugador fmrf = new ConvocarJugador(futbolista);
-                        this.ModificarElemento(this.lstPersonal, this.registro.ListaPesonal);
+                        this.ModificarElemento(this.registro.ListaPesonal);
                     }
                     else if (personalAModificar is Entrenador)
                     {
                         Entrenador Entrenador = (Entrenador)personalAModificar;
                         ConvocarEntrenador fmrba = new ConvocarEntrenador(Entrenador);
-                        this.ModificarElemento(this.lstPersonal, this.registro.ListaPesonal);
+                        this.ModificarElemento(this.registro.ListaPesonal);
                     }
                     else
                     {
                         Masajista masajista = (Masajista)personalAModificar;
                         ConvocarMasajista fmrbe = new ConvocarMasajista(masajista);
-                        this.ModificarElemento(this.lstPersonal, this.registro.ListaPesonal);
+                        this.ModificarElemento( this.registro.ListaPesonal);
                     }
                 }
             }
@@ -384,13 +341,14 @@ namespace FormSelecciones
             }
         }
 
+
         /// <summary>
         /// Manejador de eventos para el clic en el formulario principal. 
         /// Deselecciona todos los elementos en las listas.
         /// </summary>
         private void FormPrincipal_Click(object sender, EventArgs e)
         {
-            lstPersonal.ClearSelected();
+            this.lstPersonal.ClearSelected();
         }
 
         /// <summary>
@@ -537,11 +495,10 @@ namespace FormSelecciones
         /// Abre un formulario de edición correspondiente y actualiza la lista y la base de datos según los cambios.
         /// </summary>
         /// <typeparam name="T">Tipo de personal (Jugador, Entrenador, Masajista).</typeparam>
-        /// <param name="lst">ListBox que contiene la lista de personal.</param>
         /// <param name="personal">Lista de personal del equipo.</param>
-        private void ModificarList<T>(ListBox lst, List<T> personal) where T : PersonalEquipoSeleccion
+        public void ModificarList<T>(List<T> personal) where T : PersonalEquipoSeleccion
         {
-            int selectedIndex = lst.SelectedIndex;
+            int selectedIndex = this.lstPersonal.SelectedIndex;
 
             // Verifica si el índice es válido
             if (selectedIndex >= 0 && selectedIndex < personal.Count)
@@ -564,7 +521,7 @@ namespace FormSelecciones
 
                         // Realiza la asignación y modificación de la lista
                         personal[selectedIndex] = jugadorModificado;
-                        lst.Items[selectedIndex] = jugadorModificado;
+                        this.lstPersonal.Items[selectedIndex] = jugadorModificado;
                         sql.ModificarDato((Jugador)(object)jugadorModificado);
                     }
                 }
@@ -583,7 +540,7 @@ namespace FormSelecciones
 
                         // Realiza la asignación y modificación de la lista
                         personal[selectedIndex] = entrenadorModificado;
-                        lst.Items[selectedIndex] = entrenadorModificado;
+                        this.lstPersonal.Items[selectedIndex] = entrenadorModificado;
                         sql.ModificarDato((Entrenador)(object)entrenadorModificado);
                     }
                 }
@@ -602,12 +559,13 @@ namespace FormSelecciones
 
                         // Realiza la asignación y modificación de la lista
                         personal[selectedIndex] = entrenadorModificado;
-                        lst.Items[selectedIndex] = entrenadorModificado;
+                        this.lstPersonal.Items[selectedIndex] = entrenadorModificado;
                         sql.ModificarDato((Masajista)(object)entrenadorModificado);
                     }
                 }
             }
         }
+
 
         /// <summary>
         /// Modifica el elemento seleccionado en el ListBox de acuerdo con su tipo (Jugador, Entrenador, Masajista).
@@ -616,15 +574,14 @@ namespace FormSelecciones
         /// <param name="listBox">ListBox que contiene la lista de personal.</param>
         /// <param name="lista">Lista de personal del equipo.</param>
 
-        public void ModificarElemento<T>(ListBox listBox, List<T> lista) where T : PersonalEquipoSeleccion
+        public void ModificarElemento<T>(List<T> lista) where T : PersonalEquipoSeleccion
         {
-            if (listBox.SelectedIndex != -1)
+            if (this.lstPersonal.SelectedIndex != -1)
             {
-                ModificarList(listBox, lista);
+                ModificarList(lista);
             }
         }
         #endregion
-
 
         #region Cronómetro y Hora
 

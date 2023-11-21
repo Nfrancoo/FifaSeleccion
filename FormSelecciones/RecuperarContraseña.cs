@@ -53,7 +53,7 @@ namespace FormSelecciones
 
             if (usuarioRecuperado != null)
             {
-                MessageBox.Show($"La contraseña del usuario {usuarioRecuperado.nombre} {usuarioRecuperado.apellido} es: {usuarioRecuperado.clave}", "Contraseña Recuperada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"La contraseña del usuario {usuarioRecuperado.nombre}   {usuarioRecuperado.apellido} es: {usuarioRecuperado.clave}", "Contraseña Recuperada", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Lanzar el evento personalizado
                 OnRecuperarContraseñaFormClosed();
