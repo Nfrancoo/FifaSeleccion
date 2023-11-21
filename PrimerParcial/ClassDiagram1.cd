@@ -3,42 +3,71 @@
   <Class Name="SegundoParcial.PersonalEquipoSeleccion">
     <Position X="8" Y="0.5" Width="5.25" />
     <TypeIdentifier>
-      <HashCode>AACAAAAAAAQAAACEgAAAgAAAAAAAAgAQAAIAAAAAIiQ=</HashCode>
+      <HashCode>AAAAAAAAAAQAAACEAAAAgAAAEAAAAgAQAAIAAAAAIiA=</HashCode>
       <FileName>PersonalEquipoSeleccion.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="SegundoParcial.Entrenador">
     <Position X="2.5" Y="6.25" Width="5" />
     <TypeIdentifier>
-      <HashCode>AACAAAAAAAAAAAAEgAAAAAAAAAAAAAAQAAAACAAAAAg=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAEAAAAAAQAAAACAAAAAg=</HashCode>
       <FileName>Entrenador.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SegundoParcial.Jugador">
     <Position X="7.75" Y="6.25" Width="5.75" />
     <TypeIdentifier>
-      <HashCode>AACAAAAAgAAAAIAEgAAAAAAAAAAAAAAQAAQAAAAEAAA=</HashCode>
+      <HashCode>AAAAAAAAgAAAAIAEgAAAAAAAEAAAAAAQAAQAAAAEAAA=</HashCode>
       <FileName>Jugador.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SegundoParcial.Masajista">
     <Position X="14" Y="6.25" Width="6" />
     <TypeIdentifier>
-      <HashCode>AACAAIAAAAAAAAAEgAAAAAAAAAAAAAAQACAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAIAAAAAAAAAEgAAAAAAAEAAAAAAQACAAAAAAAAA=</HashCode>
       <FileName>Masajista.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="SegundoParcial.ExcepSql">
+    <Position X="21.5" Y="5.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ExcepSql.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SegundoParcial.ExcepIguales">
+    <Position X="23.75" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ExcepIguales.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SegundoParcial.SQL">
+    <Position X="21.25" Y="0.75" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEIAAAIAAAEABIAABAAAEBAAAAAgAAAABAAAIAAE=</HashCode>
+      <FileName>SQL.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Interface Name="SegundoParcial.IPersonal">
-    <Position X="14" Y="0.5" Width="2.5" />
+    <Position X="14.25" Y="0.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAA=</HashCode>
       <FileName>IPersonal.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="SegundoParcial.IConvocar">
-    <Position X="5" Y="0.5" Width="2.5" />
+  <Interface Name="IConvocar">
+    <Position X="18.25" Y="0.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAABAEA=</HashCode>
+      <FileName>IConvocar.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SegundoParcial.IPrincipal&lt;T&gt;">
+    <Position X="14.25" Y="2.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAACAAAAAAEAAAAAA=</HashCode>
       <FileName>IPrincipal.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -50,7 +79,7 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="EPosicion">
-    <Position X="9.75" Y="10" Width="1.5" />
+    <Position X="13.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAAAAAAAAAAABAAAAAAAAEgAAAAAAA=</HashCode>
       <FileName>EPosiciones.cs</FileName>

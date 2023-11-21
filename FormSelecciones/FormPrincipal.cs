@@ -684,9 +684,8 @@ namespace FormSelecciones
         /// <typeparam name="T">Tipo de personal (Jugador, Entrenador, Masajista).</typeparam>
         /// <param name="nuevoPersonal">Nuevo personal a verificar.</param>
         /// <returns>True si el personal ya existe, False si no.</returns>
-        private bool ExistePersonal<T>(T nuevoPersonal) where T : PersonalEquipoSeleccion
+        public bool ExistePersonal<T>(T nuevoPersonal) where T : PersonalEquipoSeleccion
         {
-            // Verificar si el personal ya existe en la lista
             foreach (PersonalEquipoSeleccion personal in this.registro.ListaPesonal)
             {
                 if (personal is T personalExistente && personalExistente == nuevoPersonal)
