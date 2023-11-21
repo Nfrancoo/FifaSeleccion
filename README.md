@@ -16,25 +16,25 @@ Esta aplicación sirve como una herramienta para gestionar la información del p
 
 ![Alt text](ClassDiagram1-1.png)
 
-###Lo separo en imagenes mas chico para que veas mejor:
+### Lo separo en imagenes mas chico para que veas mejor:
 
-####Diagrama principal:
-![Alt text](diagramaPrincipal.png)
+- #### Diagrama principal:
+- ![Alt text](diagramaPrincipal.png)
 
-####Interfaces:
+- #### Interfaces:
 
-![Alt text](interfacez.png)
+- ![Alt text](interfacez.png)
 
-####Clase donde manejo la base de datos de SQL mas excepciones:
+### Clase donde manejo la base de datos de SQL mas excepciones:
 
 ![Alt text](<Captura de pantalla 2023-11-21 174805.png>)
 
-### Diseño de mi Form
+## Diseño de mi Form
 
-####Login:
+- #### Login:
 
-![Alt text](<Captura de pantalla 2023-11-21 175146.png>)
+- ![Alt text](<Captura de pantalla 2023-11-21 175146.png>)
 
-####Form principal de mi aplicacion
+- #### Form principal de mi aplicacion
 
-![Alt text](<Captura de pantalla 2023-11-21 175114.png>)
+- ![Alt text](<Captura de pantalla 2023-11-21 175114.png>)
